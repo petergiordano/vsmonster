@@ -1,218 +1,201 @@
-# AI-Assisted Project Template
+# [Your Project Name]
 
-### **Purpose: A streamlined workflow for developing with AI assistance.**
+**[Brief one-sentence description of what your project does]**
 
-This repository is a template for starting new software projects using a structured, AI-assisted workflow. It provides a simple command-driven process that guides you from project idea to implementation.
+## 🚀 Quick Start - Setup Required
 
-## 🚀 Getting Started (2 minutes)
+**Welcome to your new project!** Complete setup in 30 seconds:
 
-### **Step 1: Use This Template**
+### **Essential Setup (One-Time)**
 
-**Create your project repository on GitHub:**
-
-1. **Use this template:**
-   - Click the **"Use this template"** button at the top of this GitHub page
-   - Choose **"Create a new repository"**
-   - Select your GitHub account as the owner
-   - Name your repository (this becomes your project name)
-   - Choose public or private as needed
-   - Click **"Create repository"**
-
-2. **Clone YOUR new repository locally:**
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/YOUR-PROJECT-NAME.git
-   cd YOUR-PROJECT-NAME
-   ```
-
-3. **Open in VS Code:**
-   ```bash
-   code .
-   ```
-4. **Save workspace for your project:**
-   - In VS Code: File → Save Workspace As...
-   - Name it: `your-project-name.code-workspace` (e.g., `test2.code-workspace`)
-   - Save it in your project root directory
-   - When prompted, choose "Open Workspace"
-  
-5. **Import Claude Desktop MCP Servers:**
-   - Do this on the terminal, NOT within Claude Code!
-```bash
-claude mcp add-from-claude-desktop
-```
-
-### **Step 2: Essential Setup**
-
-**Open terminal in VS Code and run these commands:**
+Open terminal in VS Code and run:
 
 ```bash
-# Start Claude Code CLI (make sure you're in YOUR project directory)
+# Start Claude Code CLI
 claude
 
 # Set up your project workspace (one-time only)
-/project-setup
+/setup-project
+```
 
+**What this does:**
+- Cleans up template files → creates your project structure
+- Sets up AI-assisted development workflow
+- Creates foundation documents for your project
+
+### **After Setup - Start Building**
+
+```bash
 # Begin feature development 
 /start-coding
 ```
 
-**What `/project-setup` does for you:**
-1. **Validates workspace safety** - Checks if setup was already completed to prevent double-execution
-2. **Configures git remotes** - Adds template remote pointing to `ai-new-project-template` for inheriting updates
-3. **Copies essential workflow files** - Moves `.ai-rules/` and `.project-docs/` from scaffolding to your project root (`.claude/` already available for immediate use)
-4. **Creates project documentation** - Transforms template files into your project's `README.md` and `TODO.md`
-5. **Sets up source directory** - Creates `src/` folder for your application code
-6. **Cleans up scaffolding** - Removes `_project-scaffolding/` directory (contents now in proper locations)
-7. **Commits setup changes** - Creates a clean git commit documenting the workspace transformation
-8. **Enables template inheritance** - Shows you can now get template improvements with `git pull template main`
+---
 
-**✅ Benefits of Template Approach:**
-- **Clean GitHub workflow** - Purpose-built for template usage
-- **Template inheritance** - Get improvements via template remote
-- **Independent repository** - Your project owns its own git history
-- **Professional setup** - GitHub's recommended template pattern
-
-## 🎯 Complete User Journey
+## 🎯 Your Development Journey
 
 ```
-1. Use template on GitHub → your-username/your-project-name
-2. Clone YOUR repository → local development
-3. cd your-project-name (CRITICAL!)
-4. /project-setup (one-time workspace setup + template remote)
-5. Setup Chat AI Strategist (recommended)
-6. /start-coding (foundation → PRD → tasks → implementation)
-7. /start-coding (next feature: PRD → tasks → implementation)
-8. /orient (anytime navigation)
+1. 🔄 /setup-project (complete workspace setup) ← START HERE
+2. 🔄 /start-coding (foundation → PRD → tasks → implementation)
+3. 🔄 /start-coding (next feature: PRD → tasks → implementation)
+4. 🧭 /orient (navigation and state checking)
 ```
-
-### **What Each Command Does:**
-
-- **`/project-setup`** - Transform template files, configure template remote, setup workspace
-- **`/start-coding`** - Intelligent feature development orchestrator  
-- **`/orient`** - Check current state and get guidance anytime
-
-## 🧠 How It Works
-
-### **3-Party Collaboration Model**
-- **You:** Project director making decisions
-- **Chat AI:** Strategic planning and context preparation
-- **CLI AI:** Technical implementation and file operations
-
-### **5-Step Workflow (Automated)**
-1. **Project Foundation** - AI interview creates project context
-2. **Dynamic Context** - Automatic context loading for AI assistants  
-3. **Feature Planning** - PRD creation with validation criteria
-4. **Task Generation** - Detailed implementation breakdown
-5. **Quality Implementation** - Code execution with progressive validation
-
-## 📂 Template Structure
-
-After `/setup-project`, your workspace will look like:
-
-```
-your-project/
-├── .claude/                    # Claude Code configuration
-├── .ai-rules/                  # AI workflow instructions
-├── .project-docs/              # Project planning documents
-├── src/                        # Your application source code
-├── tasks/                      # Feature PRDs and task lists
-├── setup-claude-chat-ai/       # Chat AI Strategist setup instructions
-├── README.md                   # Your project's README (this gets replaced)
-├── TODO.md                     # Development task tracking
-├── AI_CONTEXT.md              # AI assistant briefing
-└── WORKFLOW_GUIDE.md          # Complete workflow documentation
-```
-
-## ⚡ Advanced Features
-
-- **Template Inheritance** - Pull improvements from template via `git pull template main`
-- **Smart State Detection** - Commands know where you are in the workflow
-- **Progressive Validation** - 4-level quality gates prevent error accumulation
-- **Context Engineering** - AI assistants get comprehensive project context
-- **Plan Mode Integration** - Safe exploration with Claude Code CLI
-- **Multi-Feature Support** - Handle multiple features in same project
-- **Recovery Handling** - Resume work after interruptions
-- **Clean Git Workflow** - Template → develop → independent project evolution
-
-## 🔄 Getting Template Updates
-
-### **Pull Latest Template Improvements:**
-```bash
-# Your /project-setup command configures this automatically
-git pull template main
-
-# Resolve any conflicts with your project-specific changes
-# Your project customizations remain intact
-```
-
-**Benefits:**
-- Get new AI rules and workflow improvements
-- Enhanced commands and better error handling  
-- New features and capabilities added to template
-- Maintain your project's custom changes
-
-## 🆘 Need Help?
-
-### **Common Questions:**
-
-**"What if I mess something up?"**
-- Use `/orient` to check current state
-- Commands include recovery guidance
-- GitHub fork makes it easy to reset: re-clone your fork
-
-**"Can I use different AI assistants?"**
-- Yes! Works with Claude, ChatGPT, Gemini
-- Template provides context for any AI assistant
-- CLI AI gets automatic project context
-
-**"How do I add multiple features?"**
-- Run `/start-coding` for each new feature
-- System tracks multiple PRDs and task lists
-- Maintains project-wide context
-
-**"I'm getting git errors or wrong directory issues"**
-- Make sure you're in YOUR project directory: `pwd`
-- Should show `your-project-name`, not `ai-new-project-template`
-- Run `/project-setup` to fix workspace configuration
-- Check GitHub remote: `git remote -v` should show YOUR repository + template
-
-**"How do I get template updates?"**
-- Use `git pull template main` to get latest improvements
-- `/project-setup` configures template remote automatically
-- Resolve conflicts to keep your customizations
-
-### **If You Get Stuck:**
-1. Try `/orient` for current state and next steps
-2. Check `WORKFLOW_GUIDE.md` for detailed explanations
-3. Ensure you're in YOUR project directory: `pwd`
-4. Verify git remotes: `git remote -v` (should show your repository + template)
-5. Create fresh repository from template if needed
-
-## 📚 Learn More
-
-- **Complete Guide:** See `WORKFLOW_GUIDE.md` for detailed workflow
-- **AI Instructions:** Explore `.ai-rules/` for AI command details
-- **Context Engineering:** Built on proven AI collaboration principles
-- **Template Evolution:** This template continuously improves - use template updates to benefit!
 
 ---
 
-**Ready to build? Use Template → Clone → `/project-setup` → `/start-coding`**
+## Development Workflow (After Setup)
 
-## 🎯 Why This Template Works
+This project uses the AI-Assisted Development Framework for efficient feature development.
 
-### **Context Engineering Excellence**
-- AI assistants get comprehensive project context automatically
-- Context accumulates across workflow steps for consistency
-- Eliminates repetitive explanations and reduces errors
+### **Commands You'll Use:**
 
-### **Professional Development Workflow**  
-- GitHub template pattern follows recommended practices
-- Independent repository ownership
-- Clean git history focused on your project
+```bash
+# Check current project state and get guidance
+/orient
 
-### **Simple, Lovable, Complete Framework**
-- **Simple:** One command to start, clear next steps always
-- **Lovable:** Delightful AI collaboration, minimal friction
-- **Complete:** Production-ready implementations, not prototypes
+# Develop new features (foundation → PRD → tasks → implementation)
+/start-coding
+```
 
-**Start building with AI assistance that actually works.**
+### **3-Party Collaboration:**
+- **You:** Project director making decisions and testing results
+- **Chat AI:** Strategic planning and requirements definition
+- **CLI AI:** Technical implementation and file operations
+
+---
+
+## Overview
+
+[After `/start-coding` foundation interview, this section will be populated with your project's specific goals, target users, and core value proposition]
+
+## Features
+
+[Will be populated during your feature development workflow]
+
+- [Key feature 1]
+- [Key feature 2] 
+- [Key feature 3]
+
+## Getting Started
+
+### Prerequisites
+
+[Will be defined during foundation setup based on your tech stack choices]
+
+- [Prerequisite 1 - e.g., Node.js 18+]
+- [Prerequisite 2 - e.g., Python 3.11+]
+
+### Installation
+
+```bash
+# Clone the repository
+git clone [your-repo-url]
+cd [project-directory]
+
+# Install dependencies
+[installation commands - will be defined during setup]
+```
+
+### Usage
+
+```bash
+# Basic usage example
+[command to run your project - will be defined during development]
+```
+
+---
+
+## Project Structure (After Setup)
+
+After running `/setup-project`, your workspace becomes:
+
+```
+[project-name]/
+├── .ai-rules/              # AI workflow instructions
+├── .claude/                # Claude Code CLI configuration
+├── .project-docs/          # Project foundation documents
+├── src/                    # Source code
+├── tasks/                  # Feature PRDs and task lists
+├── tests/                  # Test files
+├── setup-claude-chat-ai/   # Chat AI Strategist setup (optional)
+├── AI_CONTEXT.md          # AI assistant project briefing
+├── README.md              # This file - project documentation
+├── TODO.md                # Development task tracking
+└── WORKFLOW_GUIDE.md      # Complete development workflow
+```
+
+## Development
+
+### **AI-Assisted Development**
+
+This project uses a structured AI collaboration workflow:
+
+- **Chat AI (Strategy):** Claude/ChatGPT/Gemini for planning and context
+- **CLI AI (Implementation):** Claude Code/Gemini CLI for technical execution
+- **Progressive Validation:** 4-level quality gates ensure reliable code
+
+### **Adding New Features**
+
+```bash
+# Start feature development workflow
+/start-coding
+
+# The system will guide you through:
+# 1. Feature definition (PRD creation)
+# 2. Task breakdown (implementation planning)
+# 3. Code execution (with validation)
+```
+
+### **Project State Management**
+
+```bash
+# Check where you are and what's next
+/orient
+
+# Examples of what you might see:
+# "Foundation complete → Ready for first feature"
+# "PRD exists → Generate task list"
+# "Tasks ready → Begin implementation"
+```
+
+### Running Tests
+
+```bash
+[test commands - will be defined during development]
+```
+
+### Building
+
+```bash
+[build commands - will be defined during development]
+```
+
+## AI Development Context
+
+Your project's AI context is maintained in `AI_CONTEXT.md` and includes:
+- Project goals and technical approach
+- Coding conventions and architecture patterns
+- Dependencies and constraints
+- Testing requirements
+
+This context automatically loads when using Claude Code or Gemini CLI.
+
+## Contributing
+
+[How others can contribute to your project]
+
+### For Contributors Using AI Assistance
+
+1. **Read the project context:** Check `AI_CONTEXT.md` and `.project-docs/`
+2. **Use the workflow:** Follow the `/start-coding` process for new features
+3. **Maintain quality:** Leverage the built-in validation systems
+
+## License
+
+[Your license - e.g., MIT, Apache 2.0, etc.]
+
+---
+
+**🎯 Ready to build?** Start with `/setup-project` then `/start-coding`
+
+Built using the AI-Assisted Development Framework for efficient, high-quality development.
