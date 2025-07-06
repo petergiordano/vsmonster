@@ -1,0 +1,23 @@
+# VS Code workspace files (user-specific)
+*.code-workspace
+
+# macOS
+.DS_Store
+
+# Node modules (if using Node.js)
+node_modules/
+
+# Python cache (if using Python)
+__pycache__/
+*.pyc
+
+# IDE files
+.vscode/settings.json
+.idea/
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
