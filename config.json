@@ -1,0 +1,51 @@
+{
+  "parser": {
+    "version": "1.0",
+    "default_output_dir": "output/json",
+    "default_debug_mode": false,
+    "max_processing_time_seconds": 10,
+    "supported_file_extensions": [".md"],
+    "character_encoding": "utf-8"
+  },
+  "pipeline": {
+    "step_number": 1,
+    "step_name": "Script Parser",
+    "next_step": "Voice Generation",
+    "pipeline_total_steps": 8
+  },
+  "output": {
+    "json_indent": 2,
+    "include_metadata": true,
+    "include_validation_report": true,
+    "include_debug_output": false,
+    "filename_pattern": "{episode_name}.json",
+    "validation_filename_pattern": "{episode_name}_validation.txt",
+    "debug_filename_pattern": "{episode_name}_debug.json"
+  },
+  "validation": {
+    "required_scene_markers": ["SCENE:"],
+    "required_characters": ["THORAK", "ZARA"],
+    "multimedia_tags": ["IMG:", "SFX:", "MUSIC:", "AMBIENT:", "TRANSITION:"],
+    "warning_on_missing_tags": true,
+    "fail_on_critical_errors": false
+  },
+  "logging": {
+    "default_level": "INFO",
+    "debug_level": "DEBUG",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "date_format": "%H:%M:%S"
+  },
+  "cost_estimation": {
+    "elevenlabs_cost_per_character": 0.0003,
+    "image_generation_cost_per_prompt": 0.05,
+    "sfx_cost_per_effect": 0.02,
+    "music_cost_per_cue": 0.10,
+    "currency": "USD"
+  },
+  "episode_settings": {
+    "expected_characters_per_minute": 200,
+    "default_speech_rate_words_per_minute": 150,
+    "pause_duration_between_speakers_seconds": 0.5,
+    "scene_transition_duration_seconds": 1.0
+  }
+}

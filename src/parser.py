@@ -16,13 +16,44 @@ from pathlib import Path
 from typing import Dict, Any
 
 
-def setup_logging(debug: bool = False) -> logging.Logger:
+def load_config(config_path: str = "config.json") -> Dict[str, Any]:
+    """Load configuration from config.json file."""
+    try:
+        with open(config_path, "r", encoding="utf-8") as file:
+            config = json.load(file)
+        return config
+    except FileNotFoundError:
+        # Return default configuration if file doesn't exist
+        return {
+            "parser": {
+                "version": "1.0",
+                "default_output_dir": "output/json",
+                "default_debug_mode": False,
+                "max_processing_time_seconds": 10,
+            },
+            "logging": {
+                "default_level": "INFO",
+                "debug_level": "DEBUG",
+                "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+                "date_format": "%H:%M:%S",
+            },
+        }
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid JSON in config file {config_path}: {e}")
+
+
+def setup_logging(debug: bool = False, config: Dict[str, Any] = None) -> logging.Logger:
     """Set up logging configuration."""
-    level = logging.DEBUG if debug else logging.INFO
+    if config is None:
+        config = {}
+    
+    logging_config = config.get("logging", {})
+    level = logging.DEBUG if debug else getattr(logging, logging_config.get("default_level", "INFO"))
+    
     logging.basicConfig(
         level=level,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        datefmt="%H:%M:%S",
+        format=logging_config.get("format", "%(asctime)s - %(name)s - %(levelname)s - %(message)s"),
+        datefmt=logging_config.get("date_format", "%H:%M:%S"),
     )
     return logging.getLogger("versusMonster.parser")
 
@@ -176,6 +207,15 @@ def main() -> int:
     """Main entry point for the script parser."""
     start_time = time.time()
 
+    # Load configuration
+    try:
+        config = load_config()
+    except Exception as e:
+        print(f"❌ Failed to load configuration: {e}")
+        return 1
+
+    parser_config = config.get("parser", {})
+
     # Parse command line arguments
     parser = argparse.ArgumentParser(
         description="Parse versusMonster podcast scripts into structured JSON",
@@ -190,25 +230,30 @@ def main() -> int:
     parser.add_argument(
         "--debug",
         action="store_true",
+        default=parser_config.get("default_debug_mode", False),
         help="Enable debug mode with intermediate output files",
     )
 
     parser.add_argument(
         "--output-dir",
         type=str,
-        default="output/json",
-        help="Custom output directory (default: output/json)",
+        default=parser_config.get("default_output_dir", "output/json"),
+        help=f"Custom output directory (default: {parser_config.get('default_output_dir', 'output/json')})",
     )
 
     parser.add_argument(
-        "--version", action="version", version="versusMonster Script Parser v1.0"
+        "--version", 
+        action="version", 
+        version=f"versusMonster Script Parser v{parser_config.get('version', '1.0')}"
     )
 
     args = parser.parse_args()
 
     # Set up logging
-    logger = setup_logging(args.debug)
-    logger.info("🚀 versusMonster Script Parser v1.0 - Step 1 of 8-Component Pipeline")
+    logger = setup_logging(args.debug, config)
+    parser_version = parser_config.get("version", "1.0")
+    pipeline_info = config.get("pipeline", {})
+    logger.info(f"🚀 versusMonster Script Parser v{parser_version} - Step {pipeline_info.get('step_number', 1)} of {pipeline_info.get('pipeline_total_steps', 8)}-Component Pipeline")
 
     try:
         # Validate input file
