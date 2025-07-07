@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "processing_timestamp": "2025-07-07T15:58:33.801607",
+    "processing_timestamp": "2025-07-07T16:03:12.361005",
     "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/scripts/episode_007.md",
-    "total_processing_time_seconds": 0.008,
+    "total_processing_time_seconds": 0.01,
     "estimated_downstream_costs": {
       "elevenlabs_character_count": 10192,
       "image_generation_count": 13,
@@ -10,6 +10,73 @@
       "music_cue_count": 5,
       "ambient_count": 3,
       "transition_count": 3
+    },
+    "timing_estimates": {
+      "total_duration_seconds": 659.5,
+      "total_duration_minutes": 10.99,
+      "dialogue_duration_seconds": 652.5,
+      "transition_duration_seconds": 7.0,
+      "total_words": 1555,
+      "average_speech_rate_wpm": 150,
+      "scene_count": 8,
+      "scene_timings": [
+        {
+          "scene_id": "cold_open",
+          "dialogue_duration_seconds": 19.9,
+          "word_count": 46,
+          "dialogue_count": 4,
+          "estimated_reading_speed_wpm": 150
+        },
+        {
+          "scene_id": "intro_and_host_banter",
+          "dialogue_duration_seconds": 72.2,
+          "word_count": 173,
+          "dialogue_count": 7,
+          "estimated_reading_speed_wpm": 150
+        },
+        {
+          "scene_id": "battle_setup",
+          "dialogue_duration_seconds": 186.7,
+          "word_count": 453,
+          "dialogue_count": 12,
+          "estimated_reading_speed_wpm": 150
+        },
+        {
+          "scene_id": "advertisement_break_1",
+          "dialogue_duration_seconds": 50.0,
+          "word_count": 120,
+          "dialogue_count": 5,
+          "estimated_reading_speed_wpm": 150
+        },
+        {
+          "scene_id": "battle_commentary",
+          "dialogue_duration_seconds": 123.0,
+          "word_count": 285,
+          "dialogue_count": 19,
+          "estimated_reading_speed_wpm": 150
+        },
+        {
+          "scene_id": "advertisement_break_2",
+          "dialogue_duration_seconds": 44.0,
+          "word_count": 105,
+          "dialogue_count": 5,
+          "estimated_reading_speed_wpm": 150
+        },
+        {
+          "scene_id": "aftermath_analysis",
+          "dialogue_duration_seconds": 105.9,
+          "word_count": 256,
+          "dialogue_count": 8,
+          "estimated_reading_speed_wpm": 150
+        },
+        {
+          "scene_id": "outro_and_next_episode_tease",
+          "dialogue_duration_seconds": 50.8,
+          "word_count": 117,
+          "dialogue_count": 9,
+          "estimated_reading_speed_wpm": 150
+        }
+      ]
     },
     "validation_status": "passed",
     "character_count_by_speaker": {

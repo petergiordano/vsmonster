@@ -364,12 +364,78 @@ def calculate_multimedia_counts(scenes: List[Dict[str, Any]]) -> Dict[str, int]:
     return counts
 
 
+def calculate_timing_estimates(scenes: List[Dict[str, Any]], config: Dict[str, Any]) -> Dict[str, Any]:
+    """Calculate timing estimates for dialogue and scenes."""
+    episode_settings = config.get("episode_settings", {})
+    speech_rate = episode_settings.get("default_speech_rate_words_per_minute", 150)
+    pause_between_speakers = episode_settings.get("pause_duration_between_speakers_seconds", 0.5)
+    scene_transition_duration = episode_settings.get("scene_transition_duration_seconds", 1.0)
+    
+    total_dialogue_duration = 0
+    total_words = 0
+    scene_timings = []
+    
+    for scene in scenes:
+        scene_dialogue_duration = 0
+        scene_words = 0
+        dialogue_count = len(scene.get("dialogues", []))
+        
+        # Calculate dialogue duration for this scene
+        for dialogue in scene.get("dialogues", []):
+            text = dialogue["text"]
+            # Estimate words (simple split by spaces)
+            words = len(text.split())
+            scene_words += words
+            
+            # Calculate speech duration (words per minute to seconds)
+            speech_duration = (words / speech_rate) * 60
+            scene_dialogue_duration += speech_duration
+        
+        # Add pauses between speakers (one less pause than dialogue count)
+        if dialogue_count > 1:
+            scene_dialogue_duration += (dialogue_count - 1) * pause_between_speakers
+        
+        # Store scene timing data
+        scene_timing = {
+            "scene_id": scene["scene_id"],
+            "dialogue_duration_seconds": round(scene_dialogue_duration, 2),
+            "word_count": scene_words,
+            "dialogue_count": dialogue_count,
+            "estimated_reading_speed_wpm": speech_rate
+        }
+        scene_timings.append(scene_timing)
+        
+        total_dialogue_duration += scene_dialogue_duration
+        total_words += scene_words
+    
+    # Add scene transition time (between scenes, not before first or after last)
+    num_scene_transitions = max(0, len(scenes) - 1)
+    total_transition_duration = num_scene_transitions * scene_transition_duration
+    
+    # Calculate total episode duration
+    total_duration = total_dialogue_duration + total_transition_duration
+    
+    timing_data = {
+        "total_duration_seconds": round(total_duration, 2),
+        "total_duration_minutes": round(total_duration / 60, 2),
+        "dialogue_duration_seconds": round(total_dialogue_duration, 2),
+        "transition_duration_seconds": round(total_transition_duration, 2),
+        "total_words": total_words,
+        "average_speech_rate_wpm": speech_rate,
+        "scene_count": len(scenes),
+        "scene_timings": scene_timings
+    }
+    
+    return timing_data
+
+
 def generate_output_metadata(
-    input_path: Path, processing_time: float, scenes: List[Dict[str, Any]]
+    input_path: Path, processing_time: float, scenes: List[Dict[str, Any]], config: Dict[str, Any]
 ) -> Dict[str, Any]:
     """Generate metadata for the parsed output."""
     character_stats = calculate_character_counts(scenes)
     multimedia_stats = calculate_multimedia_counts(scenes)
+    timing_stats = calculate_timing_estimates(scenes, config)
 
     return {
         "processing_timestamp": datetime.now().isoformat(),
@@ -383,6 +449,7 @@ def generate_output_metadata(
             "ambient_count": multimedia_stats["ambient_count"],
             "transition_count": multimedia_stats["transition_count"],
         },
+        "timing_estimates": timing_stats,
         "validation_status": "passed",  # Will be determined in Task 5.1
         "character_count_by_speaker": character_stats["by_speaker"],
     }
@@ -513,7 +580,7 @@ def main() -> int:
         # Generate metadata
         processing_time = time.time() - start_time
         metadata = generate_output_metadata(
-            input_path, processing_time, parsed_data["scenes"]
+            input_path, processing_time, parsed_data["scenes"], config
         )
 
         # Extract episode name for file naming
