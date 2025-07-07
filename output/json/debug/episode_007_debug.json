@@ -1,17 +1,21 @@
 {
   "debug_info": {
     "full_metadata": {
-      "processing_timestamp": "2025-07-07T15:00:43.713667",
+      "processing_timestamp": "2025-07-07T15:44:05.833193",
       "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/scripts/episode_007.md",
-      "total_processing_time_seconds": 0.013,
+      "total_processing_time_seconds": 0.015,
       "estimated_downstream_costs": {
-        "elevenlabs_character_count": 0,
+        "elevenlabs_character_count": 10192,
         "image_generation_count": 0,
         "sfx_count": 0,
         "music_cue_count": 0
       },
       "validation_status": "passed",
-      "character_count_by_speaker": {}
+      "character_count_by_speaker": {
+        "ZARA": 3630,
+        "THORAK": 6471,
+        "BOTH": 91
+      }
     },
     "parsing_details": "Debug information will be added in subsequent tasks"
   }

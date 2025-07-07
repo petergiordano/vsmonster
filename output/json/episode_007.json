@@ -1,16 +1,20 @@
 {
   "metadata": {
-    "processing_timestamp": "2025-07-07T15:01:19.616932",
+    "processing_timestamp": "2025-07-07T15:44:34.787963",
     "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/scripts/episode_007.md",
-    "total_processing_time_seconds": 0.006,
+    "total_processing_time_seconds": 0.004,
     "estimated_downstream_costs": {
-      "elevenlabs_character_count": 0,
+      "elevenlabs_character_count": 10192,
       "image_generation_count": 0,
       "sfx_count": 0,
       "music_cue_count": 0
     },
     "validation_status": "passed",
-    "character_count_by_speaker": {}
+    "character_count_by_speaker": {
+      "ZARA": 3630,
+      "THORAK": 6471,
+      "BOTH": 91
+    }
   },
   "episode_metadata": {
     "title": "Episode 007",
@@ -25,8 +29,38 @@
       "scene_name": "COLD OPEN",
       "start_line": 24,
       "content": "\\[SFX: earth\\_rumbling\\_deep\\]\n\n\\[IMG: cold\\_open\\_leap\\] PROMPT: \"Massive armored bulette erupting from forest ground in mid-leap, jaws agape, targeting a green dragon hovering just above, dramatic lighting with earth and stone spraying, cinematic fantasy art style\"\n\nZARA: (Breathless) \"OH MY GODS\\! That landshark just launched itself thirty feet straight up at a DRAGON\\!\"\n\nTHORAK: (Gravelly, impressed) \"Aye, lass, that's what we call tactical audacity \\- using the dragon's overconfidence against it\\!\"\n\n\\[Brief pause for dramatic effect\\]\n\nZARA: \"I'm Zara Emberclaw—\"\n\nTHORAK: \"—and I'm Thorak Ironquill, and you're listening to Chronicles of Khronexia: Battle Witnessed\\!\"\n\n\\[TRANSITION: Magical whoosh effect leading to intro music\\]\n\n---",
+      "dialogues": [
+        {
+          "character": "ZARA",
+          "direction": "Breathless",
+          "text": "OH MY GODS\\! That landshark just launched itself thirty feet straight up at a DRAGON\\!",
+          "character_count": 86,
+          "line_position": 5
+        },
+        {
+          "character": "THORAK",
+          "direction": "Gravelly, impressed",
+          "text": "Aye, lass, that's what we call tactical audacity \\- using the dragon's overconfidence against it\\!",
+          "character_count": 98,
+          "line_position": 7
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "I'm Zara Emberclaw—",
+          "character_count": 19,
+          "line_position": 11
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "—and I'm Thorak Ironquill, and you're listening to Chronicles of Khronexia: Battle Witnessed\\!",
+          "character_count": 94,
+          "line_position": 13
+        }
+      ],
       "metadata": {
-        "dialogue_count": 0,
+        "dialogue_count": 4,
         "image_tags": [],
         "sfx_tags": [],
         "music_tags": []
@@ -37,8 +71,59 @@
       "scene_name": "INTRO & HOST BANTER",
       "start_line": 44,
       "content": "\\[MUSIC: main\\_theme\\_intro\\]\n\n\\[IMG: hosts\\_broadcast\\] PROMPT: \"Thorak (dwarf cleric with gray beard, robes) and Zara (tiefling with red skin, small horns, dark clothing) in ancient stone chamber with glowing scrying stones, warm magical lighting, fantasy broadcast studio\"\n\nTHORAK: \"Welcome back to Chronicles of Khronexia: Battle Witnessed\\! I'm Thorak Ironquill, your humble chronicler and battle analyst.\"\n\nZARA: \"And I'm Zara Emberclaw, bringing you all the excitement, drama, and delicious chaos\\! This is episode seven, and honey, we've got something SPECIAL brewing today\\!\"\n\nTHORAK: \"Indeed. The autumn storms have been stirring up activity across the Thornwall region, and our network contacts report increased territorial disputes. Even the normally reclusive forest dragons are becoming more aggressive.\"\n\nZARA: \"My patron whispers that something big is shifting in the balance of power, sweetie. The old territories are being challenged, and today's battle might just be the tipping point\\!\"\n\nTHORAK: \"Today, our Scrying Stones take us deep into the Thornwall Grove, where ancient oaks meet rocky highlands. It's a place where the forest floor is deceptively solid above, but riddled with underground networks below.\"\n\nZARA: \"Where we'll witness an absolutely BRUTAL showdown between a legendary landshark and a young but ambitious forest dragon\\! Underground terror meets aerial supremacy\\!\"\n\nTHORAK: \"Indeed. Let's set the stage for what promises to be a most educational encounter.\"\n\n---",
+      "dialogues": [
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Welcome back to Chronicles of Khronexia: Battle Witnessed\\! I'm Thorak Ironquill, your humble chronicler and battle analyst.",
+          "character_count": 124,
+          "line_position": 5
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "And I'm Zara Emberclaw, bringing you all the excitement, drama, and delicious chaos\\! This is episode seven, and honey, we've got something SPECIAL brewing today\\!",
+          "character_count": 163,
+          "line_position": 7
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Indeed. The autumn storms have been stirring up activity across the Thornwall region, and our network contacts report increased territorial disputes. Even the normally reclusive forest dragons are becoming more aggressive.",
+          "character_count": 222,
+          "line_position": 9
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "My patron whispers that something big is shifting in the balance of power, sweetie. The old territories are being challenged, and today's battle might just be the tipping point\\!",
+          "character_count": 178,
+          "line_position": 11
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Today, our Scrying Stones take us deep into the Thornwall Grove, where ancient oaks meet rocky highlands. It's a place where the forest floor is deceptively solid above, but riddled with underground networks below.",
+          "character_count": 214,
+          "line_position": 13
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Where we'll witness an absolutely BRUTAL showdown between a legendary landshark and a young but ambitious forest dragon\\! Underground terror meets aerial supremacy\\!",
+          "character_count": 165,
+          "line_position": 15
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Indeed. Let's set the stage for what promises to be a most educational encounter.",
+          "character_count": 81,
+          "line_position": 17
+        }
+      ],
       "metadata": {
-        "dialogue_count": 0,
+        "dialogue_count": 7,
         "image_tags": [],
         "sfx_tags": [],
         "music_tags": []
@@ -49,8 +134,94 @@
       "scene_name": "BATTLE SETUP",
       "start_line": 66,
       "content": "\\[AMBIENT: forest\\_wind\\_eerie\\]\n\n\\[IMG: thornwall\\_grove\\] PROMPT: \"Ancient forest clearing with massive oak trees, rocky outcroppings providing elevation, dappled sunlight through canopy, tactical stone platforms and fallen logs, atmospheric depth with mist in background\"\n\nTHORAK: \"The Thornwall Grove presents a fascinating tactical environment, combining dense forest cover with significant elevation changes. Rocky outcroppings provide natural platforms, while the forest floor conceals an extensive network of tunnels carved by decades of burrowing predators. Ancient oak roots create natural barriers, and fallen logs offer both cover and elevated positions.\"\n\nZARA: \"Oh honey, this place just SCREAMS ambush potential\\! You've got hiding spots everywhere, and that canopy is perfect for aerial hit-and-run tactics\\!\"\n\n\\[IMG: bulette\\_portrait\\] PROMPT: \"Massive armored bulette in forest setting, shark-like fin protruding from rocky ground, metallic bronze scales gleaming, powerful claws extended, tremorsense actively scanning, menacing predatory stance\"\n\nTHORAK: \"Our first combatant: the Thornwall Excavator, a mature bulette that has terrorized this region for over a decade. Standing eight feet at the shoulder when fully emerged, this armored predator possesses the distinctive metallic scales that give it near-impenetrable natural armor. Its shark-like dorsal fin and powerful claws mark it as a apex subterranean hunter.\"\n\nZARA: \"That thing is absolutely MASSIVE\\! Look at those claws \\- they're designed for ripping through solid rock like it's cheese\\!\"\n\nTHORAK: \"This particular bulette has claimed the Thornwall Grove as its primary hunting ground after driving out a family of brown bears and systematically eliminating the local deer population. Its tremorsense ability allows it to detect movement up to sixty feet away, making surprise nearly impossible. Today, it's defending its territory against an unexpected aerial challenger.\"\n\n\\[IMG: young\\_green\\_dragon\\] PROMPT: \"Young green dragon perched on oak branch, forest green scales with darker markings, intelligent amber eyes, wing membranes partially extended, poison dripping from fangs, cunning expression, natural forest camouflage\"\n\nTHORAK: \"And facing this underground terror: Verdania the Whisper-Wing, a young green dragon barely past her first century. Twenty feet from nose to tail, her forest-green scales provide perfect camouflage among the oak leaves. Her amber eyes gleam with the cunning intelligence that makes green dragons so dangerous.\"\n\nZARA: \"Oh, she's gorgeous and DEADLY\\! Those scales are shimmering with what I'm betting is magical poison resistance\\!\"\n\nTHORAK: \"Verdania has been expanding her influence throughout the northern Thornwall, using her superior intellect to manipulate local kobold tribes and corrupt forest spirits. She's come to the Grove seeking to establish a new lair, but the bulette's presence threatens her plans. This is about more than territory \\- it's about establishing dominance in the entire region.\"\n\nZARA: \"So what do you think, Thorak? My patron is whispering interesting things about this matchup. The dragon has reach and flight, but that bulette is built like a living siege engine\\!\"\n\nTHORAK: \"A fascinating tactical puzzle, lass. The bulette possesses devastating melee capabilities and that remarkable leaping ability, but it's entirely grounded. Verdania has aerial superiority and ranged poison attacks, but she's physically frailer. My analysis suggests the dragon will attempt to maintain distance and wear down the bulette, while the landshark will try to force close combat. My prediction: if the dragon can stay airborne, she wins through attrition. If the bulette can close distance, it's over quickly.\"\n\nZARA: \"Well, let's see who's right\\! Time to roll initiative\\!\"\n\n\\[SFX: dice\\_rolling\\]\n\nInitiative Order:\n\n* Young Green Dragon: d20 (14) \\+ 2 \\= 16  \n* Bulette: d20 (12) \\+ 0 \\= 12\n\nTHORAK: \"Verdania's draconic reflexes give her the first move. Let the battle begin\\!\"\n\n---",
+      "dialogues": [
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "The Thornwall Grove presents a fascinating tactical environment, combining dense forest cover with significant elevation changes. Rocky outcroppings provide natural platforms, while the forest floor conceals an extensive network of tunnels carved by decades of burrowing predators. Ancient oak roots create natural barriers, and fallen logs offer both cover and elevated positions.",
+          "character_count": 381,
+          "line_position": 5
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Oh honey, this place just SCREAMS ambush potential\\! You've got hiding spots everywhere, and that canopy is perfect for aerial hit-and-run tactics\\!",
+          "character_count": 148,
+          "line_position": 7
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Our first combatant: the Thornwall Excavator, a mature bulette that has terrorized this region for over a decade. Standing eight feet at the shoulder when fully emerged, this armored predator possesses the distinctive metallic scales that give it near-impenetrable natural armor. Its shark-like dorsal fin and powerful claws mark it as a apex subterranean hunter.",
+          "character_count": 363,
+          "line_position": 11
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "That thing is absolutely MASSIVE\\! Look at those claws \\- they're designed for ripping through solid rock like it's cheese\\!",
+          "character_count": 124,
+          "line_position": 13
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "This particular bulette has claimed the Thornwall Grove as its primary hunting ground after driving out a family of brown bears and systematically eliminating the local deer population. Its tremorsense ability allows it to detect movement up to sixty feet away, making surprise nearly impossible. Today, it's defending its territory against an unexpected aerial challenger.",
+          "character_count": 373,
+          "line_position": 15
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "And facing this underground terror: Verdania the Whisper-Wing, a young green dragon barely past her first century. Twenty feet from nose to tail, her forest-green scales provide perfect camouflage among the oak leaves. Her amber eyes gleam with the cunning intelligence that makes green dragons so dangerous.",
+          "character_count": 308,
+          "line_position": 19
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Oh, she's gorgeous and DEADLY\\! Those scales are shimmering with what I'm betting is magical poison resistance\\!",
+          "character_count": 112,
+          "line_position": 21
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Verdania has been expanding her influence throughout the northern Thornwall, using her superior intellect to manipulate local kobold tribes and corrupt forest spirits. She's come to the Grove seeking to establish a new lair, but the bulette's presence threatens her plans. This is about more than territory \\- it's about establishing dominance in the entire region.",
+          "character_count": 365,
+          "line_position": 23
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "So what do you think, Thorak? My patron is whispering interesting things about this matchup. The dragon has reach and flight, but that bulette is built like a living siege engine\\!",
+          "character_count": 180,
+          "line_position": 25
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "A fascinating tactical puzzle, lass. The bulette possesses devastating melee capabilities and that remarkable leaping ability, but it's entirely grounded. Verdania has aerial superiority and ranged poison attacks, but she's physically frailer. My analysis suggests the dragon will attempt to maintain distance and wear down the bulette, while the landshark will try to force close combat. My prediction: if the dragon can stay airborne, she wins through attrition. If the bulette can close distance, it's over quickly.",
+          "character_count": 518,
+          "line_position": 27
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Well, let's see who's right\\! Time to roll initiative\\!",
+          "character_count": 55,
+          "line_position": 29
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Verdania's draconic reflexes give her the first move. Let the battle begin\\!",
+          "character_count": 76,
+          "line_position": 38
+        }
+      ],
       "metadata": {
-        "dialogue_count": 0,
+        "dialogue_count": 12,
         "image_tags": [],
         "sfx_tags": [],
         "music_tags": []
@@ -61,8 +232,45 @@
       "scene_name": "ADVERTISEMENT BREAK 1",
       "start_line": 109,
       "content": "\\[MUSIC: tavern\\_festive\\]\n\n\\[IMG: tavern\\_supplies\\] PROMPT: \"Fantasy tavern interior with barrels of mead, magical instruments, gaming tables, warm firelight, dwarf bartender serving drinks, medieval marketplace atmosphere\"\n\nTHORAK: \"This epic battle is brought to you by Ye Olde Mead & Tavern Supplies\\!\"\n\nZARA: \"Oh honey, after watching these two titans clash, you're going to need something strong to settle your nerves\\! And nobody knows drinks like the masters at Ye Olde Mead\\!\"\n\nTHORAK: \"Their Dwarven Battle Brew at 12 gold pieces per keg will fortify your courage for any adventure, while their Elven Starlight Wine at 25 gold pieces per bottle provides the perfect toast to victory. Don't forget their Complete Gaming Set for 15 gold pieces \\- perfect for those long evenings between adventures\\!\"\n\nZARA: \"Side effects may include spontaneous tavern songs, temporary invincibility complex, and uncontrollable urge to challenge dragons to drinking contests\\!\"\n\nBOTH: \"Where every drink tells a story\\!\"\n\n\\[TRANSITION: Battle atmosphere returns\\]\n\n---",
+      "dialogues": [
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "This epic battle is brought to you by Ye Olde Mead & Tavern Supplies\\!",
+          "character_count": 70,
+          "line_position": 5
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Oh honey, after watching these two titans clash, you're going to need something strong to settle your nerves\\! And nobody knows drinks like the masters at Ye Olde Mead\\!",
+          "character_count": 169,
+          "line_position": 7
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Their Dwarven Battle Brew at 12 gold pieces per keg will fortify your courage for any adventure, while their Elven Starlight Wine at 25 gold pieces per bottle provides the perfect toast to victory. Don't forget their Complete Gaming Set for 15 gold pieces \\- perfect for those long evenings between adventures\\!",
+          "character_count": 311,
+          "line_position": 9
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Side effects may include spontaneous tavern songs, temporary invincibility complex, and uncontrollable urge to challenge dragons to drinking contests\\!",
+          "character_count": 151,
+          "line_position": 11
+        },
+        {
+          "character": "BOTH",
+          "direction": null,
+          "text": "Where every drink tells a story\\!",
+          "character_count": 33,
+          "line_position": 13
+        }
+      ],
       "metadata": {
-        "dialogue_count": 0,
+        "dialogue_count": 5,
         "image_tags": [],
         "sfx_tags": [],
         "music_tags": []
@@ -73,8 +281,143 @@
       "scene_name": "BATTLE COMMENTARY",
       "start_line": 129,
       "content": "\\[AMBIENT: forest\\_battle\\_tension\\]\n\n\\[IMG: battle\\_positions\\] PROMPT: \"Young green dragon hovering 40 feet above forest clearing, wings spread majestically, while massive bulette emerges from ground below, earth spraying around it, tense pre-combat moment\"\n\nTHORAK: \"The Scrying Stone focuses on the combatants. Let us chronicle this battle\\!\"\n\n**Combatants**: Bulette (HP: 94, AC: 17\\) vs. Young Green Dragon (HP: 136, AC: 18\\)\n\n**ROUND 1**\n\n**Young Green Dragon's Turn (Initiative: 16\\)**:\n\nZARA: \"Verdania's not taking any chances, sweetie\\! She's hovering about forty feet up, just at the edge of the canopy, sizing up her opponent like the cunning predator she is\\!\"\n\nTHORAK: \"Smart positioning. She's maintaining aerial superiority while staying within optimal breath weapon range.\"\n\nPoison Breath (Recharge 5-6): The dragon exhales a 30-foot cone of poisonous gas Constitution Saving Throw: DC 14 (Bulette) Bulette Save: d20 (8) \\+ 6 \\= 14 \\[SUCCESS\\] Damage: 42 poison damage, halved to 21 damage Bulette: HP reduced from 94 to 73\n\nZARA: \"Holy hells\\! That poison cloud just melted through half the underbrush, but look at that bulette \\- it's still standing\\!\"\n\nTHORAK: \"Remarkable constitution on that landshark. Its natural resilience served it well, though it's clearly feeling the effects.\"\n\n**Bulette's Turn (Initiative: 12\\)**:\n\nZARA: \"Now the bulette's MAD\\! I can see it calculating distances with those beady little eyes\\!\"\n\nTHORAK: \"The tactical question is whether it can reach the dragon with its legendary leaping ability.\"\n\nStanding Leap: The bulette moves 30 feet and leaps up to 30 feet high toward the dragon Deadly Leap Attack: The bulette attempts to land on the dragon (within 15 feet) Dexterity Saving Throw: DC 15 (Young Green Dragon) Dragon Save: d20 (11) \\+ 2 \\= 13 \\[FAILURE\\] Damage: 19 bludgeoning damage, dragon is knocked prone (falls 40 feet) Fall Damage: 4d6 \\= 14 additional bludgeoning damage Young Green Dragon: HP reduced from 136 to 103\n\n\\[IMG: epic\\_leap\\] PROMPT: \"Massive bulette launching through air in spectacular leap, jaws open wide, while green dragon attempts to dodge, forest canopy in background, action frozen at moment of impact\"\n\nZARA: \"OH MY STARS\\! That absolute madlad just LAUNCHED itself through the air like a furry missile\\!\"\n\nTHORAK: \"Extraordinary\\! A forty-foot vertical leap catching a dragon in flight \\- I've never witnessed such tactical audacity\\!\"\n\n**ROUND 2**\n\n**Young Green Dragon's Turn (Initiative: 16\\)**:\n\nTHORAK: \"Verdania is grounded now, and that changes everything. She needs to create distance immediately.\"\n\nMovement: Dragon moves 40 feet away from the bulette (using half movement to stand from prone)\n\nMultiattack: The dragon makes three Rend attacks Attack 1 \\- Rend: d20 (15) \\+ 7 \\= 22 \\[HIT\\] Damage: 2d6 (4,3) \\+ 4 slashing \\+ 2d6 (2,5) poison \\= 11 slashing \\+ 7 poison \\= 18 total damage\n\nAttack 2 \\- Rend: d20 (8) \\+ 7 \\= 15 \\[MISS\\]\n\nAttack 3 \\- Rend: d20 (19) \\+ 7 \\= 26 \\[HIT\\] Damage: 2d6 (6,2) \\+ 4 slashing \\+ 2d6 (3,6) poison \\= 12 slashing \\+ 9 poison \\= 21 total damage\n\nBulette: HP reduced from 73 to 34\n\nZARA: \"Those claws are finding their mark\\! Poison and razor-sharp talons \\- what a combination\\!\"\n\nTHORAK: \"The dragon's desperation is showing in the ferocity of her attacks. She knows she can't afford prolonged melee combat.\"\n\n**Bulette's Turn (Initiative: 12\\)**:\n\nTHORAK: \"The bulette is bloodied but far from finished. Time for its signature assault.\"\n\nMovement: Bulette moves 30 feet to close with the dragon\n\nMultiattack: The bulette makes two Bite attacks Attack 1 \\- Bite: d20 (16) \\+ 7 \\= 23 \\[HIT\\] Damage: 2d12 (8,11) \\+ 4 \\= 27 piercing damage\n\nAttack 2 \\- Bite: d20 (12) \\+ 7 \\= 19 \\[HIT\\] Damage: 2d12 (6,9) \\+ 4 \\= 19 piercing damage\n\nYoung Green Dragon: HP reduced from 103 to 57\n\nZARA: \"Those jaws are like steel traps\\! The dragon's in serious trouble now\\!\"\n\nTHORAK: \"Indeed. Those bites are finding weak spots between the dragon's scales.\"\n\n\\[IMG: fierce\\_melee\\] PROMPT: \"Intense close combat between bulette and young green dragon, bulette's massive jaws clamped on dragon's flank, dragon's claws raking bulette's armored hide, forest debris flying, dramatic lighting\"\n\n**ROUND 3**\n\n**Young Green Dragon's Turn (Initiative: 16\\)**:\n\nZARA: \"She's got to get airborne again or this is over\\!\"\n\nTHORAK: \"Precisely. Flight is her only tactical advantage remaining.\"\n\nMovement: Dragon attempts to fly 40 feet up (provoking opportunity attack)\n\nOpportunity Attack \\- Bulette Bite: d20 (18) \\+ 7 \\= 25 \\[HIT\\] Damage: 2d12 (10,7) \\+ 4 \\= 21 piercing damage Young Green Dragon: HP reduced from 57 to 36\n\nPoison Breath Recharge: d6 \\= 6 \\[RECHARGED\\]\n\nPoison Breath (30-foot cone): Targeting the bulette below Constitution Saving Throw: DC 14 (Bulette) Bulette Save: d20 (6) \\+ 6 \\= 12 \\[FAILURE\\] Damage: 42 poison damage (full) Bulette: HP reduced from 34 to \\-8 \\[DEFEATED\\]\n\n\\[IMG: victory\\_poison\\] PROMPT: \"Young green dragon hovering triumphantly as massive bulette collapses below, green poison cloud dissipating around fallen landshark, dragon's amber eyes gleaming with victory, forest clearing battle-scarred\"\n\nZARA: \"AND THERE'S THE KNOCKOUT\\! Verdania pulls victory from the jaws of defeat with that devastating poison breath\\!\"\n\nTHORAK: \"Remarkable tactical recovery. The dragon's aerial mobility proved decisive in the final moments.\"\n\n**Battle Conclusion**: Young Green Dragon: 36 HP remaining (bloodied but victorious) Bulette: \\-8 HP (defeated, succumbed to poison)\n\n\\[SFX: forest\\_settling\\_quiet\\]\n\n---",
+      "dialogues": [
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "The Scrying Stone focuses on the combatants. Let us chronicle this battle\\!",
+          "character_count": 75,
+          "line_position": 5
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Verdania's not taking any chances, sweetie\\! She's hovering about forty feet up, just at the edge of the canopy, sizing up her opponent like the cunning predator she is\\!",
+          "character_count": 170,
+          "line_position": 13
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Smart positioning. She's maintaining aerial superiority while staying within optimal breath weapon range.",
+          "character_count": 105,
+          "line_position": 15
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Holy hells\\! That poison cloud just melted through half the underbrush, but look at that bulette \\- it's still standing\\!",
+          "character_count": 121,
+          "line_position": 19
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Remarkable constitution on that landshark. Its natural resilience served it well, though it's clearly feeling the effects.",
+          "character_count": 122,
+          "line_position": 21
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Now the bulette's MAD\\! I can see it calculating distances with those beady little eyes\\!",
+          "character_count": 89,
+          "line_position": 25
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "The tactical question is whether it can reach the dragon with its legendary leaping ability.",
+          "character_count": 92,
+          "line_position": 27
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "OH MY STARS\\! That absolute madlad just LAUNCHED itself through the air like a furry missile\\!",
+          "character_count": 94,
+          "line_position": 33
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Extraordinary\\! A forty-foot vertical leap catching a dragon in flight \\- I've never witnessed such tactical audacity\\!",
+          "character_count": 119,
+          "line_position": 35
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Verdania is grounded now, and that changes everything. She needs to create distance immediately.",
+          "character_count": 96,
+          "line_position": 41
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Those claws are finding their mark\\! Poison and razor-sharp talons \\- what a combination\\!",
+          "character_count": 90,
+          "line_position": 53
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "The dragon's desperation is showing in the ferocity of her attacks. She knows she can't afford prolonged melee combat.",
+          "character_count": 118,
+          "line_position": 55
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "The bulette is bloodied but far from finished. Time for its signature assault.",
+          "character_count": 78,
+          "line_position": 59
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Those jaws are like steel traps\\! The dragon's in serious trouble now\\!",
+          "character_count": 71,
+          "line_position": 69
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Indeed. Those bites are finding weak spots between the dragon's scales.",
+          "character_count": 71,
+          "line_position": 71
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "She's got to get airborne again or this is over\\!",
+          "character_count": 49,
+          "line_position": 79
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Precisely. Flight is her only tactical advantage remaining.",
+          "character_count": 59,
+          "line_position": 81
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "AND THERE'S THE KNOCKOUT\\! Verdania pulls victory from the jaws of defeat with that devastating poison breath\\!",
+          "character_count": 111,
+          "line_position": 93
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Remarkable tactical recovery. The dragon's aerial mobility proved decisive in the final moments.",
+          "character_count": 96,
+          "line_position": 95
+        }
+      ],
       "metadata": {
-        "dialogue_count": 0,
+        "dialogue_count": 19,
         "image_tags": [],
         "sfx_tags": [],
         "music_tags": []
@@ -85,8 +428,45 @@
       "scene_name": "ADVERTISEMENT BREAK 2",
       "start_line": 233,
       "content": "\\[MUSIC: elegant\\_orchestral\\]\n\n\\[IMG: gilded\\_gauntlet\\] PROMPT: \"Elegant armor shop with gleaming shields and masterwork weapons displayed, magical enchantments glowing softly, armorer fitting a knight with protective gear, warm golden lighting\"\n\nTHORAK: \"Speaking of that impressive draconic armor, it reminds me of The Gilded Gauntlet\\!\"\n\nZARA: \"Honey, after seeing how that dragon's natural scales held up against those massive bites, you KNOW you need premium protection for your next adventure\\!\"\n\nTHORAK: \"Their Masterwork Shield at 150 gold pieces provides exceptional defense against both physical and magical attacks, while their Reinforced Battle Helm at 75 gold pieces protects your most vital asset \\- your head\\! Don't forget their Blessed Chain Mail at 200 gold pieces, enchanted by genuine clerics.\"\n\nZARA: \"Warning: Blessing may cause temporary divine visions, uncontrollable urge to smite evil, or spontaneous hymn singing during combat\\!\"\n\nBOTH: \"Protection with prestige\\!\"\n\n\\[TRANSITION: Return to aftermath atmosphere\\]\n\n---",
+      "dialogues": [
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Speaking of that impressive draconic armor, it reminds me of The Gilded Gauntlet\\!",
+          "character_count": 82,
+          "line_position": 5
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Honey, after seeing how that dragon's natural scales held up against those massive bites, you KNOW you need premium protection for your next adventure\\!",
+          "character_count": 152,
+          "line_position": 7
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Their Masterwork Shield at 150 gold pieces provides exceptional defense against both physical and magical attacks, while their Reinforced Battle Helm at 75 gold pieces protects your most vital asset \\- your head\\! Don't forget their Blessed Chain Mail at 200 gold pieces, enchanted by genuine clerics.",
+          "character_count": 301,
+          "line_position": 9
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Warning: Blessing may cause temporary divine visions, uncontrollable urge to smite evil, or spontaneous hymn singing during combat\\!",
+          "character_count": 132,
+          "line_position": 11
+        },
+        {
+          "character": "BOTH",
+          "direction": null,
+          "text": "Protection with prestige\\!",
+          "character_count": 26,
+          "line_position": 13
+        }
+      ],
       "metadata": {
-        "dialogue_count": 0,
+        "dialogue_count": 5,
         "image_tags": [],
         "sfx_tags": [],
         "music_tags": []
@@ -97,8 +477,66 @@
       "scene_name": "AFTERMATH ANALYSIS",
       "start_line": 253,
       "content": "\\[AMBIENT: forest\\_peaceful\\_aftermath\\]\n\n\\[IMG: aftermath\\_scene\\] PROMPT: \"Forest clearing showing aftermath of battle, young green dragon perched victoriously on fallen bulette, disturbed earth and broken vegetation, shafts of sunlight through canopy highlighting the scene\"\n\nTHORAK: \"Verdania emerges victorious, though significantly wounded, while the mighty Thornwall Excavator lies still, finally succumbed to the dragon's persistent poison attacks.\"\n\nZARA: \"What an absolutely BRUTAL fight\\! That dragon proved that sometimes cunning and mobility beat raw power, but barely\\!\"\n\nTHORAK: \"Let us analyze the key moments that decided this battle. First, the dragon's opening poison breath established early damage but failed to capitalize due to the bulette's exceptional constitution. Second, the bulette's incredible leap attack completely changed the tactical dynamic, bringing the fight to close quarters where it held the advantage. Finally, Verdania's ability to regain altitude in the third round allowed her to deploy her breath weapon from safety, securing victory.\"\n\nZARA: \"That landshark could have won if it had prevented the dragon from getting airborne again\\! One more round of those devastating bites might have finished her off\\!\"\n\nTHORAK: \"Precisely the lesson for adventurers: when facing flying opponents, control their mobility. Use ranged attacks, terrain advantages, or magical restraints. The bulette's leap attack was brilliant improvisation, but it needed a follow-up strategy to keep the dragon grounded.\"\n\nZARA: \"As for consequences in our world, Verdania now controls the entire Thornwall Grove and can establish her lair as planned. The local kobold tribes will likely pledge allegiance, and forest travelers should expect increased manipulation and extortion attempts.\"\n\nTHORAK: \"Indeed. The elimination of the bulette removes a significant threat to surface dwellers, but replaces it with a far more intelligent and strategically dangerous predator. The balance of power in the northern Thornwall has shifted dramatically.\"\n\nZARA: \"Another incredible battle for the chronicles\\!\"\n\n---",
+      "dialogues": [
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Verdania emerges victorious, though significantly wounded, while the mighty Thornwall Excavator lies still, finally succumbed to the dragon's persistent poison attacks.",
+          "character_count": 168,
+          "line_position": 5
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "What an absolutely BRUTAL fight\\! That dragon proved that sometimes cunning and mobility beat raw power, but barely\\!",
+          "character_count": 117,
+          "line_position": 7
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Let us analyze the key moments that decided this battle. First, the dragon's opening poison breath established early damage but failed to capitalize due to the bulette's exceptional constitution. Second, the bulette's incredible leap attack completely changed the tactical dynamic, bringing the fight to close quarters where it held the advantage. Finally, Verdania's ability to regain altitude in the third round allowed her to deploy her breath weapon from safety, securing victory.",
+          "character_count": 484,
+          "line_position": 9
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "That landshark could have won if it had prevented the dragon from getting airborne again\\! One more round of those devastating bites might have finished her off\\!",
+          "character_count": 162,
+          "line_position": 11
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Precisely the lesson for adventurers: when facing flying opponents, control their mobility. Use ranged attacks, terrain advantages, or magical restraints. The bulette's leap attack was brilliant improvisation, but it needed a follow-up strategy to keep the dragon grounded.",
+          "character_count": 273,
+          "line_position": 13
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "As for consequences in our world, Verdania now controls the entire Thornwall Grove and can establish her lair as planned. The local kobold tribes will likely pledge allegiance, and forest travelers should expect increased manipulation and extortion attempts.",
+          "character_count": 258,
+          "line_position": 15
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Indeed. The elimination of the bulette removes a significant threat to surface dwellers, but replaces it with a far more intelligent and strategically dangerous predator. The balance of power in the northern Thornwall has shifted dramatically.",
+          "character_count": 243,
+          "line_position": 17
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Another incredible battle for the chronicles\\!",
+          "character_count": 46,
+          "line_position": 19
+        }
+      ],
       "metadata": {
-        "dialogue_count": 0,
+        "dialogue_count": 8,
         "image_tags": [],
         "sfx_tags": [],
         "music_tags": []
@@ -109,8 +547,73 @@
       "scene_name": "OUTRO & NEXT EPISODE TEASE",
       "start_line": 277,
       "content": "\\[MUSIC: main\\_theme\\_outro\\]\n\n\\[IMG: hosts\\_farewell\\] PROMPT: \"Thorak and Zara in broadcast chamber waving goodbye, scrying stones glowing softly in background, warm magical lighting, satisfied expressions after covering epic battle\"\n\nTHORAK: \"And so concludes another chronicle of legendary combat. Thank you to our sponsors, Ye Olde Mead & Tavern Supplies and The Gilded Gauntlet.\"\n\nZARA: \"And thank you to all our amazing listeners\\! Your support keeps the Scrying Stones glowing\\!\"\n\nTHORAK: \"Next time on Chronicles of Khronexia...\"\n\nZARA: \"We're diving deep into the Sunless Caverns where an ancient Death Knight faces off against a massive Stone Golem\\! Undead necromancy meets unstoppable construct force in a battle that will shake the very foundations of the underground realm\\!\"\n\nTHORAK: \"Will centuries of tactical experience triumph over relentless magical automation?\"\n\nZARA: \"Find out next week as we witness another legendary battle\\!\"\n\nTHORAK: \"Until then, I'm Thorak Ironquill—\"\n\nZARA: \"—and I'm Zara Emberclaw\\!\"\n\nBOTH: \"Stay safe, and watch the skies\\!\"\n\n\\[MUSIC: Theme music swells and fades\\]\n\n\\[SFX: scrying\\_stone\\_powerdown\\]\n\n---\n\n## **PRODUCTION NOTES**\n\n**Total Estimated Runtime:** 18 minutes\n\n**Image Prompts Used:** 8 (exceeds 7 minimum requirement)\n\n**Audio Cues Used:** 16 (exceeds 15 minimum requirement)\n\n**Monster Accuracy:** 100% D\\&D 2024 compliant with official stat blocks\n\n**Character Voice Consistency:** Maintained throughout episode\n\n**Sponsor Compliance:** Both sponsors from approved Fantasy Business Directory\n\n**Technical Standards:** All dice rolls in plain text format, no mathematical notation\n\n---\n\n## **QUALITY SCORE REPORT**\n\n**Compliance Score:** 41/41 items (100%)\n\n* Structural Compliance: 10/10  \n* Content Compliance: 10/10  \n* Technical Compliance: 18/18  \n* Thumbnail Compliance: 3/3  \n* Automation Compliance: 6/6\n\n---\n\n## **THUMBNAIL GENERATION OUTPUT**\n\n**Instructions:** Copy the complete prompt below and paste into your AI image generator\n\nCreate YouTube thumbnail for Chronicles of Khronexia podcast following these EXACT specifications:\n\n**EPISODE DETAILS:**\n\n* Episode: \"S1 \\- Sesh007 \\- The Landshark's Gambit\"  \n* Monsters: Bulette vs. Young Green Dragon  \n* Setting: Thornwall Grove ancient forest clearing\n\n**TECHNICAL SPECS:**\n\n* 1920x1080 pixels, mobile-optimized design  \n* Semi-realistic digital painting style (concept art quality)  \n* High contrast, saturated fantasy colors  \n* Environmental depth with atmospheric perspective\n\n**LAYOUT REQUIREMENTS:**\n\n* Left 60%: Monster battle scene only \\- no text overlap  \n* Right 40%: Text overlay with translucent dark background (\\#000000 at 70% opacity)  \n* Diagonal magical energy separator dividing the 60/40 sections (dynamic lightning/energy effect in gold \\#ffd700)\n\n**CRITICAL D\\&D MONSTER ANATOMY (Left 60% Only):**\n\n**Bulette (LEFT POSITION):** Large metallic bull-like creature, quadruped stance, bronze/copper metallic scales with reflective surface, approximately 6 feet at shoulder with muscular build, shark-like dorsal fin, powerful claws, constructed/artificial appearance, ground-based positioning in charging or aggressive stance\n\n**Young Green Dragon (RIGHT POSITION):** 20-foot forest green dragon with darker markings, classic western dragon anatomy (four legs, two wings, long tail), intelligent amber eyes, forest green scales providing natural camouflage, wing membranes partially extended, reptilian head with horns, cunning expression, hovering or perched position\n\n**TYPOGRAPHY (Right 40% Only):**\n\n* Main title: \"LANDSHARK'S GAMBIT\" \\- 96pt bold white sans-serif (\\#ffffff) with black outline  \n* Series brand: \"Chronicles of Khronexia\" \\- 60pt ornate gold fantasy script (\\#ffd700)  \n* Episode ID: \"S1 \\- Sesh007\" \\- 48pt white text (\\#ffffff), bottom right  \n* ALL text must have strong black outlines for mobile readability\n\n**ENVIRONMENT (Left 60% Background):** Ancient forest clearing with massive oak trees, rocky outcroppings providing elevation, dappled sunlight through canopy creating natural lighting, fallen logs and stone platforms for tactical terrain, background elements progressively faded/shaded for atmospheric depth, mysterious mist in distant background, tactical terrain features visible but not overwhelming\n\n**COLOR PALETTE:**\n\n* Background: Deep forest greens (\\#2e7d32) with earth browns (\\#5d4037) and atmospheric gradients  \n* Magical separator: Crackling gold/white energy (\\#ffd700)  \n* Text: Pure white (\\#ffffff) with black outlines  \n* Monster lighting: Forest-filtered sunlight creating dappled illumination on both creatures  \n* Crystal/magical effects: Electric blues and purples for mystical atmosphere\n\n**QUALITY VALIDATION:**\n\n* Bulette MUST follow exact D\\&D anatomy \\- metallic bull body, shark fin, no organic appearance  \n* Young Green Dragon MUST follow exact D\\&D anatomy \\- classic western dragon, forest green scales  \n* Text MUST be readable on mobile screens with strong outlines  \n* Monsters MUST be positioned only in left 60% with clear separation  \n* Background MUST show clear atmospheric depth and perspective  \n* Diagonal separator MUST be prominent magical energy effect\n\n---\n\n## **EPISODE ASSET MANIFEST**\n\nepisode\\_assets:\n\n  metadata:\n\n    episode\\_number: \"S1 \\- Sesh007\"\n\n    title: \"The Landshark's Gambit\"\n\n    runtime\\_estimate: \"18 minutes\"\n\n    monsters: \\[\"Bulette\", \"Young Green Dragon\"\\]\n\n    location: \"Thornwall Grove\"\n\n  voices:\n\n    \\- speaker: \"THORAK\"\n\n      voice\\_id: \"thorak\\_dwarf\\_cleric\"\n\n    \\- speaker: \"ZARA\"\n\n      voice\\_id: \"zara\\_tiefling\\_warlock\"\n\n  sfx\\_required:\n\n    \\- \"earth\\_rumbling\\_deep\"\n\n    \\- \"dice\\_rolling\"\n\n    \\- \"forest\\_wind\\_eerie\"\n\n    \\- \"forest\\_battle\\_tension\"\n\n    \\- \"forest\\_settling\\_quiet\"\n\n    \\- \"forest\\_peaceful\\_aftermath\"\n\n    \\- \"scrying\\_stone\\_powerdown\"\n\n  music\\_cues:\n\n    \\- \"main\\_theme\\_intro\"\n\n    \\- \"tavern\\_festive\"\n\n    \\- \"elegant\\_orchestral\"\n\n    \\- \"main\\_theme\\_outro\"\n\n  image\\_prompts:\n\n    \\- id: \"cold\\_open\\_leap\"\n\n      prompt: \"Massive armored bulette erupting from forest ground in mid-leap, jaws agape, targeting a green dragon hovering just above, dramatic lighting with earth and stone spraying, cinematic fantasy art style\"\n\n    \\- id: \"hosts\\_broadcast\"\n\n      prompt: \"Thorak (dwarf cleric with gray beard, robes) and Zara (tiefling with red skin, small horns, dark clothing) in ancient stone chamber with glowing scrying stones, warm magical lighting, fantasy broadcast studio\"\n\n    \\- id: \"thornwall\\_grove\"\n\n      prompt: \"Ancient forest clearing with massive oak trees, rocky outcroppings providing elevation, dappled sunlight through canopy, tactical stone platforms and fallen logs, atmospheric depth with mist in background\"\n\n    \\- id: \"bulette\\_portrait\"\n\n      prompt: \"Massive armored bulette in forest setting, shark-like fin protruding from rocky ground, metallic bronze scales gleaming, powerful claws extended, tremorsense actively scanning, menacing predatory stance\"\n\n    \\- id: \"young\\_green\\_dragon\"\n\n      prompt: \"Young green dragon perched on oak branch, forest green scales with darker markings, intelligent amber eyes, wing membranes partially extended, poison dripping from fangs, cunning expression, natural forest camouflage\"\n\n    \\- id: \"battle\\_positions\"\n\n      prompt: \"Young green dragon hovering 40 feet above forest clearing, wings spread majestically, while massive bulette emerges from ground below, earth spraying around it, tense pre-combat moment\"\n\n    \\- id: \"epic\\_leap\"\n\n      prompt: \"Massive bulette launching through air in spectacular leap, jaws open wide, while green dragon attempts to dodge, forest canopy in background, action frozen at moment of impact\"\n\n    \\- id: \"aftermath\\_scene\"\n\n      prompt: \"Forest clearing showing aftermath of battle, young green dragon perched victoriously on fallen bulette, disturbed earth and broken vegetation, shafts of sunlight through canopy highlighting the scene\"\n\n  thumbnail:\n\n    prompt: \"Complete 2000+ character thumbnail prompt with D\\&D monster anatomy specifications and brand compliance\"\n\n---\n\n## **VALIDATION CHECKLIST**\n\n### **Episode Generation Complete:**\n\n* \\[x\\] All 8 episode sections present  \n* \\[x\\] Quality score 100% compliance  \n* \\[x\\] Thumbnail prompt included (2000+ chars)  \n* \\[x\\] All outputs ready for production pipeline\n\n---\n\n## **END OF EPISODE GENERATION**\n\n**This episode is now complete and ready for the automated production pipeline\\!**",
+      "dialogues": [
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "And so concludes another chronicle of legendary combat. Thank you to our sponsors, Ye Olde Mead & Tavern Supplies and The Gilded Gauntlet.",
+          "character_count": 138,
+          "line_position": 5
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "And thank you to all our amazing listeners\\! Your support keeps the Scrying Stones glowing\\!",
+          "character_count": 92,
+          "line_position": 7
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Next time on Chronicles of Khronexia...",
+          "character_count": 39,
+          "line_position": 9
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "We're diving deep into the Sunless Caverns where an ancient Death Knight faces off against a massive Stone Golem\\! Undead necromancy meets unstoppable construct force in a battle that will shake the very foundations of the underground realm\\!",
+          "character_count": 242,
+          "line_position": 11
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Will centuries of tactical experience triumph over relentless magical automation?",
+          "character_count": 81,
+          "line_position": 13
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "Find out next week as we witness another legendary battle\\!",
+          "character_count": 59,
+          "line_position": 15
+        },
+        {
+          "character": "THORAK",
+          "direction": null,
+          "text": "Until then, I'm Thorak Ironquill—",
+          "character_count": 33,
+          "line_position": 17
+        },
+        {
+          "character": "ZARA",
+          "direction": null,
+          "text": "—and I'm Zara Emberclaw\\!",
+          "character_count": 25,
+          "line_position": 19
+        },
+        {
+          "character": "BOTH",
+          "direction": null,
+          "text": "Stay safe, and watch the skies\\!",
+          "character_count": 32,
+          "line_position": 21
+        }
+      ],
       "metadata": {
-        "dialogue_count": 0,
+        "dialogue_count": 9,
         "image_tags": [],
         "sfx_tags": [],
         "music_tags": []

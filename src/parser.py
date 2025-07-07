@@ -111,6 +111,39 @@ def normalize_scene_id(scene_name: str) -> str:
     return scene_id
 
 
+def parse_dialogue_from_content(
+    content: str, logger: logging.Logger
+) -> List[Dict[str, Any]]:
+    """Extract dialogue lines from scene content."""
+    # Pattern to match dialogue: CHARACTER: (optional direction) "text"
+    # Supports THORAK:, ZARA:, BOTH:, and potentially other characters
+    dialogue_pattern = re.compile(
+        r"^([A-Z][A-Z\s]*?):\s*(?:\(([^)]+)\))?\s*\"([^\"]+)\"", re.MULTILINE
+    )
+
+    dialogues = []
+    for match in dialogue_pattern.finditer(content):
+        character = match.group(1).strip()
+        direction = match.group(2).strip() if match.group(2) else None
+        text = match.group(3).strip()
+
+        # Calculate character count (for cost estimation)
+        character_count = len(text)
+
+        dialogue_data = {
+            "character": character,
+            "direction": direction,
+            "text": text,
+            "character_count": character_count,
+            "line_position": content[: match.start()].count("\n") + 1,
+        }
+
+        dialogues.append(dialogue_data)
+        logger.debug(f"Found dialogue: {character} ({character_count} chars)")
+
+    return dialogues
+
+
 def extract_scenes(content: str, logger: logging.Logger) -> List[Dict[str, Any]]:
     """Extract scenes from the markdown content."""
     # Pattern to match scene markers: ## **\[SCENE: NAME\]**
@@ -149,13 +182,17 @@ def extract_scenes(content: str, logger: logging.Logger) -> List[Dict[str, Any]]
         # Extract and clean scene content
         scene_content = content[content_start:content_end].strip()
 
+        # Parse dialogues within this scene
+        dialogues = parse_dialogue_from_content(scene_content, logger)
+
         scene_data = {
             "scene_id": scene_id,
             "scene_name": scene_name,
             "start_line": line_number,
             "content": scene_content,
+            "dialogues": dialogues,
             "metadata": {
-                "dialogue_count": 0,  # Will be populated in Task 2.2
+                "dialogue_count": len(dialogues),
                 "image_tags": [],  # Will be populated in Task 2.3
                 "sfx_tags": [],  # Will be populated in Task 2.3
                 "music_tags": [],  # Will be populated in Task 2.3
@@ -163,7 +200,9 @@ def extract_scenes(content: str, logger: logging.Logger) -> List[Dict[str, Any]]
         }
 
         scenes.append(scene_data)
-        logger.debug(f"Extracted scene: {scene_name} (line {line_number})")
+        logger.debug(
+            f"Extracted scene: {scene_name} (line {line_number}, {len(dialogues)} dialogues)"
+        )
 
     logger.info(f"Extracted {len(scenes)} scenes from the script")
     return scenes
@@ -221,22 +260,42 @@ def parse_episode_script(input_path: Path, logger: logging.Logger) -> Dict[str, 
     return parsed_data
 
 
+def calculate_character_counts(scenes: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Calculate character counts for cost estimation."""
+    character_counts = {}
+    total_characters = 0
+
+    for scene in scenes:
+        for dialogue in scene.get("dialogues", []):
+            character = dialogue["character"]
+            char_count = dialogue["character_count"]
+
+            if character not in character_counts:
+                character_counts[character] = 0
+            character_counts[character] += char_count
+            total_characters += char_count
+
+    return {"total_characters": total_characters, "by_speaker": character_counts}
+
+
 def generate_output_metadata(
-    input_path: Path, processing_time: float
+    input_path: Path, processing_time: float, scenes: List[Dict[str, Any]]
 ) -> Dict[str, Any]:
     """Generate metadata for the parsed output."""
+    character_stats = calculate_character_counts(scenes)
+
     return {
         "processing_timestamp": datetime.now().isoformat(),
         "input_file_path": str(input_path.absolute()),
         "total_processing_time_seconds": round(processing_time, 3),
         "estimated_downstream_costs": {
-            "elevenlabs_character_count": 0,  # Will be calculated in Task 4.1
+            "elevenlabs_character_count": character_stats["total_characters"],
             "image_generation_count": 0,  # Will be calculated in Task 2.3
             "sfx_count": 0,  # Will be calculated in Task 2.3
             "music_cue_count": 0,  # Will be calculated in Task 2.3
         },
         "validation_status": "passed",  # Will be determined in Task 5.1
-        "character_count_by_speaker": {},  # Will be calculated in Task 4.1
+        "character_count_by_speaker": character_stats["by_speaker"],
     }
 
 
@@ -364,7 +423,9 @@ def main() -> int:
 
         # Generate metadata
         processing_time = time.time() - start_time
-        metadata = generate_output_metadata(input_path, processing_time)
+        metadata = generate_output_metadata(
+            input_path, processing_time, parsed_data["scenes"]
+        )
 
         # Extract episode name for file naming
         episode_name = input_path.stem
