@@ -198,6 +198,76 @@
 
 ---
 
+## 12. Environment Setup & Integration Patterns
+
+### **Python/FFmpeg Integration Strategy**
+- **Primary Approach:** Direct subprocess control for maximum flexibility and performance
+- **FFmpeg Path:** System-installed via Homebrew (`/opt/homebrew/bin/ffmpeg` on Apple Silicon)
+- **Hardware Acceleration:** Use VideoToolbox codecs on macOS (`h264_videotoolbox`, `hevc_videotoolbox`)
+- **Output Format:** MP4 container, H.264 video codec, AAC audio codec, 1920x1080 @ 30fps
+
+### **ElevenLabs API Integration**
+- **SDK:** Official Python SDK (`elevenlabs` package)
+- **Voice Models:** Eleven Multilingual v2 for highest quality
+- **Streaming:** Use streaming API for real-time voice generation
+- **Voice Settings:** 
+  - Thorak: Stability 0.75, Similarity 0.85 (consistent scholarly tone)
+  - Zara: Stability 0.45, Similarity 0.75 (more emotional variation)
+
+### **API Key Management**
+- **Method:** python-dotenv for environment variables
+- **File:** `.env` in project root (NEVER commit to git)
+- **Loading:** `load_dotenv()` at application startup
+- **Access:** `os.getenv('ELEVENLABS_API_KEY')`
+- **Security:** Add `.env` to `.gitignore` immediately
+
+### **Core Dependencies**
+```
+elevenlabs      # Official ElevenLabs SDK
+pydub           # Audio manipulation
+ffmpeg-python   # FFmpeg Python wrapper
+moviepy         # High-level video editing
+python-dotenv   # Environment variable management
+requests        # HTTP requests
+opencv-python   # Image processing
+pillow          # Image manipulation
+imageio         # Image I/O operations
+imageio-ffmpeg  # FFmpeg plugin for imageio
+```
+
+### **Project Media Structure**
+```
+versusMonster/
+├── scripts/          # Input markdown scripts
+├── output/
+│   ├── json/        # Parsed script data
+│   ├── voices/      # Generated voice files
+│   ├── audio/       # Mixed audio tracks
+│   └── videos/      # Final video outputs
+├── assets/
+│   ├── images/      # Background images
+│   ├── sfx/         # Sound effects
+│   └── music/       # Background music
+└── reference/       # Test episodes
+```
+
+### **Validation Requirements**
+- Python ≥ 3.9 (for modern type hints and features)
+- FFmpeg ≥ 5.0 (for Apple Silicon optimization)
+- All output directories must exist before processing
+- .env file must contain valid ELEVENLABS_API_KEY
+- Test with Episode 7 before processing other episodes
+
+### **Git Workflow & Version Control**
+- **Primary Tool:** GitHub Desktop for commits and pushes
+- **Repository:** https://github.com/petergiordano/vsmonster.git
+- **Branch Strategy:** Main branch for stable development
+- **Commit Frequency:** Regular commits after completing major setup steps or features
+- **Security:** Never commit .env files or API keys (protected by .gitignore)
+- **Template Updates:** Use `git pull template main` for framework improvements
+
+---
+
 ## IMPORTANT: Context Continuity Instructions
 
 ### **For New AI Sessions:**

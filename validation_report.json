@@ -1,0 +1,47 @@
+{
+  "timestamp": "Sun Jul  6 19:29:08 PDT 2025",
+  "summary": {
+    "total_tests": 28,
+    "passed": 28,
+    "failed": 0,
+    "warnings": 2,
+    "success_rate": "100.0%"
+  },
+  "results": {
+    "info": [
+      "\u2705 Python 3.11.5 meets requirements (\u22653.9)",
+      "\u2705 FFmpeg found: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers",
+      "\u2705 VideoToolbox hardware acceleration available",
+      "\u2705 FFmpeg basic video/audio generation works",
+      "\u2705 Package elevenlabs is installed",
+      "\u2705 Package pydub is installed",
+      "\u2705 Package ffmpeg is installed",
+      "\u2705 Package moviepy is installed",
+      "\u2705 Package requests is installed",
+      "\u2705 Package dotenv is installed",
+      "\u2705 Package cv2 is installed",
+      "\u2705 Package PIL is installed",
+      "\u2705 Package imageio is installed",
+      "\u2705 Directory scripts/ exists",
+      "\u2705 Directory output/ exists",
+      "\u2705 Directory output/json/ exists",
+      "\u2705 Directory output/voices/ exists",
+      "\u2705 Directory output/audio/ exists",
+      "\u2705 Directory output/videos/ exists",
+      "\u2705 Directory assets/ exists",
+      "\u2705 Directory assets/images/ exists",
+      "\u2705 Directory assets/sfx/ exists",
+      "\u2705 Directory assets/music/ exists",
+      "\u2705 Directory reference/ exists",
+      "\u2705 Directory src/ exists",
+      "\u2705 .env file exists",
+      "\u2705 .env is in .gitignore",
+      "\u2705 Episode 7 reference file exists (25866 bytes)"
+    ],
+    "warnings": [
+      "\u26a0\ufe0f ELEVENLABS_API_KEY looks like placeholder value",
+      "\u26a0\ufe0f Skipping ElevenLabs API test - no valid API key"
+    ],
+    "errors": []
+  }
+}

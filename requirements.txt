@@ -1,0 +1,31 @@
+# versusMonster AVPS Requirements
+# Automated Video Podcast System dependencies
+
+# Core Audio/Video Processing
+elevenlabs>=1.0.0          # ElevenLabs Text-to-Speech API
+pydub>=0.25.1              # Audio manipulation and processing
+ffmpeg-python>=0.2.0       # Python FFmpeg wrapper
+moviepy>=1.0.3             # High-level video editing library
+
+# Environment & Configuration
+python-dotenv>=1.0.0       # Environment variable management
+requests>=2.31.0           # HTTP client library
+
+# Image Processing
+opencv-python>=4.8.0       # Computer vision and image processing
+Pillow>=10.0.0             # Python Imaging Library (PIL)
+imageio>=2.31.0            # Image I/O operations
+imageio-ffmpeg>=0.4.9      # FFmpeg plugin for imageio
+
+# Optional: Development and Testing
+pytest>=7.4.0             # Testing framework
+black>=23.0.0              # Code formatter
+flake8>=6.0.0              # Code linter
+
+# Platform-specific notes:
+# - macOS: Ensure FFmpeg is installed via Homebrew (brew install ffmpeg)
+# - Apple Silicon: Use native ARM64 builds when available
+# - Intel Macs: Standard x86_64 builds should work fine
+
+# Installation command:
+# pip install -r requirements.txt

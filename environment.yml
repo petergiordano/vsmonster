@@ -1,0 +1,42 @@
+name: versusmonster
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python runtime
+  - python=3.11
+  
+  # System dependencies
+  - ffmpeg>=5.0
+  
+  # Core Python packages available via conda
+  - requests>=2.31.0
+  - pillow>=10.0.0
+  - opencv>=4.8.0
+  
+  # Scientific computing (good conda support)
+  - numpy>=1.24.0
+  - scipy>=1.11.0
+  
+  # Development tools
+  - pytest>=7.4.0
+  - black>=23.0.0
+  - flake8>=6.0.0
+  
+  # Packages only available via pip
+  - pip
+  - pip:
+    - elevenlabs>=1.0.0
+    - pydub>=0.25.1
+    - ffmpeg-python>=0.2.0
+    - moviepy>=1.0.3
+    - python-dotenv>=1.0.0
+    - imageio>=2.31.0
+    - imageio-ffmpeg>=0.4.9
+
+# Usage:
+# conda env create -f environment.yml
+# conda activate versusmonster
+
+# Or to update existing environment:
+# conda env update -f environment.yml
