@@ -12,50 +12,67 @@
 
 ## 1. Project Overview & Goal
 
-- **Project Name:** [Your Project Name]
-- **Core Goal:** [A one-sentence summary of what this project does, taken from your Roadmap.md]
-- **Target Vibe:** [e.g., "Intuitive and powerful," "Playful and simple," taken from your VibeTesting.md]
-- **Current Workflow Stage:** [INITIALIZATION | PRD_CREATED | TASKS_GENERATED | IN_DEVELOPMENT | FEATURE_COMPLETE]
+- **Project Name:** versusMonster AVPS (Automated Video Podcast System)
+- **Core Goal:** Transform markdown podcast scripts into complete multimedia YouTube episodes, enabling 2 episodes per week production with minimal manual intervention
+- **Target Vibe:** "Excitement through reliable automation" - thrilled about creative possibilities while completely confident the system will deliver
+- **Current Workflow Stage:** FOUNDATION_COMPLETE
 
 ---
 
 ## 2. Tech Stack
 
-- **Frontend:** [e.g., React, Next.js, Tailwind CSS]
-- **Backend:** [e.g., Node.js, Express, FastAPI]
-- **Database:** [e.g., Firestore, Supabase, PostgreSQL]
-- **Key Libraries:** [e.g., Pydantic for validation, Auth.js for authentication]
+- **Core Language:** Python 3.11+ with virtual environment
+- **Media Processing:** FFmpeg with VideoToolbox hardware acceleration (macOS)
+- **Voice Generation:** ElevenLabs API with streaming capabilities
+- **Key Libraries:** elevenlabs, pydub, ffmpeg-python, moviepy, python-dotenv, opencv-python, pillow
+- **Interface:** Command-line first, ASCII progress indicators
+- **Asset Management:** Simple folder-based library structure
+- **Environment:** macOS optimized with Homebrew dependencies
 
 ---
 
 ## 3. File & Folder Structure
 
-- **`/src`**: Contains all application source code.
-- **`/src/components`**: Reusable UI components.
-- **`/src/lib`**: Core logic, API clients, and utility functions.
-- **`/tests`**: All Pytest/Jest tests, mirroring the `/src` structure.
-- **`.project-docs/`**: Contains high-level planning documents (Roadmap, etc.). Do not write code here.
-- **`.ai-rules/`**: Contains the specific, step-by-step instruction templates for the development workflow.
-- **`/tasks`**: Contains PRDs and task lists for feature development.
+- **`/src`**: Contains all application source code for the 8-component pipeline.
+- **`/scripts`**: Input markdown episodes (e.g., episode_007.md).
+- **`/output`**: Generated content organized by episode and component.
+  - `/json`: Parsed script data
+  - `/voices`: Generated voice files
+  - `/audio`: Mixed audio tracks
+  - `/videos`: Final video outputs
+- **`/assets`**: Reusable media library.
+  - `/images`: Background images, character portraits, scenes
+  - `/sfx`: Sound effects (combat, ambient, UI)
+  - `/music`: Themes, ambient music, stings
+- **`/reference`**: Test episodes and validation content.
+- **`.project-docs/`**: High-level planning documents (Roadmap, VibeTesting, etc.).
+- **`.ai-rules/`**: Step-by-step instruction templates for development workflow.
+- **`/tasks`**: Will contain PRDs and task lists for feature development.
 
 ---
 
 ## 4. Coding Conventions & Style
 
-- **Language:** [e.g., Python 3.11, TypeScript]
-- **Formatting:** All code must be formatted with [e.g., `black` for Python, `prettier` for JS/TS].
-- **Naming:** Use `snake_case` for variables and functions, `PascalCase` for classes.
-- **Docstrings:** All functions must have Google-style docstrings.
-- **Error Handling:** All external API calls must be wrapped in a `try...except` block to handle potential errors gracefully.
+- **Language:** Python 3.11+ (for modern type hints and features)
+- **Formatting:** All code formatted with `black` (included in requirements.txt)
+- **Linting:** Use `flake8` for code quality checking
+- **Naming:** Use `snake_case` for variables and functions, `PascalCase` for classes
+- **Docstrings:** All functions must have Google-style docstrings
+- **Error Handling:** Fail fast with clear error messages; all external API calls wrapped in try/except
+- **CLI Design:** ASCII progress bars, clear status messages, actionable error guidance
+- **File Naming:** Use episode naming convention (e.g., episode_007.md, episode_007.json)
 
 ---
 
 ## 5. Global AI Instructions
 
-- **Always Create Tests:** Every new feature or function must be accompanied by a corresponding unit test in the `/tests` directory.
-- **No New Dependencies:** Do not add any new libraries or packages without explicit permission.
-- **Follow Existing Patterns:** Before writing new code, review the existing files in `/src` to understand and replicate the established patterns.
-- **Ask Before Overwriting:** Never delete or significantly refactor existing code without asking for confirmation first.
+- **Episode 7 First:** Always validate new features against Episode 7 reference implementation
+- **Simple, Lovable, Complete:** Follow SLC framework - build simple, delightful, complete features
+- **Command-Line Focus:** Prioritize CLI interfaces with clear progress indication
+- **Cost Awareness:** Track API usage and provide cost estimation for each component
+- **Fault Tolerance:** Build resume capability and component isolation
+- **Asset Library Integration:** Always consider reusable assets when building features
+- **Script Generator Feedback:** Establish feedback loops to improve input quality
 
 ---
 
@@ -77,54 +94,71 @@
 ## 7. Current Project Context State
 
 ### **Active Features** (Features currently in development)
-[This section gets updated as features move through the workflow]
+**Feature: Script Parser (Component 1)**
+- **Status:** PRD_NEEDED
+- **Priority:** CRITICAL - Foundation for all other components
+- **Success Criteria:** Parse Episode 7 with 100% accuracy, generate structured JSON
+- **Key Context:** Must handle THORAK:/ZARA: dialogue, [SFX:]/[MUSIC:]/[IMG:] tags, scene transitions
+- **Integration Points:** Output JSON feeds Voice Generation (Component 2)
+- **Validation Status:** Episode 7 reference available for testing
 
-**Feature: [Name]**
-- **Status:** [PRD_CREATED | TASKS_GENERATED | IN_DEVELOPMENT | TESTING | COMPLETE]
-- **PRD Location:** `tasks/prd-[feature-name].md`
-- **Task List:** `tasks/tasks-[feature-name].md`
-- **Key Context:** [Important decisions, constraints, or patterns discovered]
-- **Integration Points:** [How this feature connects with existing code]
-- **Validation Status:** [Current test/validation state]
-
-### **Completed Features** (Reference for patterns and integration)
-[This section accumulates successful implementations as references]
+### **Planned Features** (Next in pipeline)
+- **Voice Generation (Component 2)**: ElevenLabs integration with character-specific settings
+- **Audio Assembly (Component 3)**: Combine voice files with timing synchronization
+- **Video Generation (Component 4)**: Create MP4 with static background
+- **Asset Library Foundation**: Simple folder-based management with auto-discovery
 
 ### **Architecture Decisions Made**
-[This section accumulates important architectural choices made during development]
-- **Decision:** [What was decided]
-- **Rationale:** [Why it was decided]
-- **Impact:** [How it affects future development]
-- **Date:** [When decided]
+- **Decision:** 8-component iterative pipeline approach
+- **Rationale:** Each component delivers independent value and can be validated separately
+- **Impact:** Enables systematic development and easy debugging
+- **Date:** 2025-01-07
+
+- **Decision:** Command-line first with ASCII progress indicators
+- **Rationale:** Simple, Lovable, Complete framework - focus on functionality over UI
+- **Impact:** Faster development, easier automation, professional developer experience
+- **Date:** 2025-01-07
+
+- **Decision:** Episode 7 as universal test case
+- **Rationale:** Complete, representative example with all required elements
+- **Impact:** Consistent validation across all components
+- **Date:** 2025-01-07
 
 ### **Known Patterns & Conventions Discovered**
-[This section grows as patterns are identified during development]
-- **Pattern:** [Description of the pattern]
-- **Location:** [Where it's implemented]
-- **Usage:** [When to use this pattern]
+- **Pattern:** Folder-based asset organization
+- **Location:** `/assets` directory with logical subdirectories
+- **Usage:** Auto-discovery for reusable images, SFX, music
+
+- **Pattern:** Episode naming convention
+- **Location:** All file operations use episode_XXX format
+- **Usage:** Consistent file naming across all components and outputs
+
+- **Pattern:** JSON schema for component handoffs
+- **Location:** Output from Script Parser, input to Voice Generation
+- **Usage:** Structured data exchange between pipeline components
 
 ---
 
 ## 8. Plan Mode Best Practices (Project-Specific)
 
 ### **When to ALWAYS Use Plan Mode**
-- **Project Initialization:** Understanding existing project structure
-- **Feature Integration:** Planning how new features fit with existing architecture  
-- **Complex Debugging:** Understanding root causes before attempting fixes
-- **Architectural Changes:** Any modifications to core patterns or structure
+- **Component Integration:** Planning how new pipeline components integrate with existing ones
+- **Episode 7 Analysis:** Understanding script structure before building parsers
+- **API Cost Planning:** Estimating and optimizing API usage before implementation
+- **Asset Library Design:** Planning media organization and discovery patterns
 
 ### **Project-Specific Plan Mode Guidance**
-- **Tech Stack Considerations:** [Specific considerations for your tech stack]
-- **Architecture Patterns:** [Key architectural patterns to understand in Plan Mode]
-- **Integration Requirements:** [Critical integration points to analyze in Plan Mode]
-- **Testing Patterns:** [Testing approaches to understand before implementation]
+- **8-Component Pipeline:** Always consider impact on downstream components
+- **ElevenLabs Integration:** Plan API usage patterns and cost implications
+- **FFmpeg Operations:** Understand hardware acceleration and output format requirements
+- **Asset Management:** Consider reusability and organization patterns
 
 ### **Context Validation Checkpoints in Plan Mode**
-- [ ] Understand current project state and active features
-- [ ] Review architectural decisions that might impact new work
-- [ ] Identify existing patterns that should be followed
-- [ ] Confirm integration requirements with active features
-- [ ] Validate test coverage approach aligns with project standards
+- [ ] Understand current pipeline component status and dependencies
+- [ ] Review Episode 7 structure for parsing/processing requirements
+- [ ] Validate API cost implications and budget constraints
+- [ ] Confirm asset library integration patterns
+- [ ] Verify output format compatibility with next component in pipeline
 
 ---
 
@@ -139,11 +173,21 @@
 
 ### **Context Validation Commands**
 ```bash
-# Add your project-specific validation commands here
-# Example:
-# npm run lint
-# npm test
-# npm run type-check
+# Level 1: Syntax & Style validation
+source venv/bin/activate
+black src/ --check
+flake8 src/
+
+# Level 2: Unit test execution  
+pytest tests/ -v
+
+# Level 3: Integration testing with Episode 7
+python src/parser.py scripts/episode_007.md
+python setup_validation.py
+
+# Level 4: Full validation suite
+python -m pytest tests/ --cov=src
+python setup_validation.py
 ```
 
 ---
@@ -151,15 +195,19 @@
 ## 10. Context Evolution Log
 
 ### **Context Updates** (Track how context evolves during development)
-- **Date:** [Date]
-- **Stage:** [Which workflow step]
-- **Context Added:** [What new context was discovered/added]
-- **Reason:** [Why this context is important for future development]
+- **Date:** 2025-01-07
+- **Stage:** Foundation Interview Complete
+- **Context Added:** Complete foundation documents (Roadmap, VibeTesting, ComponentLibrary, SLC_Session_Notes)
+- **Reason:** Establishes clear project vision, user experience goals, and development strategy for 8-component pipeline
 
 ### **Lessons Learned** (Accumulate insights across features)
-- **Lesson:** [What was learned]
-- **Context:** [Situation where it was learned]
-- **Application:** [How to apply this lesson in future development]
+- **Lesson:** Episode 7 provides comprehensive test case covering all system requirements
+- **Context:** Foundation interview revealed Episode 7 contains dialogue, SFX, music, images, scene transitions
+- **Application:** Use Episode 7 as validation test for every component in the pipeline
+
+- **Lesson:** Simple, Lovable, Complete framework critical for maintaining focus
+- **Context:** User emphasized avoiding complexity while building delightful, fault-tolerant system
+- **Application:** Prioritize CLI simplicity, clear progress indication, and robust error handling
 
 ---
 
@@ -265,6 +313,23 @@ versusMonster/
 - **Commit Frequency:** Regular commits after completing major setup steps or features
 - **Security:** Never commit .env files or API keys (protected by .gitignore)
 - **Template Updates:** Use `git pull template main` for framework improvements
+
+### **CRITICAL: Pipeline Tag Standards**
+- **Specification Document:** `docs/pipeline_tag_specification.md` (MUST READ)
+- **Purpose:** Standardized tags enable automated service integration without human intervention
+- **Tag Categories:** SCENE, CHARACTER DIALOGUE, [IMG:], [SFX:], [MUSIC:], [AMBIENT:], [TRANSITION:]
+- **Service Integration:** Tags directly map to ElevenLabs, image generation, SFX, music APIs
+- **Quality Requirement:** All script generator output must follow exact tag formats
+- **Cost Tracking:** Tag-based BOM calculation for all service usage
+- **Validation:** Automated feedback loop ensures script generator produces parseable content
+
+**Critical Tag Examples:**
+```markdown
+THORAK: (Gravelly, impressed) "Dialogue text"
+[IMG: image_id] PROMPT: "Detailed generation prompt with style consistency"
+[SFX: earth_rumbling_deep]
+[MUSIC: main_theme_intro]
+```
 
 ---
 
