@@ -9,11 +9,12 @@ PRD-v0 Command: python parser.py episode_007.md
 import argparse
 import json
 import logging
+import re
 import sys
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, List, Tuple
 
 
 def load_config(config_path: str = "config.json") -> Dict[str, Any]:
@@ -46,13 +47,19 @@ def setup_logging(debug: bool = False, config: Dict[str, Any] = None) -> logging
     """Set up logging configuration."""
     if config is None:
         config = {}
-    
+
     logging_config = config.get("logging", {})
-    level = logging.DEBUG if debug else getattr(logging, logging_config.get("default_level", "INFO"))
-    
+    level = (
+        logging.DEBUG
+        if debug
+        else getattr(logging, logging_config.get("default_level", "INFO"))
+    )
+
     logging.basicConfig(
         level=level,
-        format=logging_config.get("format", "%(asctime)s - %(name)s - %(levelname)s - %(message)s"),
+        format=logging_config.get(
+            "format", "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        ),
         datefmt=logging_config.get("date_format", "%H:%M:%S"),
     )
     return logging.getLogger("versusMonster.parser")
@@ -86,6 +93,82 @@ def ensure_output_directory(output_dir: str, debug: bool = False) -> Path:
     return output_path
 
 
+def normalize_scene_id(scene_name: str) -> str:
+    """Normalize scene name to create a valid scene ID."""
+    # Convert to lowercase
+    scene_id = scene_name.lower()
+    # Replace spaces with underscores
+    scene_id = scene_id.replace(" ", "_")
+    # Replace ampersands with 'and'
+    scene_id = scene_id.replace("&", "and")
+    # Remove any remaining special characters except underscores
+    scene_id = re.sub(r"[^a-z0-9_]", "", scene_id)
+    # Remove duplicate underscores
+    scene_id = re.sub(r"_+", "_", scene_id)
+    # Strip leading/trailing underscores
+    scene_id = scene_id.strip("_")
+
+    return scene_id
+
+
+def extract_scenes(content: str, logger: logging.Logger) -> List[Dict[str, Any]]:
+    """Extract scenes from the markdown content."""
+    # Pattern to match scene markers: ## **\[SCENE: NAME\]**
+    # Note: In markdown, square brackets are escaped with backslashes
+    scene_pattern = re.compile(r"^## \*\*\\\[SCENE: ([^\]]+)\\\]\*\*$", re.MULTILINE)
+
+    # Find all scene markers with their positions
+    scene_matches = list(scene_pattern.finditer(content))
+
+    if not scene_matches:
+        logger.warning("No scenes found in the script")
+        return []
+
+    # Split content into lines for line number tracking
+    lines = content.split("\n")
+
+    # Build scenes list
+    scenes = []
+    for i, match in enumerate(scene_matches):
+        scene_name = match.group(1).strip()
+        scene_id = normalize_scene_id(scene_name)
+
+        # Calculate line number (1-based)
+        start_pos = match.start()
+        line_number = content[:start_pos].count("\n") + 1
+
+        # Extract content from this scene marker to the next (or end of file)
+        content_start = match.end()
+        if i < len(scene_matches) - 1:
+            # Content ends at the start of the next scene
+            content_end = scene_matches[i + 1].start()
+        else:
+            # Last scene - content goes to end of file
+            content_end = len(content)
+
+        # Extract and clean scene content
+        scene_content = content[content_start:content_end].strip()
+
+        scene_data = {
+            "scene_id": scene_id,
+            "scene_name": scene_name,
+            "start_line": line_number,
+            "content": scene_content,
+            "metadata": {
+                "dialogue_count": 0,  # Will be populated in Task 2.2
+                "image_tags": [],  # Will be populated in Task 2.3
+                "sfx_tags": [],  # Will be populated in Task 2.3
+                "music_tags": [],  # Will be populated in Task 2.3
+            },
+        }
+
+        scenes.append(scene_data)
+        logger.debug(f"Extracted scene: {scene_name} (line {line_number})")
+
+    logger.info(f"Extracted {len(scenes)} scenes from the script")
+    return scenes
+
+
 def parse_episode_script(input_path: Path, logger: logging.Logger) -> Dict[str, Any]:
     """Parse the episode markdown script into structured data."""
     logger.info(f"Reading script from: {input_path}")
@@ -105,6 +188,14 @@ def parse_episode_script(input_path: Path, logger: logging.Logger) -> Dict[str, 
         else f"episode_{episode_match}"
     )
 
+    # Extract scenes from the content
+    scenes = extract_scenes(content, logger)
+
+    # Generate warnings if no scenes found
+    warnings = []
+    if not scenes:
+        warnings.append("No scene markers found. Expected format: ## **[SCENE: NAME]**")
+
     # Placeholder parsing result - will be implemented in subsequent tasks
     parsed_data = {
         "episode_metadata": {
@@ -112,9 +203,10 @@ def parse_episode_script(input_path: Path, logger: logging.Logger) -> Dict[str, 
             "number": episode_number,
             "input_file": str(input_path.absolute()),
             "content_preview": content[:200] + "..." if len(content) > 200 else content,
+            "total_scenes": len(scenes),
         },
-        "scenes": [],  # Will be populated in Task 2.1
-        "warnings": [],
+        "scenes": scenes,
+        "warnings": warnings,
         "feedback": {
             "missing_tags": [],
             "format_violations": [],
@@ -124,6 +216,7 @@ def parse_episode_script(input_path: Path, logger: logging.Logger) -> Dict[str, 
 
     logger.info(f"Parsed episode: {parsed_data['episode_metadata']['title']}")
     logger.info(f"Content length: {len(content)} characters")
+    logger.info(f"Total scenes: {len(scenes)}")
 
     return parsed_data
 
@@ -242,9 +335,9 @@ def main() -> int:
     )
 
     parser.add_argument(
-        "--version", 
-        action="version", 
-        version=f"versusMonster Script Parser v{parser_config.get('version', '1.0')}"
+        "--version",
+        action="version",
+        version=f"versusMonster Script Parser v{parser_config.get('version', '1.0')}",
     )
 
     args = parser.parse_args()
@@ -253,7 +346,9 @@ def main() -> int:
     logger = setup_logging(args.debug, config)
     parser_version = parser_config.get("version", "1.0")
     pipeline_info = config.get("pipeline", {})
-    logger.info(f"🚀 versusMonster Script Parser v{parser_version} - Step {pipeline_info.get('step_number', 1)} of {pipeline_info.get('pipeline_total_steps', 8)}-Component Pipeline")
+    logger.info(
+        f"🚀 versusMonster Script Parser v{parser_version} - Step {pipeline_info.get('step_number', 1)} of {pipeline_info.get('pipeline_total_steps', 8)}-Component Pipeline"
+    )
 
     try:
         # Validate input file

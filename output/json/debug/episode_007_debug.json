@@ -1,9 +1,9 @@
 {
   "debug_info": {
     "full_metadata": {
-      "processing_timestamp": "2025-07-07T09:53:42.727997",
+      "processing_timestamp": "2025-07-07T15:00:43.713667",
       "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/scripts/episode_007.md",
-      "total_processing_time_seconds": 0.005,
+      "total_processing_time_seconds": 0.013,
       "estimated_downstream_costs": {
         "elevenlabs_character_count": 0,
         "image_generation_count": 0,
