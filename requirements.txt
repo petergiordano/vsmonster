@@ -17,10 +17,16 @@ Pillow>=10.0.0             # Python Imaging Library (PIL)
 imageio>=2.31.0            # Image I/O operations
 imageio-ffmpeg>=0.4.9      # FFmpeg plugin for imageio
 
-# Optional: Development and Testing
+# Script Parser Dependencies
+markdown>=3.5.0            # Markdown parsing for Episode 7 format
+mistune>=3.0.0             # Alternative markdown parser (lightweight)
+
+# Development and Testing  
 pytest>=7.4.0             # Testing framework
+pytest-cov>=4.1.0         # Test coverage reporting
 black>=23.0.0              # Code formatter
 flake8>=6.0.0              # Code linter
+mypy>=1.5.0                # Static type checking
 
 # Platform-specific notes:
 # - macOS: Ensure FFmpeg is installed via Homebrew (brew install ffmpeg)
