@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "processing_timestamp": "2025-07-07T09:56:00.760667",
+    "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/scripts/episode_007.md",
+    "total_processing_time_seconds": 0.004,
+    "estimated_downstream_costs": {
+      "elevenlabs_character_count": 0,
+      "image_generation_count": 0,
+      "sfx_count": 0,
+      "music_cue_count": 0
+    },
+    "validation_status": "passed",
+    "character_count_by_speaker": {}
+  },
+  "episode_metadata": {
+    "title": "Episode 007",
+    "number": "episode_007",
+    "input_file": "/Users/petergiordano/Documents/GitHub/vsmonster/scripts/episode_007.md",
+    "content_preview": "**Episode Generation Beginning:**\n\n**Bulette (CR 5\\)** \\- The fearsome \"landshark\" with burrowing abilities and devastating leaping attacks  \n **Young Green Dragon (CR 8\\)** \\- Cunning forest predator..."
+  },
+  "scenes": [],
+  "warnings": [],
+  "feedback": {
+    "missing_tags": [],
+    "format_violations": [],
+    "quality_suggestions": []
+  }
+}
