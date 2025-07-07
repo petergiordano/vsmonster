@@ -144,6 +144,65 @@ def parse_dialogue_from_content(
     return dialogues
 
 
+def parse_multimedia_tags_from_content(
+    content: str, logger: logging.Logger
+) -> Dict[str, List[Dict[str, Any]]]:
+    """Extract multimedia tags from scene content."""
+
+    # Pattern to match multimedia tags: [TYPE: identifier] optional PROMPT: "text"
+    multimedia_patterns = {
+        "image_tags": re.compile(
+            r"^\\\[IMG:\s*([^\]]+)\\\](?:\s*PROMPT:\s*\"([^\"]+)\")?", re.MULTILINE
+        ),
+        "sfx_tags": re.compile(r"^\\\[SFX:\s*([^\]]+)\\\]", re.MULTILINE),
+        "music_tags": re.compile(r"^\\\[MUSIC:\s*([^\]]+)\\\]", re.MULTILINE),
+        "ambient_tags": re.compile(r"^\\\[AMBIENT:\s*([^\]]+)\\\]", re.MULTILINE),
+        "transition_tags": re.compile(r"^\\\[TRANSITION:\s*([^\]]+)\\\]", re.MULTILINE),
+    }
+
+    multimedia_data = {
+        "image_tags": [],
+        "sfx_tags": [],
+        "music_tags": [],
+        "ambient_tags": [],
+        "transition_tags": [],
+    }
+
+    # Extract image tags (can have optional PROMPT)
+    for match in multimedia_patterns["image_tags"].finditer(content):
+        tag_id = match.group(1).strip()
+        prompt = match.group(2).strip() if match.group(2) else None
+        line_position = content[: match.start()].count("\n") + 1
+
+        image_data = {
+            "tag_id": tag_id,
+            "prompt": prompt,
+            "line_position": line_position,
+            "tag_type": "image",
+        }
+        multimedia_data["image_tags"].append(image_data)
+        logger.debug(f"Found IMG tag: {tag_id}")
+
+    # Extract other multimedia tags (simpler format)
+    for tag_type, pattern in multimedia_patterns.items():
+        if tag_type == "image_tags":
+            continue  # Already processed above
+
+        for match in pattern.finditer(content):
+            tag_id = match.group(1).strip()
+            line_position = content[: match.start()].count("\n") + 1
+
+            tag_data = {
+                "tag_id": tag_id,
+                "line_position": line_position,
+                "tag_type": tag_type.replace("_tags", ""),  # "sfx_tags" -> "sfx"
+            }
+            multimedia_data[tag_type].append(tag_data)
+            logger.debug(f"Found {tag_type.upper().replace('_TAGS', '')} tag: {tag_id}")
+
+    return multimedia_data
+
+
 def extract_scenes(content: str, logger: logging.Logger) -> List[Dict[str, Any]]:
     """Extract scenes from the markdown content."""
     # Pattern to match scene markers: ## **\[SCENE: NAME\]**
@@ -185,17 +244,23 @@ def extract_scenes(content: str, logger: logging.Logger) -> List[Dict[str, Any]]
         # Parse dialogues within this scene
         dialogues = parse_dialogue_from_content(scene_content, logger)
 
+        # Parse multimedia tags within this scene
+        multimedia_tags = parse_multimedia_tags_from_content(scene_content, logger)
+
         scene_data = {
             "scene_id": scene_id,
             "scene_name": scene_name,
             "start_line": line_number,
             "content": scene_content,
             "dialogues": dialogues,
+            "multimedia": multimedia_tags,
             "metadata": {
                 "dialogue_count": len(dialogues),
-                "image_tags": [],  # Will be populated in Task 2.3
-                "sfx_tags": [],  # Will be populated in Task 2.3
-                "music_tags": [],  # Will be populated in Task 2.3
+                "image_tags": multimedia_tags["image_tags"],
+                "sfx_tags": multimedia_tags["sfx_tags"],
+                "music_tags": multimedia_tags["music_tags"],
+                "ambient_tags": multimedia_tags["ambient_tags"],
+                "transition_tags": multimedia_tags["transition_tags"],
             },
         }
 
@@ -278,11 +343,33 @@ def calculate_character_counts(scenes: List[Dict[str, Any]]) -> Dict[str, Any]:
     return {"total_characters": total_characters, "by_speaker": character_counts}
 
 
+def calculate_multimedia_counts(scenes: List[Dict[str, Any]]) -> Dict[str, int]:
+    """Calculate multimedia tag counts for cost estimation."""
+    counts = {
+        "image_generation_count": 0,
+        "sfx_count": 0,
+        "music_cue_count": 0,
+        "ambient_count": 0,
+        "transition_count": 0,
+    }
+
+    for scene in scenes:
+        multimedia = scene.get("multimedia", {})
+        counts["image_generation_count"] += len(multimedia.get("image_tags", []))
+        counts["sfx_count"] += len(multimedia.get("sfx_tags", []))
+        counts["music_cue_count"] += len(multimedia.get("music_tags", []))
+        counts["ambient_count"] += len(multimedia.get("ambient_tags", []))
+        counts["transition_count"] += len(multimedia.get("transition_tags", []))
+
+    return counts
+
+
 def generate_output_metadata(
     input_path: Path, processing_time: float, scenes: List[Dict[str, Any]]
 ) -> Dict[str, Any]:
     """Generate metadata for the parsed output."""
     character_stats = calculate_character_counts(scenes)
+    multimedia_stats = calculate_multimedia_counts(scenes)
 
     return {
         "processing_timestamp": datetime.now().isoformat(),
@@ -290,9 +377,11 @@ def generate_output_metadata(
         "total_processing_time_seconds": round(processing_time, 3),
         "estimated_downstream_costs": {
             "elevenlabs_character_count": character_stats["total_characters"],
-            "image_generation_count": 0,  # Will be calculated in Task 2.3
-            "sfx_count": 0,  # Will be calculated in Task 2.3
-            "music_cue_count": 0,  # Will be calculated in Task 2.3
+            "image_generation_count": multimedia_stats["image_generation_count"],
+            "sfx_count": multimedia_stats["sfx_count"],
+            "music_cue_count": multimedia_stats["music_cue_count"],
+            "ambient_count": multimedia_stats["ambient_count"],
+            "transition_count": multimedia_stats["transition_count"],
         },
         "validation_status": "passed",  # Will be determined in Task 5.1
         "character_count_by_speaker": character_stats["by_speaker"],

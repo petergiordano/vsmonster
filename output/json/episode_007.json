@@ -1,13 +1,15 @@
 {
   "metadata": {
-    "processing_timestamp": "2025-07-07T15:44:34.787963",
+    "processing_timestamp": "2025-07-07T15:58:33.801607",
     "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/scripts/episode_007.md",
-    "total_processing_time_seconds": 0.004,
+    "total_processing_time_seconds": 0.008,
     "estimated_downstream_costs": {
       "elevenlabs_character_count": 10192,
-      "image_generation_count": 0,
-      "sfx_count": 0,
-      "music_cue_count": 0
+      "image_generation_count": 13,
+      "sfx_count": 4,
+      "music_cue_count": 5,
+      "ambient_count": 3,
+      "transition_count": 3
     },
     "validation_status": "passed",
     "character_count_by_speaker": {
@@ -59,11 +61,58 @@
           "line_position": 13
         }
       ],
+      "multimedia": {
+        "image_tags": [
+          {
+            "tag_id": "cold\\_open\\_leap",
+            "prompt": "Massive armored bulette erupting from forest ground in mid-leap, jaws agape, targeting a green dragon hovering just above, dramatic lighting with earth and stone spraying, cinematic fantasy art style",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [
+          {
+            "tag_id": "earth\\_rumbling\\_deep",
+            "line_position": 1,
+            "tag_type": "sfx"
+          }
+        ],
+        "music_tags": [],
+        "ambient_tags": [],
+        "transition_tags": [
+          {
+            "tag_id": "Magical whoosh effect leading to intro music",
+            "line_position": 15,
+            "tag_type": "transition"
+          }
+        ]
+      },
       "metadata": {
         "dialogue_count": 4,
-        "image_tags": [],
-        "sfx_tags": [],
-        "music_tags": []
+        "image_tags": [
+          {
+            "tag_id": "cold\\_open\\_leap",
+            "prompt": "Massive armored bulette erupting from forest ground in mid-leap, jaws agape, targeting a green dragon hovering just above, dramatic lighting with earth and stone spraying, cinematic fantasy art style",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [
+          {
+            "tag_id": "earth\\_rumbling\\_deep",
+            "line_position": 1,
+            "tag_type": "sfx"
+          }
+        ],
+        "music_tags": [],
+        "ambient_tags": [],
+        "transition_tags": [
+          {
+            "tag_id": "Magical whoosh effect leading to intro music",
+            "line_position": 15,
+            "tag_type": "transition"
+          }
+        ]
       }
     },
     {
@@ -122,11 +171,46 @@
           "line_position": 17
         }
       ],
+      "multimedia": {
+        "image_tags": [
+          {
+            "tag_id": "hosts\\_broadcast",
+            "prompt": "Thorak (dwarf cleric with gray beard, robes) and Zara (tiefling with red skin, small horns, dark clothing) in ancient stone chamber with glowing scrying stones, warm magical lighting, fantasy broadcast studio",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [],
+        "music_tags": [
+          {
+            "tag_id": "main\\_theme\\_intro",
+            "line_position": 1,
+            "tag_type": "music"
+          }
+        ],
+        "ambient_tags": [],
+        "transition_tags": []
+      },
       "metadata": {
         "dialogue_count": 7,
-        "image_tags": [],
+        "image_tags": [
+          {
+            "tag_id": "hosts\\_broadcast",
+            "prompt": "Thorak (dwarf cleric with gray beard, robes) and Zara (tiefling with red skin, small horns, dark clothing) in ancient stone chamber with glowing scrying stones, warm magical lighting, fantasy broadcast studio",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
         "sfx_tags": [],
-        "music_tags": []
+        "music_tags": [
+          {
+            "tag_id": "main\\_theme\\_intro",
+            "line_position": 1,
+            "tag_type": "music"
+          }
+        ],
+        "ambient_tags": [],
+        "transition_tags": []
       }
     },
     {
@@ -220,11 +304,82 @@
           "line_position": 38
         }
       ],
+      "multimedia": {
+        "image_tags": [
+          {
+            "tag_id": "thornwall\\_grove",
+            "prompt": "Ancient forest clearing with massive oak trees, rocky outcroppings providing elevation, dappled sunlight through canopy, tactical stone platforms and fallen logs, atmospheric depth with mist in background",
+            "line_position": 3,
+            "tag_type": "image"
+          },
+          {
+            "tag_id": "bulette\\_portrait",
+            "prompt": "Massive armored bulette in forest setting, shark-like fin protruding from rocky ground, metallic bronze scales gleaming, powerful claws extended, tremorsense actively scanning, menacing predatory stance",
+            "line_position": 9,
+            "tag_type": "image"
+          },
+          {
+            "tag_id": "young\\_green\\_dragon",
+            "prompt": "Young green dragon perched on oak branch, forest green scales with darker markings, intelligent amber eyes, wing membranes partially extended, poison dripping from fangs, cunning expression, natural forest camouflage",
+            "line_position": 17,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [
+          {
+            "tag_id": "dice\\_rolling",
+            "line_position": 31,
+            "tag_type": "sfx"
+          }
+        ],
+        "music_tags": [],
+        "ambient_tags": [
+          {
+            "tag_id": "forest\\_wind\\_eerie",
+            "line_position": 1,
+            "tag_type": "ambient"
+          }
+        ],
+        "transition_tags": []
+      },
       "metadata": {
         "dialogue_count": 12,
-        "image_tags": [],
-        "sfx_tags": [],
-        "music_tags": []
+        "image_tags": [
+          {
+            "tag_id": "thornwall\\_grove",
+            "prompt": "Ancient forest clearing with massive oak trees, rocky outcroppings providing elevation, dappled sunlight through canopy, tactical stone platforms and fallen logs, atmospheric depth with mist in background",
+            "line_position": 3,
+            "tag_type": "image"
+          },
+          {
+            "tag_id": "bulette\\_portrait",
+            "prompt": "Massive armored bulette in forest setting, shark-like fin protruding from rocky ground, metallic bronze scales gleaming, powerful claws extended, tremorsense actively scanning, menacing predatory stance",
+            "line_position": 9,
+            "tag_type": "image"
+          },
+          {
+            "tag_id": "young\\_green\\_dragon",
+            "prompt": "Young green dragon perched on oak branch, forest green scales with darker markings, intelligent amber eyes, wing membranes partially extended, poison dripping from fangs, cunning expression, natural forest camouflage",
+            "line_position": 17,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [
+          {
+            "tag_id": "dice\\_rolling",
+            "line_position": 31,
+            "tag_type": "sfx"
+          }
+        ],
+        "music_tags": [],
+        "ambient_tags": [
+          {
+            "tag_id": "forest\\_wind\\_eerie",
+            "line_position": 1,
+            "tag_type": "ambient"
+          }
+        ],
+        "transition_tags": []
       }
     },
     {
@@ -269,11 +424,58 @@
           "line_position": 13
         }
       ],
+      "multimedia": {
+        "image_tags": [
+          {
+            "tag_id": "tavern\\_supplies",
+            "prompt": "Fantasy tavern interior with barrels of mead, magical instruments, gaming tables, warm firelight, dwarf bartender serving drinks, medieval marketplace atmosphere",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [],
+        "music_tags": [
+          {
+            "tag_id": "tavern\\_festive",
+            "line_position": 1,
+            "tag_type": "music"
+          }
+        ],
+        "ambient_tags": [],
+        "transition_tags": [
+          {
+            "tag_id": "Battle atmosphere returns",
+            "line_position": 15,
+            "tag_type": "transition"
+          }
+        ]
+      },
       "metadata": {
         "dialogue_count": 5,
-        "image_tags": [],
+        "image_tags": [
+          {
+            "tag_id": "tavern\\_supplies",
+            "prompt": "Fantasy tavern interior with barrels of mead, magical instruments, gaming tables, warm firelight, dwarf bartender serving drinks, medieval marketplace atmosphere",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
         "sfx_tags": [],
-        "music_tags": []
+        "music_tags": [
+          {
+            "tag_id": "tavern\\_festive",
+            "line_position": 1,
+            "tag_type": "music"
+          }
+        ],
+        "ambient_tags": [],
+        "transition_tags": [
+          {
+            "tag_id": "Battle atmosphere returns",
+            "line_position": 15,
+            "tag_type": "transition"
+          }
+        ]
       }
     },
     {
@@ -416,11 +618,94 @@
           "line_position": 95
         }
       ],
+      "multimedia": {
+        "image_tags": [
+          {
+            "tag_id": "battle\\_positions",
+            "prompt": "Young green dragon hovering 40 feet above forest clearing, wings spread majestically, while massive bulette emerges from ground below, earth spraying around it, tense pre-combat moment",
+            "line_position": 3,
+            "tag_type": "image"
+          },
+          {
+            "tag_id": "epic\\_leap",
+            "prompt": "Massive bulette launching through air in spectacular leap, jaws open wide, while green dragon attempts to dodge, forest canopy in background, action frozen at moment of impact",
+            "line_position": 31,
+            "tag_type": "image"
+          },
+          {
+            "tag_id": "fierce\\_melee",
+            "prompt": "Intense close combat between bulette and young green dragon, bulette's massive jaws clamped on dragon's flank, dragon's claws raking bulette's armored hide, forest debris flying, dramatic lighting",
+            "line_position": 73,
+            "tag_type": "image"
+          },
+          {
+            "tag_id": "victory\\_poison",
+            "prompt": "Young green dragon hovering triumphantly as massive bulette collapses below, green poison cloud dissipating around fallen landshark, dragon's amber eyes gleaming with victory, forest clearing battle-scarred",
+            "line_position": 91,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [
+          {
+            "tag_id": "forest\\_settling\\_quiet",
+            "line_position": 99,
+            "tag_type": "sfx"
+          }
+        ],
+        "music_tags": [],
+        "ambient_tags": [
+          {
+            "tag_id": "forest\\_battle\\_tension",
+            "line_position": 1,
+            "tag_type": "ambient"
+          }
+        ],
+        "transition_tags": []
+      },
       "metadata": {
         "dialogue_count": 19,
-        "image_tags": [],
-        "sfx_tags": [],
-        "music_tags": []
+        "image_tags": [
+          {
+            "tag_id": "battle\\_positions",
+            "prompt": "Young green dragon hovering 40 feet above forest clearing, wings spread majestically, while massive bulette emerges from ground below, earth spraying around it, tense pre-combat moment",
+            "line_position": 3,
+            "tag_type": "image"
+          },
+          {
+            "tag_id": "epic\\_leap",
+            "prompt": "Massive bulette launching through air in spectacular leap, jaws open wide, while green dragon attempts to dodge, forest canopy in background, action frozen at moment of impact",
+            "line_position": 31,
+            "tag_type": "image"
+          },
+          {
+            "tag_id": "fierce\\_melee",
+            "prompt": "Intense close combat between bulette and young green dragon, bulette's massive jaws clamped on dragon's flank, dragon's claws raking bulette's armored hide, forest debris flying, dramatic lighting",
+            "line_position": 73,
+            "tag_type": "image"
+          },
+          {
+            "tag_id": "victory\\_poison",
+            "prompt": "Young green dragon hovering triumphantly as massive bulette collapses below, green poison cloud dissipating around fallen landshark, dragon's amber eyes gleaming with victory, forest clearing battle-scarred",
+            "line_position": 91,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [
+          {
+            "tag_id": "forest\\_settling\\_quiet",
+            "line_position": 99,
+            "tag_type": "sfx"
+          }
+        ],
+        "music_tags": [],
+        "ambient_tags": [
+          {
+            "tag_id": "forest\\_battle\\_tension",
+            "line_position": 1,
+            "tag_type": "ambient"
+          }
+        ],
+        "transition_tags": []
       }
     },
     {
@@ -465,11 +750,58 @@
           "line_position": 13
         }
       ],
+      "multimedia": {
+        "image_tags": [
+          {
+            "tag_id": "gilded\\_gauntlet",
+            "prompt": "Elegant armor shop with gleaming shields and masterwork weapons displayed, magical enchantments glowing softly, armorer fitting a knight with protective gear, warm golden lighting",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [],
+        "music_tags": [
+          {
+            "tag_id": "elegant\\_orchestral",
+            "line_position": 1,
+            "tag_type": "music"
+          }
+        ],
+        "ambient_tags": [],
+        "transition_tags": [
+          {
+            "tag_id": "Return to aftermath atmosphere",
+            "line_position": 15,
+            "tag_type": "transition"
+          }
+        ]
+      },
       "metadata": {
         "dialogue_count": 5,
-        "image_tags": [],
+        "image_tags": [
+          {
+            "tag_id": "gilded\\_gauntlet",
+            "prompt": "Elegant armor shop with gleaming shields and masterwork weapons displayed, magical enchantments glowing softly, armorer fitting a knight with protective gear, warm golden lighting",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
         "sfx_tags": [],
-        "music_tags": []
+        "music_tags": [
+          {
+            "tag_id": "elegant\\_orchestral",
+            "line_position": 1,
+            "tag_type": "music"
+          }
+        ],
+        "ambient_tags": [],
+        "transition_tags": [
+          {
+            "tag_id": "Return to aftermath atmosphere",
+            "line_position": 15,
+            "tag_type": "transition"
+          }
+        ]
       }
     },
     {
@@ -535,11 +867,46 @@
           "line_position": 19
         }
       ],
+      "multimedia": {
+        "image_tags": [
+          {
+            "tag_id": "aftermath\\_scene",
+            "prompt": "Forest clearing showing aftermath of battle, young green dragon perched victoriously on fallen bulette, disturbed earth and broken vegetation, shafts of sunlight through canopy highlighting the scene",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [],
+        "music_tags": [],
+        "ambient_tags": [
+          {
+            "tag_id": "forest\\_peaceful\\_aftermath",
+            "line_position": 1,
+            "tag_type": "ambient"
+          }
+        ],
+        "transition_tags": []
+      },
       "metadata": {
         "dialogue_count": 8,
-        "image_tags": [],
+        "image_tags": [
+          {
+            "tag_id": "aftermath\\_scene",
+            "prompt": "Forest clearing showing aftermath of battle, young green dragon perched victoriously on fallen bulette, disturbed earth and broken vegetation, shafts of sunlight through canopy highlighting the scene",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
         "sfx_tags": [],
-        "music_tags": []
+        "music_tags": [],
+        "ambient_tags": [
+          {
+            "tag_id": "forest\\_peaceful\\_aftermath",
+            "line_position": 1,
+            "tag_type": "ambient"
+          }
+        ],
+        "transition_tags": []
       }
     },
     {
@@ -612,11 +979,68 @@
           "line_position": 21
         }
       ],
+      "multimedia": {
+        "image_tags": [
+          {
+            "tag_id": "hosts\\_farewell",
+            "prompt": "Thorak and Zara in broadcast chamber waving goodbye, scrying stones glowing softly in background, warm magical lighting, satisfied expressions after covering epic battle",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [
+          {
+            "tag_id": "scrying\\_stone\\_powerdown",
+            "line_position": 25,
+            "tag_type": "sfx"
+          }
+        ],
+        "music_tags": [
+          {
+            "tag_id": "main\\_theme\\_outro",
+            "line_position": 1,
+            "tag_type": "music"
+          },
+          {
+            "tag_id": "Theme music swells and fades",
+            "line_position": 23,
+            "tag_type": "music"
+          }
+        ],
+        "ambient_tags": [],
+        "transition_tags": []
+      },
       "metadata": {
         "dialogue_count": 9,
-        "image_tags": [],
-        "sfx_tags": [],
-        "music_tags": []
+        "image_tags": [
+          {
+            "tag_id": "hosts\\_farewell",
+            "prompt": "Thorak and Zara in broadcast chamber waving goodbye, scrying stones glowing softly in background, warm magical lighting, satisfied expressions after covering epic battle",
+            "line_position": 3,
+            "tag_type": "image"
+          }
+        ],
+        "sfx_tags": [
+          {
+            "tag_id": "scrying\\_stone\\_powerdown",
+            "line_position": 25,
+            "tag_type": "sfx"
+          }
+        ],
+        "music_tags": [
+          {
+            "tag_id": "main\\_theme\\_outro",
+            "line_position": 1,
+            "tag_type": "music"
+          },
+          {
+            "tag_id": "Theme music swells and fades",
+            "line_position": 23,
+            "tag_type": "music"
+          }
+        ],
+        "ambient_tags": [],
+        "transition_tags": []
       }
     }
   ],
