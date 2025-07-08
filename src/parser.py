@@ -349,6 +349,89 @@ def calculate_character_counts(scenes: List[Dict[str, Any]]) -> Dict[str, Any]:
     return {"total_characters": total_characters, "by_speaker": character_counts}
 
 
+def calculate_detailed_costs(
+    scenes: List[Dict[str, Any]], config: Dict[str, Any]
+) -> Dict[str, Any]:
+    """Calculate detailed cost breakdown for all pipeline components."""
+    cost_config = config.get("cost_estimation", {})
+    
+    # Voice generation costs (ElevenLabs)
+    character_stats = calculate_character_counts(scenes)
+    elevenlabs_cost_per_char = cost_config.get("elevenlabs_cost_per_character", 0.0003)
+    voice_generation_cost = character_stats["total_characters"] * elevenlabs_cost_per_char
+    
+    # Voice costs by speaker
+    voice_costs_by_speaker = {}
+    for speaker, char_count in character_stats["by_speaker"].items():
+        voice_costs_by_speaker[speaker] = char_count * elevenlabs_cost_per_char
+    
+    # Multimedia costs
+    multimedia_stats = calculate_multimedia_counts(scenes)
+    image_cost_per_prompt = cost_config.get("image_generation_cost_per_prompt", 0.05)
+    sfx_cost_per_effect = cost_config.get("sfx_cost_per_effect", 0.02)
+    music_cost_per_cue = cost_config.get("music_cost_per_cue", 0.10)
+    
+    image_generation_cost = multimedia_stats["image_generation_count"] * image_cost_per_prompt
+    sfx_processing_cost = multimedia_stats["sfx_count"] * sfx_cost_per_effect
+    music_processing_cost = multimedia_stats["music_cue_count"] * music_cost_per_cue
+    ambient_processing_cost = multimedia_stats["ambient_count"] * sfx_cost_per_effect  # Same rate as SFX
+    transition_processing_cost = multimedia_stats["transition_count"] * sfx_cost_per_effect  # Same rate as SFX
+    
+    # Total audio processing cost
+    audio_processing_cost = sfx_processing_cost + music_processing_cost + ambient_processing_cost + transition_processing_cost
+    
+    # Total episode cost
+    total_episode_cost = voice_generation_cost + image_generation_cost + audio_processing_cost
+    
+    # Cost breakdown by pipeline component
+    pipeline_costs = {
+        "step_1_script_parsing": 0.0,  # No cost for parsing
+        "step_2_voice_generation": voice_generation_cost,
+        "step_3_image_generation": image_generation_cost,
+        "step_4_cost_estimation": 0.0,  # No cost for cost estimation
+        "step_5_audio_processing": audio_processing_cost,
+        "step_6_quality_assurance": 0.0,  # No cost for QA
+        "step_7_video_assembly": 0.0,  # No external cost for video assembly
+        "step_8_distribution": 0.0,  # No cost for distribution processing
+    }
+    
+    return {
+        "total_episode_cost": round(total_episode_cost, 4),
+        "currency": cost_config.get("currency", "USD"),
+        "cost_breakdown": {
+            "voice_generation": {
+                "total_cost": round(voice_generation_cost, 4),
+                "cost_per_character": elevenlabs_cost_per_char,
+                "total_characters": character_stats["total_characters"],
+                "costs_by_speaker": {
+                    speaker: round(cost, 4) 
+                    for speaker, cost in voice_costs_by_speaker.items()
+                }
+            },
+            "image_generation": {
+                "total_cost": round(image_generation_cost, 4),
+                "cost_per_image": image_cost_per_prompt,
+                "total_images": multimedia_stats["image_generation_count"]
+            },
+            "audio_processing": {
+                "total_cost": round(audio_processing_cost, 4),
+                "sfx_cost": round(sfx_processing_cost, 4),
+                "music_cost": round(music_processing_cost, 4),
+                "ambient_cost": round(ambient_processing_cost, 4),
+                "transition_cost": round(transition_processing_cost, 4),
+                "breakdown": {
+                    "sfx_count": multimedia_stats["sfx_count"],
+                    "music_count": multimedia_stats["music_cue_count"],
+                    "ambient_count": multimedia_stats["ambient_count"],
+                    "transition_count": multimedia_stats["transition_count"]
+                }
+            }
+        },
+        "pipeline_component_costs": pipeline_costs,
+        "cost_per_minute": round(total_episode_cost / (config.get("episode_settings", {}).get("expected_characters_per_minute", 200) / 60), 4) if total_episode_cost > 0 else 0.0
+    }
+
+
 def calculate_multimedia_counts(scenes: List[Dict[str, Any]]) -> Dict[str, int]:
     """Calculate multimedia tag counts for cost estimation."""
     counts = {
@@ -483,6 +566,7 @@ def generate_output_metadata(
     character_stats = calculate_character_counts(scenes)
     multimedia_stats = calculate_multimedia_counts(scenes)
     timing_stats = calculate_timing_estimates(scenes, config)
+    detailed_costs = calculate_detailed_costs(scenes, config)
 
     return {
         "processing_timestamp": datetime.now().isoformat(),
@@ -496,6 +580,7 @@ def generate_output_metadata(
             "ambient_count": multimedia_stats["ambient_count"],
             "transition_count": multimedia_stats["transition_count"],
         },
+        "detailed_cost_analysis": detailed_costs,
         "timing_estimates": timing_stats,
         "validation_status": "passed",  # Will be determined by schema validation
         "character_count_by_speaker": character_stats["by_speaker"],

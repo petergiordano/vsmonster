@@ -1,9 +1,9 @@
 {
   "debug_info": {
     "full_metadata": {
-      "processing_timestamp": "2025-07-07T17:21:41.682616",
+      "processing_timestamp": "2025-07-07T17:49:58.641470",
       "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/scripts/episode_007.md",
-      "total_processing_time_seconds": 0.003,
+      "total_processing_time_seconds": 0.005,
       "estimated_downstream_costs": {
         "elevenlabs_character_count": 10192,
         "image_generation_count": 13,
@@ -11,6 +11,51 @@
         "music_cue_count": 5,
         "ambient_count": 3,
         "transition_count": 3
+      },
+      "detailed_cost_analysis": {
+        "total_episode_cost": 4.4076,
+        "currency": "USD",
+        "cost_breakdown": {
+          "voice_generation": {
+            "total_cost": 3.0576,
+            "cost_per_character": 0.0003,
+            "total_characters": 10192,
+            "costs_by_speaker": {
+              "ZARA": 1.089,
+              "THORAK": 1.9413,
+              "BOTH": 0.0273
+            }
+          },
+          "image_generation": {
+            "total_cost": 0.65,
+            "cost_per_image": 0.05,
+            "total_images": 13
+          },
+          "audio_processing": {
+            "total_cost": 0.7,
+            "sfx_cost": 0.08,
+            "music_cost": 0.5,
+            "ambient_cost": 0.06,
+            "transition_cost": 0.06,
+            "breakdown": {
+              "sfx_count": 4,
+              "music_count": 5,
+              "ambient_count": 3,
+              "transition_count": 3
+            }
+          }
+        },
+        "pipeline_component_costs": {
+          "step_1_script_parsing": 0.0,
+          "step_2_voice_generation": 3.0576,
+          "step_3_image_generation": 0.65,
+          "step_4_cost_estimation": 0.0,
+          "step_5_audio_processing": 0.7,
+          "step_6_quality_assurance": 0.0,
+          "step_7_video_assembly": 0.0,
+          "step_8_distribution": 0.0
+        },
+        "cost_per_minute": 1.3223
       },
       "timing_estimates": {
         "total_duration_seconds": 659.5,
