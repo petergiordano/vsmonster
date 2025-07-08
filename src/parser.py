@@ -16,6 +16,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, List, Tuple
 
+try:
+    import jsonschema
+    SCHEMA_VALIDATION_AVAILABLE = True
+except ImportError:
+    SCHEMA_VALIDATION_AVAILABLE = False
+
 
 def load_config(config_path: str = "config.json") -> Dict[str, Any]:
     """Load configuration from config.json file."""
@@ -429,6 +435,47 @@ def calculate_timing_estimates(scenes: List[Dict[str, Any]], config: Dict[str, A
     return timing_data
 
 
+def load_output_schema() -> Dict[str, Any]:
+    """Load the JSON schema for output validation."""
+    schema_path = Path("schema/output_schema.json")
+    try:
+        with open(schema_path, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}  # No schema validation if file not found
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid JSON in schema file {schema_path}: {e}")
+
+
+def validate_output_against_schema(
+    output_data: Dict[str, Any], logger: logging.Logger
+) -> List[str]:
+    """Validate output data against JSON schema. Returns list of validation errors."""
+    if not SCHEMA_VALIDATION_AVAILABLE:
+        logger.warning("jsonschema package not available - skipping schema validation")
+        return []
+    
+    schema = load_output_schema()
+    if not schema:
+        logger.warning("Output schema not found - skipping schema validation")
+        return []
+    
+    errors = []
+    try:
+        jsonschema.validate(output_data, schema)
+        logger.info("✓ Output validates against JSON schema")
+    except jsonschema.ValidationError as e:
+        error_msg = f"Schema validation error: {e.message} at {'.'.join(str(p) for p in e.absolute_path)}"
+        errors.append(error_msg)
+        logger.error(error_msg)
+    except jsonschema.SchemaError as e:
+        error_msg = f"Schema definition error: {e.message}"
+        errors.append(error_msg)
+        logger.error(error_msg)
+    
+    return errors
+
+
 def generate_output_metadata(
     input_path: Path, processing_time: float, scenes: List[Dict[str, Any]], config: Dict[str, Any]
 ) -> Dict[str, Any]:
@@ -450,7 +497,7 @@ def generate_output_metadata(
             "transition_count": multimedia_stats["transition_count"],
         },
         "timing_estimates": timing_stats,
-        "validation_status": "passed",  # Will be determined in Task 5.1
+        "validation_status": "passed",  # Will be determined by schema validation
         "character_count_by_speaker": character_stats["by_speaker"],
     }
 
@@ -467,6 +514,19 @@ def save_output_files(
 
     # Combine parsed data with metadata
     output_data = {"metadata": metadata, **parsed_data}
+    
+    # Validate against schema and update metadata
+    schema_errors = validate_output_against_schema(output_data, logger)
+    if schema_errors:
+        metadata["validation_status"] = "failed"
+        # Add schema errors to warnings
+        if "warnings" not in parsed_data:
+            parsed_data["warnings"] = []
+        parsed_data["warnings"].extend([f"Schema validation: {error}" for error in schema_errors])
+        # Recreate output data with updated metadata and warnings
+        output_data = {"metadata": metadata, **parsed_data}
+    else:
+        metadata["validation_status"] = "passed"
 
     # Main JSON output
     json_file = output_path / f"{episode_name}.json"
@@ -483,6 +543,13 @@ def save_output_files(
         file.write(f"Episode: {episode_name}\n")
         file.write(f"Processing time: {metadata['total_processing_time_seconds']}s\n")
         file.write(f"Status: {metadata['validation_status']}\n\n")
+        
+        # Include schema validation results
+        if schema_errors:
+            file.write("SCHEMA VALIDATION ERRORS:\n")
+            for error in schema_errors:
+                file.write(f"  - {error}\n")
+            file.write("\n")
 
         if parsed_data.get("warnings"):
             file.write("WARNINGS:\n")

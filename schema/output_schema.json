@@ -1,0 +1,497 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://versusmonster.com/schemas/parser-output.json",
+  "title": "versusMonster Script Parser Output Schema",
+  "description": "JSON schema for structured podcast script data from Step 1 of the 8-component AVPS pipeline",
+  "type": "object",
+  "required": ["metadata", "episode_metadata", "scenes"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Processing metadata and cost estimation data",
+      "required": [
+        "processing_timestamp",
+        "input_file_path", 
+        "total_processing_time_seconds",
+        "estimated_downstream_costs",
+        "timing_estimates",
+        "validation_status",
+        "character_count_by_speaker"
+      ],
+      "properties": {
+        "processing_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when parsing completed"
+        },
+        "input_file_path": {
+          "type": "string",
+          "description": "Absolute path to the source markdown file"
+        },
+        "total_processing_time_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total parser execution time in seconds"
+        },
+        "estimated_downstream_costs": {
+          "type": "object",
+          "description": "Cost estimation data for pipeline components",
+          "required": [
+            "elevenlabs_character_count",
+            "image_generation_count",
+            "sfx_count",
+            "music_cue_count",
+            "ambient_count",
+            "transition_count"
+          ],
+          "properties": {
+            "elevenlabs_character_count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Total characters for voice synthesis cost estimation"
+            },
+            "image_generation_count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of image prompts requiring generation"
+            },
+            "sfx_count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of sound effect cues"
+            },
+            "music_cue_count": {
+              "type": "integer", 
+              "minimum": 0,
+              "description": "Number of music cues"
+            },
+            "ambient_count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of ambient sound cues"
+            },
+            "transition_count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of transition effects"
+            }
+          }
+        },
+        "timing_estimates": {
+          "type": "object",
+          "description": "Episode duration and timing analysis",
+          "required": [
+            "total_duration_seconds",
+            "total_duration_minutes", 
+            "dialogue_duration_seconds",
+            "transition_duration_seconds",
+            "total_words",
+            "average_speech_rate_wpm",
+            "scene_count",
+            "scene_timings"
+          ],
+          "properties": {
+            "total_duration_seconds": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Total estimated episode duration in seconds"
+            },
+            "total_duration_minutes": {
+              "type": "number", 
+              "minimum": 0,
+              "description": "Total estimated episode duration in minutes"
+            },
+            "dialogue_duration_seconds": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Total speech duration excluding transitions"
+            },
+            "transition_duration_seconds": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Total transition and pause duration"
+            },
+            "total_words": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Total word count across all dialogue"
+            },
+            "average_speech_rate_wpm": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Words per minute rate used for calculations"
+            },
+            "scene_count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Total number of scenes in episode"
+            },
+            "scene_timings": {
+              "type": "array",
+              "description": "Per-scene timing breakdown",
+              "items": {
+                "type": "object",
+                "required": [
+                  "scene_id",
+                  "dialogue_duration_seconds",
+                  "word_count",
+                  "dialogue_count",
+                  "estimated_reading_speed_wpm"
+                ],
+                "properties": {
+                  "scene_id": {
+                    "type": "string",
+                    "description": "Normalized scene identifier"
+                  },
+                  "dialogue_duration_seconds": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "Scene dialogue duration in seconds"
+                  },
+                  "word_count": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Total words in scene dialogue"
+                  },
+                  "dialogue_count": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Number of dialogue lines in scene"
+                  },
+                  "estimated_reading_speed_wpm": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Reading speed used for this scene"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "validation_status": {
+          "type": "string",
+          "enum": ["passed", "failed", "warning"],
+          "description": "Overall validation result"
+        },
+        "character_count_by_speaker": {
+          "type": "object",
+          "description": "Character count breakdown by speaker",
+          "patternProperties": {
+            "^[A-Z][A-Z\\s]*$": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Character count for this speaker"
+            }
+          }
+        }
+      }
+    },
+    "episode_metadata": {
+      "type": "object",
+      "description": "Episode identification and basic information",
+      "required": ["title", "number", "input_file", "content_preview", "total_scenes"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Human-readable episode title"
+        },
+        "number": {
+          "type": "string",
+          "pattern": "^episode_\\d+$",
+          "description": "Episode identifier (e.g. 'episode_007')"
+        },
+        "input_file": {
+          "type": "string",
+          "description": "Path to source markdown file"
+        },
+        "content_preview": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Preview of episode content"
+        },
+        "total_scenes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of scenes in episode"
+        }
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "description": "Ordered list of episode scenes",
+      "items": {
+        "type": "object",
+        "required": [
+          "scene_id",
+          "scene_name", 
+          "start_line",
+          "content",
+          "dialogues",
+          "multimedia",
+          "metadata"
+        ],
+        "properties": {
+          "scene_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "description": "Normalized scene identifier for referencing"
+          },
+          "scene_name": {
+            "type": "string",
+            "description": "Original scene name from markdown"
+          },
+          "start_line": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Line number where scene begins in source file"
+          },
+          "content": {
+            "type": "string",
+            "description": "Raw scene content from markdown"
+          },
+          "dialogues": {
+            "type": "array",
+            "description": "Parsed dialogue lines from this scene",
+            "items": {
+              "type": "object",
+              "required": [
+                "character",
+                "direction",
+                "text",
+                "character_count", 
+                "line_position"
+              ],
+              "properties": {
+                "character": {
+                  "type": "string",
+                  "pattern": "^[A-Z][A-Z\\s]*$",
+                  "description": "Speaker name (e.g. 'THORAK', 'ZARA', 'BOTH')"
+                },
+                "direction": {
+                  "type": ["string", "null"],
+                  "description": "Stage direction or delivery instruction"
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Dialogue text for voice synthesis"
+                },
+                "character_count": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Character count for cost estimation"
+                },
+                "line_position": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Line number within scene content"
+                }
+              }
+            }
+          },
+          "multimedia": {
+            "type": "object",
+            "description": "Multimedia cues and tags for this scene",
+            "required": [
+              "image_tags",
+              "sfx_tags", 
+              "music_tags",
+              "ambient_tags",
+              "transition_tags"
+            ],
+            "properties": {
+              "image_tags": {
+                "type": "array",
+                "description": "Image generation prompts",
+                "items": {
+                  "type": "object",
+                  "required": ["tag_id", "prompt", "line_position", "tag_type"],
+                  "properties": {
+                    "tag_id": {
+                      "type": "string",
+                      "description": "Unique identifier for image"
+                    },
+                    "prompt": {
+                      "type": ["string", "null"],
+                      "description": "Image generation prompt text"
+                    },
+                    "line_position": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Line number in scene content"
+                    },
+                    "tag_type": {
+                      "type": "string",
+                      "const": "image"
+                    }
+                  }
+                }
+              },
+              "sfx_tags": {
+                "type": "array",
+                "description": "Sound effect cues",
+                "items": {
+                  "type": "object",
+                  "required": ["tag_id", "line_position", "tag_type"],
+                  "properties": {
+                    "tag_id": {
+                      "type": "string",
+                      "description": "Sound effect identifier"
+                    },
+                    "line_position": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Line number in scene content"
+                    },
+                    "tag_type": {
+                      "type": "string",
+                      "const": "sfx"
+                    }
+                  }
+                }
+              },
+              "music_tags": {
+                "type": "array",
+                "description": "Music cues",
+                "items": {
+                  "type": "object",
+                  "required": ["tag_id", "line_position", "tag_type"],
+                  "properties": {
+                    "tag_id": {
+                      "type": "string",
+                      "description": "Music track identifier"
+                    },
+                    "line_position": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Line number in scene content"
+                    },
+                    "tag_type": {
+                      "type": "string",
+                      "const": "music"
+                    }
+                  }
+                }
+              },
+              "ambient_tags": {
+                "type": "array",
+                "description": "Ambient sound cues",
+                "items": {
+                  "type": "object",
+                  "required": ["tag_id", "line_position", "tag_type"],
+                  "properties": {
+                    "tag_id": {
+                      "type": "string",
+                      "description": "Ambient sound identifier"
+                    },
+                    "line_position": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Line number in scene content"
+                    },
+                    "tag_type": {
+                      "type": "string",
+                      "const": "ambient"
+                    }
+                  }
+                }
+              },
+              "transition_tags": {
+                "type": "array",
+                "description": "Scene transition effects",
+                "items": {
+                  "type": "object",
+                  "required": ["tag_id", "line_position", "tag_type"],
+                  "properties": {
+                    "tag_id": {
+                      "type": "string",
+                      "description": "Transition effect description"
+                    },
+                    "line_position": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Line number in scene content"
+                    },
+                    "tag_type": {
+                      "type": "string",
+                      "const": "transition"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "type": "object", 
+            "description": "Scene-level statistics and summary data",
+            "required": [
+              "dialogue_count",
+              "image_tags",
+              "sfx_tags",
+              "music_tags", 
+              "ambient_tags",
+              "transition_tags"
+            ],
+            "properties": {
+              "dialogue_count": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Number of dialogue lines in scene"
+              },
+              "image_tags": {
+                "type": "array",
+                "description": "Copy of multimedia.image_tags for convenience"
+              },
+              "sfx_tags": {
+                "type": "array",
+                "description": "Copy of multimedia.sfx_tags for convenience"
+              },
+              "music_tags": {
+                "type": "array", 
+                "description": "Copy of multimedia.music_tags for convenience"
+              },
+              "ambient_tags": {
+                "type": "array",
+                "description": "Copy of multimedia.ambient_tags for convenience"
+              },
+              "transition_tags": {
+                "type": "array",
+                "description": "Copy of multimedia.transition_tags for convenience"
+              }
+            }
+          }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "description": "Non-fatal parsing warnings",
+      "items": {
+        "type": "string",
+        "description": "Warning message"
+      }
+    },
+    "feedback": {
+      "type": "object",
+      "description": "Quality and formatting feedback",
+      "required": ["missing_tags", "format_violations", "quality_suggestions"],
+      "properties": {
+        "missing_tags": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "List of expected but missing multimedia tags"
+        },
+        "format_violations": {
+          "type": "array", 
+          "items": {"type": "string"},
+          "description": "List of format compliance issues"
+        },
+        "quality_suggestions": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Suggestions for content improvement"
+        }
+      }
+    }
+  }
+}
