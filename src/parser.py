@@ -279,7 +279,7 @@ def extract_scenes(content: str, logger: logging.Logger) -> List[Dict[str, Any]]
     return scenes
 
 
-def parse_episode_script(input_path: Path, logger: logging.Logger) -> Dict[str, Any]:
+def parse_episode_script(input_path: Path, logger: logging.Logger, config: Dict[str, Any]) -> Dict[str, Any]:
     """Parse the episode markdown script into structured data."""
     logger.info(f"Reading script from: {input_path}")
 
@@ -301,11 +301,9 @@ def parse_episode_script(input_path: Path, logger: logging.Logger) -> Dict[str, 
     # Extract scenes from the content
     scenes = extract_scenes(content, logger)
 
-    # Generate warnings if no scenes found
-    warnings = []
-    if not scenes:
-        warnings.append("No scene markers found. Expected format: ## **[SCENE: NAME]**")
-
+    # Validate content and generate warnings/feedback
+    validation_results = validate_episode_content(content, scenes, config, logger)
+    
     # Placeholder parsing result - will be implemented in subsequent tasks
     parsed_data = {
         "episode_metadata": {
@@ -316,12 +314,8 @@ def parse_episode_script(input_path: Path, logger: logging.Logger) -> Dict[str, 
             "total_scenes": len(scenes),
         },
         "scenes": scenes,
-        "warnings": warnings,
-        "feedback": {
-            "missing_tags": [],
-            "format_violations": [],
-            "quality_suggestions": [],
-        },
+        "warnings": validation_results["warnings"],
+        "feedback": validation_results["feedback"],
     }
 
     logger.info(f"Parsed episode: {parsed_data['episode_metadata']['title']}")
@@ -329,6 +323,125 @@ def parse_episode_script(input_path: Path, logger: logging.Logger) -> Dict[str, 
     logger.info(f"Total scenes: {len(scenes)}")
 
     return parsed_data
+
+
+def validate_episode_content(
+    content: str, scenes: List[Dict[str, Any]], config: Dict[str, Any], logger: logging.Logger
+) -> Dict[str, Any]:
+    """Validate episode content and generate warnings/feedback."""
+    validation_config = config.get("validation", {})
+    warnings = []
+    feedback = {
+        "missing_tags": [],
+        "format_violations": [],
+        "quality_suggestions": [],
+    }
+    
+    # Check for required scenes
+    if not scenes:
+        warnings.append("No scene markers found. Expected format: ## **[SCENE: NAME]**")
+        feedback["format_violations"].append("Missing scene structure")
+    
+    # Check for required characters
+    required_characters = validation_config.get("required_characters", ["THORAK", "ZARA"])
+    found_characters = set()
+    
+    # Collect all dialogues for character validation
+    total_dialogues = 0
+    total_character_count = 0
+    scene_dialogue_counts = []
+    
+    for scene in scenes:
+        scene_dialogues = len(scene.get("dialogues", []))
+        total_dialogues += scene_dialogues
+        scene_dialogue_counts.append(scene_dialogues)
+        
+        for dialogue in scene.get("dialogues", []):
+            found_characters.add(dialogue["character"])
+            total_character_count += dialogue["character_count"]
+    
+    # Check for missing required characters
+    missing_characters = set(required_characters) - found_characters
+    if missing_characters:
+        for char in missing_characters:
+            warnings.append(f"Required character '{char}' not found in any dialogue")
+            feedback["missing_tags"].append(f"Character: {char}")
+    
+    # Check multimedia tag usage
+    required_multimedia = validation_config.get("multimedia_tags", [])
+    found_multimedia = set()
+    multimedia_counts = {}
+    
+    for scene in scenes:
+        multimedia = scene.get("multimedia", {})
+        for tag_type, tags in multimedia.items():
+            if tags:  # If there are any tags of this type
+                # Map tag types to config format
+                tag_mapping = {
+                    "image_tags": "IMG:",
+                    "sfx_tags": "SFX:",
+                    "music_tags": "MUSIC:",
+                    "ambient_tags": "AMBIENT:",
+                    "transition_tags": "TRANSITION:"
+                }
+                tag_name = tag_mapping.get(tag_type, tag_type.replace("_tags", "").upper() + ":")
+                found_multimedia.add(tag_name)
+                multimedia_counts[tag_name] = multimedia_counts.get(tag_name, 0) + len(tags)
+    
+    # Check for missing multimedia types
+    missing_multimedia = set(required_multimedia) - found_multimedia
+    if missing_multimedia and validation_config.get("warning_on_missing_tags", True):
+        for tag in missing_multimedia:
+            warnings.append(f"No {tag} tags found in episode")
+            feedback["missing_tags"].append(f"Multimedia: {tag}")
+    
+    # Content quality checks
+    if total_dialogues < 10:
+        feedback["quality_suggestions"].append(f"Episode has only {total_dialogues} dialogues - consider adding more content")
+    
+    if total_character_count < 1000:
+        feedback["quality_suggestions"].append(f"Episode has only {total_character_count} characters - may be too short for podcast format")
+    
+    # Check for scene balance
+    if scenes:
+        avg_dialogues_per_scene = total_dialogues / len(scenes)
+        if avg_dialogues_per_scene < 2:
+            feedback["quality_suggestions"].append("Some scenes have very few dialogues - consider consolidating or expanding")
+        
+        # Check for scenes with no dialogues
+        empty_scenes = [scene["scene_name"] for scene in scenes if len(scene.get("dialogues", [])) == 0]
+        if empty_scenes:
+            for scene_name in empty_scenes:
+                warnings.append(f"Scene '{scene_name}' contains no dialogue")
+                feedback["format_violations"].append(f"Empty scene: {scene_name}")
+    
+    # Check dialogue format compliance
+    for scene in scenes:
+        for dialogue in scene.get("dialogues", []):
+            # Check for very short dialogues
+            if dialogue["character_count"] < 5:
+                feedback["quality_suggestions"].append(f"Very short dialogue in {scene['scene_name']}: '{dialogue['text'][:50]}'")
+            
+            # Check for very long dialogues (potential formatting issues)
+            if dialogue["character_count"] > 1000:
+                warnings.append(f"Extremely long dialogue in {scene['scene_name']} ({dialogue['character_count']} chars) - check for formatting errors")
+                feedback["format_violations"].append(f"Oversized dialogue in {scene['scene_name']}")
+    
+    # Check multimedia distribution
+    scenes_with_images = sum(1 for scene in scenes if scene.get("multimedia", {}).get("image_tags", []))
+    if scenes_with_images == 0:
+        warnings.append("No image tags found in any scene - visual content may be missing")
+        feedback["missing_tags"].append("Images: No visual content")
+    elif scenes_with_images < len(scenes) * 0.5:  # Less than half the scenes have images
+        feedback["quality_suggestions"].append(f"Only {scenes_with_images}/{len(scenes)} scenes have images - consider adding more visual content")
+    
+    # Log validation summary
+    logger.info(f"Content validation: {len(warnings)} warnings, {len(feedback['missing_tags']) + len(feedback['format_violations']) + len(feedback['quality_suggestions'])} feedback items")
+    
+    return {
+        "warnings": warnings,
+        "feedback": feedback
+    }
 
 
 def calculate_character_counts(scenes: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -559,6 +672,23 @@ def validate_output_against_schema(
     return errors
 
 
+def determine_validation_status(warnings: List[str], feedback: Dict[str, Any], config: Dict[str, Any]) -> str:
+    """Determine overall validation status based on warnings and feedback."""
+    validation_config = config.get("validation", {})
+    fail_on_critical = validation_config.get("fail_on_critical_errors", False)
+    
+    # Count different types of issues
+    critical_errors = len([w for w in warnings if "missing" in w.lower() or "no scene" in w.lower()])
+    format_violations = len(feedback.get("format_violations", []))
+    
+    if fail_on_critical and critical_errors > 0:
+        return "failed"
+    elif warnings or format_violations > 0:
+        return "warning"
+    else:
+        return "passed"
+
+
 def generate_output_metadata(
     input_path: Path, processing_time: float, scenes: List[Dict[str, Any]], config: Dict[str, Any]
 ) -> Dict[str, Any]:
@@ -582,7 +712,7 @@ def generate_output_metadata(
         },
         "detailed_cost_analysis": detailed_costs,
         "timing_estimates": timing_stats,
-        "validation_status": "passed",  # Will be determined by schema validation
+        "validation_status": "passed",  # Will be determined by validation and schema checks
         "character_count_by_speaker": character_stats["by_speaker"],
     }
 
@@ -594,16 +724,24 @@ def save_output_files(
     episode_name: str,
     debug: bool,
     logger: logging.Logger,
+    config: Dict[str, Any],
 ) -> None:
     """Save the parsed data and metadata to output files."""
 
     # Combine parsed data with metadata
     output_data = {"metadata": metadata, **parsed_data}
     
+    # Determine content validation status first
+    content_validation_status = determine_validation_status(
+        parsed_data.get("warnings", []), 
+        parsed_data.get("feedback", {}), 
+        config
+    )
+    
     # Validate against schema and update metadata
     schema_errors = validate_output_against_schema(output_data, logger)
     if schema_errors:
-        metadata["validation_status"] = "failed"
+        final_status = "failed"
         # Add schema errors to warnings
         if "warnings" not in parsed_data:
             parsed_data["warnings"] = []
@@ -611,7 +749,11 @@ def save_output_files(
         # Recreate output data with updated metadata and warnings
         output_data = {"metadata": metadata, **parsed_data}
     else:
-        metadata["validation_status"] = "passed"
+        # Use content validation status if schema validation passes
+        final_status = content_validation_status
+    
+    # Update final validation status
+    metadata["validation_status"] = final_status
 
     # Main JSON output
     json_file = output_path / f"{episode_name}.json"
@@ -727,7 +869,7 @@ def main() -> int:
         logger.info(f"✓ Output directory ready: {output_path}")
 
         # Parse the episode script
-        parsed_data = parse_episode_script(input_path, logger)
+        parsed_data = parse_episode_script(input_path, logger, config)
 
         # Generate metadata
         processing_time = time.time() - start_time
@@ -740,7 +882,7 @@ def main() -> int:
 
         # Save output files
         save_output_files(
-            parsed_data, metadata, output_path, episode_name, args.debug, logger
+            parsed_data, metadata, output_path, episode_name, args.debug, logger, config
         )
 
         # Final status
