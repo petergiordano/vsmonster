@@ -18,6 +18,7 @@ from typing import Dict, Any, List, Tuple
 
 try:
     import jsonschema
+
     SCHEMA_VALIDATION_AVAILABLE = True
 except ImportError:
     SCHEMA_VALIDATION_AVAILABLE = False
@@ -279,7 +280,9 @@ def extract_scenes(content: str, logger: logging.Logger) -> List[Dict[str, Any]]
     return scenes
 
 
-def parse_episode_script(input_path: Path, logger: logging.Logger, config: Dict[str, Any]) -> Dict[str, Any]:
+def parse_episode_script(
+    input_path: Path, logger: logging.Logger, config: Dict[str, Any]
+) -> Dict[str, Any]:
     """Parse the episode markdown script into structured data."""
     logger.info(f"Reading script from: {input_path}")
 
@@ -289,6 +292,25 @@ def parse_episode_script(input_path: Path, logger: logging.Logger, config: Dict[
     except UnicodeDecodeError:
         logger.error(f"Failed to read file with UTF-8 encoding: {input_path}")
         raise
+    except IOError as e:
+        logger.error(f"Failed to read file: {e}")
+        # Return minimal structure to allow processing to continue
+        return {
+            "episode_metadata": {
+                "title": "Error Reading File",
+                "number": "error",
+                "input_file": str(input_path.absolute()),
+                "content_preview": "",
+                "total_scenes": 0,
+            },
+            "scenes": [],
+            "warnings": [f"Could not read input file: {str(e)}"],
+            "feedback": {
+                "missing_tags": [],
+                "format_violations": ["File could not be read"],
+                "quality_suggestions": ["Check file permissions and try again"],
+            },
+        }
 
     # Extract episode number from filename
     episode_match = input_path.stem
@@ -303,7 +325,7 @@ def parse_episode_script(input_path: Path, logger: logging.Logger, config: Dict[
 
     # Validate content and generate warnings/feedback
     validation_results = validate_episode_content(content, scenes, config, logger)
-    
+
     # Placeholder parsing result - will be implemented in subsequent tasks
     parsed_data = {
         "episode_metadata": {
@@ -326,7 +348,10 @@ def parse_episode_script(input_path: Path, logger: logging.Logger, config: Dict[
 
 
 def validate_episode_content(
-    content: str, scenes: List[Dict[str, Any]], config: Dict[str, Any], logger: logging.Logger
+    content: str,
+    scenes: List[Dict[str, Any]],
+    config: Dict[str, Any],
+    logger: logging.Logger,
 ) -> Dict[str, Any]:
     """Validate episode content and generate warnings/feedback."""
     validation_config = config.get("validation", {})
@@ -336,42 +361,44 @@ def validate_episode_content(
         "format_violations": [],
         "quality_suggestions": [],
     }
-    
+
     # Check for required scenes
     if not scenes:
         warnings.append("No scene markers found. Expected format: ## **[SCENE: NAME]**")
         feedback["format_violations"].append("Missing scene structure")
-    
+
     # Check for required characters
-    required_characters = validation_config.get("required_characters", ["THORAK", "ZARA"])
+    required_characters = validation_config.get(
+        "required_characters", ["THORAK", "ZARA"]
+    )
     found_characters = set()
-    
+
     # Collect all dialogues for character validation
     total_dialogues = 0
     total_character_count = 0
     scene_dialogue_counts = []
-    
+
     for scene in scenes:
         scene_dialogues = len(scene.get("dialogues", []))
         total_dialogues += scene_dialogues
         scene_dialogue_counts.append(scene_dialogues)
-        
+
         for dialogue in scene.get("dialogues", []):
             found_characters.add(dialogue["character"])
             total_character_count += dialogue["character_count"]
-    
+
     # Check for missing required characters
     missing_characters = set(required_characters) - found_characters
     if missing_characters:
         for char in missing_characters:
             warnings.append(f"Required character '{char}' not found in any dialogue")
             feedback["missing_tags"].append(f"Character: {char}")
-    
+
     # Check multimedia tag usage
     required_multimedia = validation_config.get("multimedia_tags", [])
     found_multimedia = set()
     multimedia_counts = {}
-    
+
     for scene in scenes:
         multimedia = scene.get("multimedia", {})
         for tag_type, tags in multimedia.items():
@@ -382,66 +409,93 @@ def validate_episode_content(
                     "sfx_tags": "SFX:",
                     "music_tags": "MUSIC:",
                     "ambient_tags": "AMBIENT:",
-                    "transition_tags": "TRANSITION:"
+                    "transition_tags": "TRANSITION:",
                 }
-                tag_name = tag_mapping.get(tag_type, tag_type.replace("_tags", "").upper() + ":")
+                tag_name = tag_mapping.get(
+                    tag_type, tag_type.replace("_tags", "").upper() + ":"
+                )
                 found_multimedia.add(tag_name)
-                multimedia_counts[tag_name] = multimedia_counts.get(tag_name, 0) + len(tags)
-    
+                multimedia_counts[tag_name] = multimedia_counts.get(tag_name, 0) + len(
+                    tags
+                )
+
     # Check for missing multimedia types
     missing_multimedia = set(required_multimedia) - found_multimedia
     if missing_multimedia and validation_config.get("warning_on_missing_tags", True):
         for tag in missing_multimedia:
             warnings.append(f"No {tag} tags found in episode")
             feedback["missing_tags"].append(f"Multimedia: {tag}")
-    
+
     # Content quality checks
     if total_dialogues < 10:
-        feedback["quality_suggestions"].append(f"Episode has only {total_dialogues} dialogues - consider adding more content")
-    
+        feedback["quality_suggestions"].append(
+            f"Episode has only {total_dialogues} dialogues - consider adding more content"
+        )
+
     if total_character_count < 1000:
-        feedback["quality_suggestions"].append(f"Episode has only {total_character_count} characters - may be too short for podcast format")
-    
+        feedback["quality_suggestions"].append(
+            f"Episode has only {total_character_count} characters - may be too short for podcast format"
+        )
+
     # Check for scene balance
     if scenes:
         avg_dialogues_per_scene = total_dialogues / len(scenes)
         if avg_dialogues_per_scene < 2:
-            feedback["quality_suggestions"].append("Some scenes have very few dialogues - consider consolidating or expanding")
-        
+            feedback["quality_suggestions"].append(
+                "Some scenes have very few dialogues - consider consolidating or expanding"
+            )
+
         # Check for scenes with no dialogues
-        empty_scenes = [scene["scene_name"] for scene in scenes if len(scene.get("dialogues", [])) == 0]
+        empty_scenes = [
+            scene["scene_name"]
+            for scene in scenes
+            if len(scene.get("dialogues", [])) == 0
+        ]
         if empty_scenes:
             for scene_name in empty_scenes:
                 warnings.append(f"Scene '{scene_name}' contains no dialogue")
                 feedback["format_violations"].append(f"Empty scene: {scene_name}")
-    
+
     # Check dialogue format compliance
     for scene in scenes:
         for dialogue in scene.get("dialogues", []):
             # Check for very short dialogues
             if dialogue["character_count"] < 5:
-                feedback["quality_suggestions"].append(f"Very short dialogue in {scene['scene_name']}: '{dialogue['text'][:50]}'")
-            
+                feedback["quality_suggestions"].append(
+                    f"Very short dialogue in {scene['scene_name']}: '{dialogue['text'][:50]}'"
+                )
+
             # Check for very long dialogues (potential formatting issues)
             if dialogue["character_count"] > 1000:
-                warnings.append(f"Extremely long dialogue in {scene['scene_name']} ({dialogue['character_count']} chars) - check for formatting errors")
-                feedback["format_violations"].append(f"Oversized dialogue in {scene['scene_name']}")
-    
+                warnings.append(
+                    f"Extremely long dialogue in {scene['scene_name']} ({dialogue['character_count']} chars) - check for formatting errors"
+                )
+                feedback["format_violations"].append(
+                    f"Oversized dialogue in {scene['scene_name']}"
+                )
+
     # Check multimedia distribution
-    scenes_with_images = sum(1 for scene in scenes if scene.get("multimedia", {}).get("image_tags", []))
+    scenes_with_images = sum(
+        1 for scene in scenes if scene.get("multimedia", {}).get("image_tags", [])
+    )
     if scenes_with_images == 0:
-        warnings.append("No image tags found in any scene - visual content may be missing")
+        warnings.append(
+            "No image tags found in any scene - visual content may be missing"
+        )
         feedback["missing_tags"].append("Images: No visual content")
-    elif scenes_with_images < len(scenes) * 0.5:  # Less than half the scenes have images
-        feedback["quality_suggestions"].append(f"Only {scenes_with_images}/{len(scenes)} scenes have images - consider adding more visual content")
-    
+    elif (
+        scenes_with_images < len(scenes) * 0.5
+    ):  # Less than half the scenes have images
+        feedback["quality_suggestions"].append(
+            f"Only {scenes_with_images}/{len(scenes)} scenes have images - consider adding more visual content"
+        )
+
     # Log validation summary
-    logger.info(f"Content validation: {len(warnings)} warnings, {len(feedback['missing_tags']) + len(feedback['format_violations']) + len(feedback['quality_suggestions'])} feedback items")
-    
-    return {
-        "warnings": warnings,
-        "feedback": feedback
-    }
+    logger.info(
+        f"Content validation: {len(warnings)} warnings, {len(feedback['missing_tags']) + len(feedback['format_violations']) + len(feedback['quality_suggestions'])} feedback items"
+    )
+
+    return {"warnings": warnings, "feedback": feedback}
 
 
 def calculate_character_counts(scenes: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -467,35 +521,50 @@ def calculate_detailed_costs(
 ) -> Dict[str, Any]:
     """Calculate detailed cost breakdown for all pipeline components."""
     cost_config = config.get("cost_estimation", {})
-    
+
     # Voice generation costs (ElevenLabs)
     character_stats = calculate_character_counts(scenes)
     elevenlabs_cost_per_char = cost_config.get("elevenlabs_cost_per_character", 0.0003)
-    voice_generation_cost = character_stats["total_characters"] * elevenlabs_cost_per_char
-    
+    voice_generation_cost = (
+        character_stats["total_characters"] * elevenlabs_cost_per_char
+    )
+
     # Voice costs by speaker
     voice_costs_by_speaker = {}
     for speaker, char_count in character_stats["by_speaker"].items():
         voice_costs_by_speaker[speaker] = char_count * elevenlabs_cost_per_char
-    
+
     # Multimedia costs
     multimedia_stats = calculate_multimedia_counts(scenes)
     image_cost_per_prompt = cost_config.get("image_generation_cost_per_prompt", 0.05)
     sfx_cost_per_effect = cost_config.get("sfx_cost_per_effect", 0.02)
     music_cost_per_cue = cost_config.get("music_cost_per_cue", 0.10)
-    
-    image_generation_cost = multimedia_stats["image_generation_count"] * image_cost_per_prompt
+
+    image_generation_cost = (
+        multimedia_stats["image_generation_count"] * image_cost_per_prompt
+    )
     sfx_processing_cost = multimedia_stats["sfx_count"] * sfx_cost_per_effect
     music_processing_cost = multimedia_stats["music_cue_count"] * music_cost_per_cue
-    ambient_processing_cost = multimedia_stats["ambient_count"] * sfx_cost_per_effect  # Same rate as SFX
-    transition_processing_cost = multimedia_stats["transition_count"] * sfx_cost_per_effect  # Same rate as SFX
-    
+    ambient_processing_cost = (
+        multimedia_stats["ambient_count"] * sfx_cost_per_effect
+    )  # Same rate as SFX
+    transition_processing_cost = (
+        multimedia_stats["transition_count"] * sfx_cost_per_effect
+    )  # Same rate as SFX
+
     # Total audio processing cost
-    audio_processing_cost = sfx_processing_cost + music_processing_cost + ambient_processing_cost + transition_processing_cost
-    
+    audio_processing_cost = (
+        sfx_processing_cost
+        + music_processing_cost
+        + ambient_processing_cost
+        + transition_processing_cost
+    )
+
     # Total episode cost
-    total_episode_cost = voice_generation_cost + image_generation_cost + audio_processing_cost
-    
+    total_episode_cost = (
+        voice_generation_cost + image_generation_cost + audio_processing_cost
+    )
+
     # Cost breakdown by pipeline component
     pipeline_costs = {
         "step_1_script_parsing": 0.0,  # No cost for parsing
@@ -507,7 +576,7 @@ def calculate_detailed_costs(
         "step_7_video_assembly": 0.0,  # No external cost for video assembly
         "step_8_distribution": 0.0,  # No cost for distribution processing
     }
-    
+
     return {
         "total_episode_cost": round(total_episode_cost, 4),
         "currency": cost_config.get("currency", "USD"),
@@ -517,14 +586,14 @@ def calculate_detailed_costs(
                 "cost_per_character": elevenlabs_cost_per_char,
                 "total_characters": character_stats["total_characters"],
                 "costs_by_speaker": {
-                    speaker: round(cost, 4) 
+                    speaker: round(cost, 4)
                     for speaker, cost in voice_costs_by_speaker.items()
-                }
+                },
             },
             "image_generation": {
                 "total_cost": round(image_generation_cost, 4),
                 "cost_per_image": image_cost_per_prompt,
-                "total_images": multimedia_stats["image_generation_count"]
+                "total_images": multimedia_stats["image_generation_count"],
             },
             "audio_processing": {
                 "total_cost": round(audio_processing_cost, 4),
@@ -536,12 +605,23 @@ def calculate_detailed_costs(
                     "sfx_count": multimedia_stats["sfx_count"],
                     "music_count": multimedia_stats["music_cue_count"],
                     "ambient_count": multimedia_stats["ambient_count"],
-                    "transition_count": multimedia_stats["transition_count"]
-                }
-            }
+                    "transition_count": multimedia_stats["transition_count"],
+                },
+            },
         },
         "pipeline_component_costs": pipeline_costs,
-        "cost_per_minute": round(total_episode_cost / (config.get("episode_settings", {}).get("expected_characters_per_minute", 200) / 60), 4) if total_episode_cost > 0 else 0.0
+        "cost_per_minute": round(
+            total_episode_cost
+            / (
+                config.get("episode_settings", {}).get(
+                    "expected_characters_per_minute", 200
+                )
+                / 60
+            ),
+            4,
+        )
+        if total_episode_cost > 0
+        else 0.0,
     }
 
 
@@ -566,57 +646,63 @@ def calculate_multimedia_counts(scenes: List[Dict[str, Any]]) -> Dict[str, int]:
     return counts
 
 
-def calculate_timing_estimates(scenes: List[Dict[str, Any]], config: Dict[str, Any]) -> Dict[str, Any]:
+def calculate_timing_estimates(
+    scenes: List[Dict[str, Any]], config: Dict[str, Any]
+) -> Dict[str, Any]:
     """Calculate timing estimates for dialogue and scenes."""
     episode_settings = config.get("episode_settings", {})
     speech_rate = episode_settings.get("default_speech_rate_words_per_minute", 150)
-    pause_between_speakers = episode_settings.get("pause_duration_between_speakers_seconds", 0.5)
-    scene_transition_duration = episode_settings.get("scene_transition_duration_seconds", 1.0)
-    
+    pause_between_speakers = episode_settings.get(
+        "pause_duration_between_speakers_seconds", 0.5
+    )
+    scene_transition_duration = episode_settings.get(
+        "scene_transition_duration_seconds", 1.0
+    )
+
     total_dialogue_duration = 0
     total_words = 0
     scene_timings = []
-    
+
     for scene in scenes:
         scene_dialogue_duration = 0
         scene_words = 0
         dialogue_count = len(scene.get("dialogues", []))
-        
+
         # Calculate dialogue duration for this scene
         for dialogue in scene.get("dialogues", []):
             text = dialogue["text"]
             # Estimate words (simple split by spaces)
             words = len(text.split())
             scene_words += words
-            
+
             # Calculate speech duration (words per minute to seconds)
             speech_duration = (words / speech_rate) * 60
             scene_dialogue_duration += speech_duration
-        
+
         # Add pauses between speakers (one less pause than dialogue count)
         if dialogue_count > 1:
             scene_dialogue_duration += (dialogue_count - 1) * pause_between_speakers
-        
+
         # Store scene timing data
         scene_timing = {
             "scene_id": scene["scene_id"],
             "dialogue_duration_seconds": round(scene_dialogue_duration, 2),
             "word_count": scene_words,
             "dialogue_count": dialogue_count,
-            "estimated_reading_speed_wpm": speech_rate
+            "estimated_reading_speed_wpm": speech_rate,
         }
         scene_timings.append(scene_timing)
-        
+
         total_dialogue_duration += scene_dialogue_duration
         total_words += scene_words
-    
+
     # Add scene transition time (between scenes, not before first or after last)
     num_scene_transitions = max(0, len(scenes) - 1)
     total_transition_duration = num_scene_transitions * scene_transition_duration
-    
+
     # Calculate total episode duration
     total_duration = total_dialogue_duration + total_transition_duration
-    
+
     timing_data = {
         "total_duration_seconds": round(total_duration, 2),
         "total_duration_minutes": round(total_duration / 60, 2),
@@ -625,9 +711,9 @@ def calculate_timing_estimates(scenes: List[Dict[str, Any]], config: Dict[str, A
         "total_words": total_words,
         "average_speech_rate_wpm": speech_rate,
         "scene_count": len(scenes),
-        "scene_timings": scene_timings
+        "scene_timings": scene_timings,
     }
-    
+
     return timing_data
 
 
@@ -650,12 +736,12 @@ def validate_output_against_schema(
     if not SCHEMA_VALIDATION_AVAILABLE:
         logger.warning("jsonschema package not available - skipping schema validation")
         return []
-    
+
     schema = load_output_schema()
     if not schema:
         logger.warning("Output schema not found - skipping schema validation")
         return []
-    
+
     errors = []
     try:
         jsonschema.validate(output_data, schema)
@@ -668,19 +754,23 @@ def validate_output_against_schema(
         error_msg = f"Schema definition error: {e.message}"
         errors.append(error_msg)
         logger.error(error_msg)
-    
+
     return errors
 
 
-def determine_validation_status(warnings: List[str], feedback: Dict[str, Any], config: Dict[str, Any]) -> str:
+def determine_validation_status(
+    warnings: List[str], feedback: Dict[str, Any], config: Dict[str, Any]
+) -> str:
     """Determine overall validation status based on warnings and feedback."""
     validation_config = config.get("validation", {})
     fail_on_critical = validation_config.get("fail_on_critical_errors", False)
-    
+
     # Count different types of issues
-    critical_errors = len([w for w in warnings if "missing" in w.lower() or "no scene" in w.lower()])
+    critical_errors = len(
+        [w for w in warnings if "missing" in w.lower() or "no scene" in w.lower()]
+    )
     format_violations = len(feedback.get("format_violations", []))
-    
+
     if fail_on_critical and critical_errors > 0:
         return "failed"
     elif warnings or format_violations > 0:
@@ -690,7 +780,10 @@ def determine_validation_status(warnings: List[str], feedback: Dict[str, Any], c
 
 
 def generate_output_metadata(
-    input_path: Path, processing_time: float, scenes: List[Dict[str, Any]], config: Dict[str, Any]
+    input_path: Path,
+    processing_time: float,
+    scenes: List[Dict[str, Any]],
+    config: Dict[str, Any],
 ) -> Dict[str, Any]:
     """Generate metadata for the parsed output."""
     character_stats = calculate_character_counts(scenes)
@@ -730,14 +823,12 @@ def save_output_files(
 
     # Combine parsed data with metadata
     output_data = {"metadata": metadata, **parsed_data}
-    
+
     # Determine content validation status first
     content_validation_status = determine_validation_status(
-        parsed_data.get("warnings", []), 
-        parsed_data.get("feedback", {}), 
-        config
+        parsed_data.get("warnings", []), parsed_data.get("feedback", {}), config
     )
-    
+
     # Validate against schema and update metadata
     schema_errors = validate_output_against_schema(output_data, logger)
     if schema_errors:
@@ -745,13 +836,15 @@ def save_output_files(
         # Add schema errors to warnings
         if "warnings" not in parsed_data:
             parsed_data["warnings"] = []
-        parsed_data["warnings"].extend([f"Schema validation: {error}" for error in schema_errors])
+        parsed_data["warnings"].extend(
+            [f"Schema validation: {error}" for error in schema_errors]
+        )
         # Recreate output data with updated metadata and warnings
         output_data = {"metadata": metadata, **parsed_data}
     else:
         # Use content validation status if schema validation passes
         final_status = content_validation_status
-    
+
     # Update final validation status
     metadata["validation_status"] = final_status
 
@@ -770,7 +863,7 @@ def save_output_files(
         file.write(f"Episode: {episode_name}\n")
         file.write(f"Processing time: {metadata['total_processing_time_seconds']}s\n")
         file.write(f"Status: {metadata['validation_status']}\n\n")
-        
+
         # Include schema validation results
         if schema_errors:
             file.write("SCHEMA VALIDATION ERRORS:\n")
@@ -814,7 +907,9 @@ def main() -> int:
         config = load_config()
     except Exception as e:
         print(f"❌ Failed to load configuration: {e}")
-        return 1
+        print(f"💡 Using default configuration to continue processing...")
+        config = load_config()  # This will return default config on error
+        print(f"✓ Default configuration loaded successfully")
 
     parser_config = config.get("parser", {})
 
@@ -860,41 +955,159 @@ def main() -> int:
     )
 
     try:
-        # Validate input file
+        # Step 1: Validate input file
+        logger.info(f"🔍 Step 1: Validating input file...")
         input_path = validate_input_file(args.input_file)
         logger.info(f"✓ Input file validated: {input_path}")
 
-        # Ensure output directory exists
+        # Step 2: Prepare output directory
+        logger.info(f"📁 Step 2: Preparing output directory...")
         output_path = ensure_output_directory(args.output_dir, args.debug)
         logger.info(f"✓ Output directory ready: {output_path}")
 
-        # Parse the episode script
+        # Step 3: Parse the episode script
+        logger.info(f"📖 Step 3: Parsing episode script...")
         parsed_data = parse_episode_script(input_path, logger, config)
+        scene_count = len(parsed_data.get("scenes", []))
+        logger.info(f"✓ Episode parsing complete - found {scene_count} scenes")
 
-        # Generate metadata
+        # Step 4: Generate metadata and cost estimates
+        logger.info(f"📊 Step 4: Generating metadata and cost estimates...")
         processing_time = time.time() - start_time
         metadata = generate_output_metadata(
             input_path, processing_time, parsed_data["scenes"], config
         )
 
-        # Extract episode name for file naming
-        episode_name = input_path.stem
+        # Show cost summary
+        cost_data = metadata.get("detailed_cost_analysis", {})
+        total_cost = cost_data.get("total_episode_cost", 0)
+        total_chars = metadata.get("estimated_downstream_costs", {}).get(
+            "elevenlabs_character_count", 0
+        )
+        logger.info(
+            f"✓ Cost analysis complete - estimated ${total_cost:.2f} ({total_chars} characters)"
+        )
 
-        # Save output files
+        # Step 5: Save output files
+        logger.info(f"💾 Step 5: Saving output files...")
+        episode_name = input_path.stem
         save_output_files(
             parsed_data, metadata, output_path, episode_name, args.debug, logger, config
         )
 
-        # Final status
+        # Final status with summary
+        validation_status = metadata.get("validation_status", "unknown")
+        warnings_count = len(parsed_data.get("warnings", []))
+
         logger.info(f"✅ Parsing complete in {processing_time:.3f}s")
         logger.info(f"📄 Output: {output_path / f'{episode_name}.json'}")
+        logger.info(
+            f"🎯 Status: {validation_status.upper()} ({warnings_count} warnings)"
+        )
+
+        if validation_status == "failed":
+            logger.info(f"❌ Processing completed with errors - check validation report")
+            return 1
+        elif validation_status == "warning":
+            logger.info(
+                f"⚠️ Processing completed with warnings - review validation report"
+            )
+        else:
+            logger.info(f"🎉 Processing completed successfully!")
 
         return 0
 
+    except FileNotFoundError as e:
+        logger.error(f"❌ Input file not found: {e}")
+        logger.info(f"💡 Please check the file path and try again")
+        return 1
+    except ValueError as e:
+        logger.error(f"❌ Input validation error: {e}")
+        logger.info(f"💡 Please ensure the file is a valid markdown (.md) file")
+        return 1
+    except UnicodeDecodeError as e:
+        logger.error(f"❌ File encoding error: {e}")
+        logger.info(f"💡 Please ensure the file is saved with UTF-8 encoding")
+        # Try to create emergency output with error details
+        try:
+            emergency_output_path = ensure_output_directory(args.output_dir, args.debug)
+            emergency_data = {
+                "metadata": {
+                    "processing_timestamp": datetime.now().isoformat(),
+                    "input_file_path": args.input_file,
+                    "total_processing_time_seconds": time.time() - start_time,
+                    "validation_status": "failed",
+                    "error_type": "encoding_error",
+                },
+                "episode_metadata": {
+                    "title": "Processing Failed",
+                    "number": "error",
+                    "input_file": args.input_file,
+                    "total_scenes": 0,
+                },
+                "scenes": [],
+                "warnings": [f"File encoding error: {str(e)}"],
+                "feedback": {
+                    "missing_tags": [],
+                    "format_violations": ["File could not be read with UTF-8 encoding"],
+                    "quality_suggestions": [
+                        "Save file with UTF-8 encoding and try again"
+                    ],
+                },
+            }
+
+            output_name = Path(args.input_file).stem
+            with open(
+                emergency_output_path / f"{output_name}.json", "w", encoding="utf-8"
+            ) as f:
+                json.dump(emergency_data, f, indent=2, ensure_ascii=False)
+            logger.info(f"✓ Emergency output saved with error details")
+        except Exception:
+            pass  # If emergency save fails, continue gracefully
+        return 1
     except Exception as e:
-        logger.error(f"❌ Parser failed: {e}")
+        logger.error(f"❌ Unexpected error during processing: {e}")
         if args.debug:
             logger.exception("Full error details:")
+
+        # Try to create emergency output even for unexpected errors
+        try:
+            emergency_output_path = ensure_output_directory(args.output_dir, args.debug)
+            emergency_data = {
+                "metadata": {
+                    "processing_timestamp": datetime.now().isoformat(),
+                    "input_file_path": args.input_file,
+                    "total_processing_time_seconds": time.time() - start_time,
+                    "validation_status": "failed",
+                    "error_type": "unexpected_error",
+                },
+                "episode_metadata": {
+                    "title": "Processing Failed",
+                    "number": "error",
+                    "input_file": args.input_file,
+                    "total_scenes": 0,
+                },
+                "scenes": [],
+                "warnings": [f"Unexpected error: {str(e)}"],
+                "feedback": {
+                    "missing_tags": [],
+                    "format_violations": ["Parser encountered an unexpected error"],
+                    "quality_suggestions": [
+                        "Please report this error with the input file for investigation"
+                    ],
+                },
+            }
+
+            output_name = Path(args.input_file).stem
+            with open(
+                emergency_output_path / f"{output_name}.json", "w", encoding="utf-8"
+            ) as f:
+                json.dump(emergency_data, f, indent=2, ensure_ascii=False)
+            logger.info(f"✓ Emergency output saved with error details")
+            logger.info(f"💡 Partial JSON output available for debugging")
+        except Exception:
+            logger.error(f"❌ Failed to create emergency output")
+
         return 1
 
 
