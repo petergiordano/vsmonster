@@ -47,5 +47,43 @@
     "default_speech_rate_words_per_minute": 150,
     "pause_duration_between_speakers_seconds": 0.5,
     "scene_transition_duration_seconds": 1.0
+  },
+  "voice_generation": {
+    "output_dir": "output/voices",
+    "output_format": "wav_44100",
+    "model": "eleven_multilingual_v2",
+    "max_retries": 3,
+    "retry_delay_seconds": 1.0,
+    "character_voices": {
+      "THORAK": {
+        "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+        "stability": 0.75,
+        "similarity": 0.85,
+        "style": 0.2,
+        "description": "Scholarly, gravelly tone"
+      },
+      "ZARA": {
+        "voice_id": "21m00Tcm4TlvDq8ikWAM",
+        "stability": 0.45,
+        "similarity": 0.75,
+        "style": 0.6,
+        "description": "Energetic, emotional variation"
+      },
+      "BOTH": {
+        "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+        "stability": 0.6,
+        "similarity": 0.8,
+        "style": 0.4,
+        "description": "Default to THORAK for shared lines"
+      }
+    },
+    "voice_direction_adjustments": {
+      "breathless": {"stability": -0.1, "style": 0.3},
+      "gravelly": {"stability": 0.1, "style": -0.2},
+      "impressed": {"stability": -0.05, "style": 0.2},
+      "excited": {"stability": -0.2, "style": 0.4},
+      "calm": {"stability": 0.2, "style": -0.3},
+      "worried": {"stability": -0.15, "style": 0.1}
+    }
   }
 }
