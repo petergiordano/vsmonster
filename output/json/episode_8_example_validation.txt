@@ -1,0 +1,20 @@
+versusMonster Script Parser - Validation Report
+Generated: 2025-07-08T09:04:55.467617
+Episode: episode_8_example
+Processing time: 0.002s
+Status: failed
+
+SCHEMA VALIDATION ERRORS:
+  - Schema validation error: 'episode_8_example' does not match '^episode_\\d+$' at episode_metadata.number
+
+WARNINGS:
+  - No scene markers found. Expected format: ## **[SCENE: NAME]**
+  - Required character 'ZARA' not found in any dialogue
+  - Required character 'THORAK' not found in any dialogue
+  - No MUSIC: tags found in episode
+  - No SFX: tags found in episode
+  - No TRANSITION: tags found in episode
+  - No AMBIENT: tags found in episode
+  - No IMG: tags found in episode
+  - No image tags found in any scene - visual content may be missing
+  - Schema validation: Schema validation error: 'episode_8_example' does not match '^episode_\\d+$' at episode_metadata.number

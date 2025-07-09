@@ -1,0 +1,107 @@
+{
+  "metadata": {
+    "processing_timestamp": "2025-07-08T09:04:55.467617",
+    "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/reference/episode_8_example.md",
+    "total_processing_time_seconds": 0.002,
+    "estimated_downstream_costs": {
+      "elevenlabs_character_count": 0,
+      "image_generation_count": 0,
+      "sfx_count": 0,
+      "music_cue_count": 0,
+      "ambient_count": 0,
+      "transition_count": 0
+    },
+    "detailed_cost_analysis": {
+      "total_episode_cost": 0.0,
+      "currency": "USD",
+      "cost_breakdown": {
+        "voice_generation": {
+          "total_cost": 0.0,
+          "cost_per_character": 0.0003,
+          "total_characters": 0,
+          "costs_by_speaker": {}
+        },
+        "image_generation": {
+          "total_cost": 0.0,
+          "cost_per_image": 0.05,
+          "total_images": 0
+        },
+        "audio_processing": {
+          "total_cost": 0.0,
+          "sfx_cost": 0.0,
+          "music_cost": 0.0,
+          "ambient_cost": 0.0,
+          "transition_cost": 0.0,
+          "breakdown": {
+            "sfx_count": 0,
+            "music_count": 0,
+            "ambient_count": 0,
+            "transition_count": 0
+          }
+        }
+      },
+      "pipeline_component_costs": {
+        "step_1_script_parsing": 0.0,
+        "step_2_voice_generation": 0.0,
+        "step_3_image_generation": 0.0,
+        "step_4_cost_estimation": 0.0,
+        "step_5_audio_processing": 0.0,
+        "step_6_quality_assurance": 0.0,
+        "step_7_video_assembly": 0.0,
+        "step_8_distribution": 0.0
+      },
+      "cost_per_minute": 0.0
+    },
+    "timing_estimates": {
+      "total_duration_seconds": 0.0,
+      "total_duration_minutes": 0.0,
+      "dialogue_duration_seconds": 0,
+      "transition_duration_seconds": 0.0,
+      "total_words": 0,
+      "average_speech_rate_wpm": 150,
+      "scene_count": 0,
+      "scene_timings": []
+    },
+    "validation_status": "failed",
+    "character_count_by_speaker": {}
+  },
+  "episode_metadata": {
+    "title": "Episode 8 Example",
+    "number": "episode_8_example",
+    "input_file": "/Users/petergiordano/Documents/GitHub/vsmonster/reference/episode_8_example.md",
+    "content_preview": "\\# \\*\\*EPISODE METADATA\\*\\*\n\n\\`\\`\\`\n\nEPISODE METADATA\n\n\\- Episode Title: Gorgon vs. Wight: Petrifying Charge\n\n\\- Episode Number: 008\n\n\\- Rules Version: D\\&D 2024\n\n\\- Battle Location: The Sunless Caver...",
+    "total_scenes": 0
+  },
+  "scenes": [],
+  "warnings": [
+    "No scene markers found. Expected format: ## **[SCENE: NAME]**",
+    "Required character 'ZARA' not found in any dialogue",
+    "Required character 'THORAK' not found in any dialogue",
+    "No MUSIC: tags found in episode",
+    "No SFX: tags found in episode",
+    "No TRANSITION: tags found in episode",
+    "No AMBIENT: tags found in episode",
+    "No IMG: tags found in episode",
+    "No image tags found in any scene - visual content may be missing",
+    "Schema validation: Schema validation error: 'episode_8_example' does not match '^episode_\\\\d+$' at episode_metadata.number"
+  ],
+  "feedback": {
+    "missing_tags": [
+      "Character: ZARA",
+      "Character: THORAK",
+      "Multimedia: MUSIC:",
+      "Multimedia: SFX:",
+      "Multimedia: TRANSITION:",
+      "Multimedia: AMBIENT:",
+      "Multimedia: IMG:",
+      "Images: No visual content"
+    ],
+    "format_violations": [
+      "Missing scene structure"
+    ],
+    "quality_suggestions": [
+      "Episode has only 0 dialogues - consider adding more content",
+      "Episode has only 0 characters - may be too short for podcast format"
+    ]
+  }
+}
