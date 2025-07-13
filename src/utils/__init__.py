@@ -1,1 +1,1 @@
-# versusMonster AVPS - Parser Utilities Package
+# Utils module for versusMonster AVPS

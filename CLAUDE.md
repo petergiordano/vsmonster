@@ -25,7 +25,7 @@ Sequential pipeline where each component delivers independent value:
 ## Task Management System
 **Notion Database:** vmonster-dev-backlog
 - Database ID: `22f859c6-e596-8007-86c6-c1df9f865855`
-- Schema: See `notion-database-schema.json`
+- Schema: See `config/notion-database-schema.json`
 - Tasks prefixed: VSM-1, VSM-2, etc.
 
 ## Essential Commands
@@ -41,7 +41,7 @@ python voice_gen.py episode_007.json
 python src/voice_gen.py episode_007.json  # Alternative path
 
 # Episode post-processing (fix tag escaping)
-python process_episode.py episode_007.md
+python tools/process_episode.py episode_007.md
 
 # Cost analysis and reporting
 python src/cost_reporter.py episode_007.json
@@ -95,10 +95,10 @@ episode_007.md → episode_007.json → individual voice WAV files → [future: 
 ```
 
 ### Configuration:
-- `config.json` - Central pipeline configuration
+- `config/config.json` - Central pipeline configuration
 - `.env` - API keys (ElevenLabs, future services)
 - `pyproject.toml` - Python tooling configuration
-- `notion-database-schema.json` - Task management schema
+- `config/notion-database-schema.json` - Task management schema
 
 ## Episode 7 as Universal Test Case
 
