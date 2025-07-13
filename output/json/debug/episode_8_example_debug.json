@@ -1,0 +1,71 @@
+{
+  "debug_info": {
+    "full_metadata": {
+      "processing_timestamp": "2025-07-10T07:53:11.727865",
+      "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/reference/episode_8_example.md",
+      "total_processing_time_seconds": 0.006,
+      "estimated_downstream_costs": {
+        "elevenlabs_character_count": 0,
+        "image_generation_count": 0,
+        "sfx_count": 0,
+        "music_cue_count": 0,
+        "ambient_count": 0,
+        "transition_count": 0
+      },
+      "detailed_cost_analysis": {
+        "total_episode_cost": 0.0,
+        "currency": "USD",
+        "cost_breakdown": {
+          "voice_generation": {
+            "total_cost": 0.0,
+            "cost_per_character": 0.0003,
+            "total_characters": 0,
+            "costs_by_speaker": {}
+          },
+          "image_generation": {
+            "total_cost": 0.0,
+            "cost_per_image": 0.05,
+            "total_images": 0
+          },
+          "audio_processing": {
+            "total_cost": 0.0,
+            "sfx_cost": 0.0,
+            "music_cost": 0.0,
+            "ambient_cost": 0.0,
+            "transition_cost": 0.0,
+            "breakdown": {
+              "sfx_count": 0,
+              "music_count": 0,
+              "ambient_count": 0,
+              "transition_count": 0
+            }
+          }
+        },
+        "pipeline_component_costs": {
+          "step_1_script_parsing": 0.0,
+          "step_2_voice_generation": 0.0,
+          "step_3_image_generation": 0.0,
+          "step_4_cost_estimation": 0.0,
+          "step_5_audio_processing": 0.0,
+          "step_6_quality_assurance": 0.0,
+          "step_7_video_assembly": 0.0,
+          "step_8_distribution": 0.0
+        },
+        "cost_per_minute": 0.0
+      },
+      "timing_estimates": {
+        "total_duration_seconds": 0.0,
+        "total_duration_minutes": 0.0,
+        "dialogue_duration_seconds": 0,
+        "transition_duration_seconds": 0.0,
+        "total_words": 0,
+        "average_speech_rate_wpm": 150,
+        "scene_count": 0,
+        "scene_timings": []
+      },
+      "validation_status": "warning",
+      "character_count_by_speaker": {}
+    },
+    "parsing_details": "Debug information will be added in subsequent tasks"
+  }
+}

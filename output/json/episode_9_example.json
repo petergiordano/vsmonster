@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "processing_timestamp": "2025-07-10T07:53:11.727865",
-    "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/reference/episode_8_example.md",
-    "total_processing_time_seconds": 0.006,
+    "processing_timestamp": "2025-07-12T08:46:08.028770",
+    "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/reference/episode_9_example.md",
+    "total_processing_time_seconds": 0.007,
     "estimated_downstream_costs": {
       "elevenlabs_character_count": 0,
       "image_generation_count": 0,
@@ -66,33 +66,33 @@
     "character_count_by_speaker": {}
   },
   "episode_metadata": {
-    "title": "Episode 8 Example",
-    "number": "episode_8_example",
-    "input_file": "/Users/petergiordano/Documents/GitHub/vsmonster/reference/episode_8_example.md",
-    "content_preview": "\\# \\*\\*EPISODE METADATA\\*\\*\n\n\\`\\`\\`\n\nEPISODE METADATA\n\n\\- Episode Title: Gorgon vs. Wight: Petrifying Charge\n\n\\- Episode Number: 008\n\n\\- Rules Version: D\\&D 2024\n\n\\- Battle Location: The Sunless Caver...",
+    "title": "Episode 9 Example",
+    "number": "episode_9_example",
+    "input_file": "/Users/petergiordano/Documents/GitHub/vsmonster/reference/episode_9_example.md",
+    "content_preview": "\n# **OWLBEAR VS. DISPLACER BEAST: FEATHERS, CLAWS, AND DISPLACEMENT**\n\n## **[SCENE: EPISODE METADATA]**\n\n**EPISODE METADATA**\n\n- Episode Title: Owlbear vs. Displacer Beast: Feathers, Claws, and Displa...",
     "total_scenes": 0
   },
   "scenes": [],
   "warnings": [
     "No scene markers found. Expected format: ## **[SCENE: NAME]**",
-    "Required character 'THORAK' not found in any dialogue",
     "Required character 'ZARA' not found in any dialogue",
-    "No IMG: tags found in episode",
-    "No TRANSITION: tags found in episode",
-    "No MUSIC: tags found in episode",
+    "Required character 'THORAK' not found in any dialogue",
     "No AMBIENT: tags found in episode",
     "No SFX: tags found in episode",
+    "No MUSIC: tags found in episode",
+    "No TRANSITION: tags found in episode",
+    "No IMG: tags found in episode",
     "No image tags found in any scene - visual content may be missing"
   ],
   "feedback": {
     "missing_tags": [
-      "Character: THORAK",
       "Character: ZARA",
-      "Multimedia: IMG:",
-      "Multimedia: TRANSITION:",
-      "Multimedia: MUSIC:",
+      "Character: THORAK",
       "Multimedia: AMBIENT:",
       "Multimedia: SFX:",
+      "Multimedia: MUSIC:",
+      "Multimedia: TRANSITION:",
+      "Multimedia: IMG:",
       "Images: No visual content"
     ],
     "format_violations": [

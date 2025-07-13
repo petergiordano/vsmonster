@@ -1,16 +1,16 @@
 versusMonster Script Parser - Validation Report
-Generated: 2025-07-10T07:53:11.727865
-Episode: episode_8_example
-Processing time: 0.006s
+Generated: 2025-07-12T19:17:43.007069
+Episode: episode_2_ex_processed
+Processing time: 0.007s
 Status: warning
 
 WARNINGS:
   - No scene markers found. Expected format: ## **[SCENE: NAME]**
   - Required character 'THORAK' not found in any dialogue
   - Required character 'ZARA' not found in any dialogue
-  - No IMG: tags found in episode
-  - No TRANSITION: tags found in episode
-  - No MUSIC: tags found in episode
-  - No AMBIENT: tags found in episode
   - No SFX: tags found in episode
+  - No MUSIC: tags found in episode
+  - No TRANSITION: tags found in episode
+  - No AMBIENT: tags found in episode
+  - No IMG: tags found in episode
   - No image tags found in any scene - visual content may be missing

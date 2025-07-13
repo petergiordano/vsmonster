@@ -1,0 +1,143 @@
+{
+  "debug_info": {
+    "full_metadata": {
+      "processing_timestamp": "2025-07-12T19:21:59.233843",
+      "input_file_path": "/Users/petergiordano/Documents/GitHub/vsmonster/reference/episode_2_ex_final.md",
+      "total_processing_time_seconds": 0.006,
+      "estimated_downstream_costs": {
+        "elevenlabs_character_count": 10770,
+        "image_generation_count": 0,
+        "sfx_count": 0,
+        "music_cue_count": 0,
+        "ambient_count": 0,
+        "transition_count": 0
+      },
+      "detailed_cost_analysis": {
+        "total_episode_cost": 3.231,
+        "currency": "USD",
+        "cost_breakdown": {
+          "voice_generation": {
+            "total_cost": 3.231,
+            "cost_per_character": 0.0003,
+            "total_characters": 10770,
+            "costs_by_speaker": {
+              "ZARA": 1.3017,
+              "THORAK": 1.8996,
+              "BOTH": 0.0297
+            }
+          },
+          "image_generation": {
+            "total_cost": 0.0,
+            "cost_per_image": 0.05,
+            "total_images": 0
+          },
+          "audio_processing": {
+            "total_cost": 0.0,
+            "sfx_cost": 0.0,
+            "music_cost": 0.0,
+            "ambient_cost": 0.0,
+            "transition_cost": 0.0,
+            "breakdown": {
+              "sfx_count": 0,
+              "music_count": 0,
+              "ambient_count": 0,
+              "transition_count": 0
+            }
+          }
+        },
+        "pipeline_component_costs": {
+          "step_1_script_parsing": 0.0,
+          "step_2_voice_generation": 3.231,
+          "step_3_image_generation": 0.0,
+          "step_4_cost_estimation": 0.0,
+          "step_5_audio_processing": 0.0,
+          "step_6_quality_assurance": 0.0,
+          "step_7_video_assembly": 0.0,
+          "step_8_distribution": 0.0
+        },
+        "cost_per_minute": 0.9693
+      },
+      "timing_estimates": {
+        "total_duration_seconds": 713.2,
+        "total_duration_minutes": 11.89,
+        "dialogue_duration_seconds": 705.2,
+        "transition_duration_seconds": 8.0,
+        "total_words": 1678,
+        "average_speech_rate_wpm": 150,
+        "scene_count": 9,
+        "scene_timings": [
+          {
+            "scene_id": "episode_metadata",
+            "dialogue_duration_seconds": 0,
+            "word_count": 0,
+            "dialogue_count": 0,
+            "estimated_reading_speed_wpm": 150
+          },
+          {
+            "scene_id": "cold_open",
+            "dialogue_duration_seconds": 19.1,
+            "word_count": 44,
+            "dialogue_count": 4,
+            "estimated_reading_speed_wpm": 150
+          },
+          {
+            "scene_id": "intro_and_host_banter",
+            "dialogue_duration_seconds": 77.0,
+            "word_count": 185,
+            "dialogue_count": 7,
+            "estimated_reading_speed_wpm": 150
+          },
+          {
+            "scene_id": "battle_setup",
+            "dialogue_duration_seconds": 196.3,
+            "word_count": 477,
+            "dialogue_count": 12,
+            "estimated_reading_speed_wpm": 150
+          },
+          {
+            "scene_id": "advertisement_break_1",
+            "dialogue_duration_seconds": 46.8,
+            "word_count": 112,
+            "dialogue_count": 5,
+            "estimated_reading_speed_wpm": 150
+          },
+          {
+            "scene_id": "battle_commentary",
+            "dialogue_duration_seconds": 150.1,
+            "word_count": 344,
+            "dialogue_count": 26,
+            "estimated_reading_speed_wpm": 150
+          },
+          {
+            "scene_id": "advertisement_break_2",
+            "dialogue_duration_seconds": 45.6,
+            "word_count": 109,
+            "dialogue_count": 5,
+            "estimated_reading_speed_wpm": 150
+          },
+          {
+            "scene_id": "aftermath_analysis",
+            "dialogue_duration_seconds": 118.7,
+            "word_count": 288,
+            "dialogue_count": 8,
+            "estimated_reading_speed_wpm": 150
+          },
+          {
+            "scene_id": "outro_and_next_episode_tease",
+            "dialogue_duration_seconds": 51.6,
+            "word_count": 119,
+            "dialogue_count": 9,
+            "estimated_reading_speed_wpm": 150
+          }
+        ]
+      },
+      "validation_status": "warning",
+      "character_count_by_speaker": {
+        "ZARA": 4339,
+        "THORAK": 6332,
+        "BOTH": 99
+      }
+    },
+    "parsing_details": "Debug information will be added in subsequent tasks"
+  }
+}

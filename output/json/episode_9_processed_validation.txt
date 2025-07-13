@@ -1,0 +1,14 @@
+versusMonster Script Parser - Validation Report
+Generated: 2025-07-12T19:22:21.370757
+Episode: episode_9_processed
+Processing time: 0.006s
+Status: warning
+
+WARNINGS:
+  - No MUSIC: tags found in episode
+  - No TRANSITION: tags found in episode
+  - No AMBIENT: tags found in episode
+  - No IMG: tags found in episode
+  - No SFX: tags found in episode
+  - Scene 'EPISODE METADATA' contains no dialogue
+  - No image tags found in any scene - visual content may be missing
