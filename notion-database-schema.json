@@ -1,0 +1,158 @@
+{
+  "database_name": "vmonster-dev-backlog",
+  "database_id": "22f859c6-e596-8007-86c6-c1df9f865855",
+  "project": "versusMonster",
+  "task_id_prefix": "VSM",
+  "description": "Development backlog for versusMonster - Automated Video Podcast System (AVPS)",
+  "properties": {
+    "Name": {
+      "type": "title",
+      "description": "Task title/name"
+    },
+    "Task ID": {
+      "type": "formula",
+      "formula": "\"VSM-\" + format(prop(\"NotionID\"))",
+      "description": "Auto-generated task identifier with VSM prefix",
+      "note": "Currently shows MDV- in formula, needs correction to VSM-"
+    },
+    "Description": {
+      "type": "rich_text",
+      "description": "Detailed task description"
+    },
+    "Status": {
+      "type": "select",
+      "options": [
+        "Critical",
+        "New", 
+        "Refined",
+        "Approved for AI",
+        "In Progress",
+        "Done",
+        "Rejected"
+      ],
+      "description": "Current status of the task"
+    },
+    "Phase": {
+      "type": "select",
+      "options": [
+        "Phase 1: Discovery",
+        "Phase 2: Design", 
+        "Phase 3: Development",
+        "Phase 4: Testing",
+        "Phase 5: Deployment"
+      ],
+      "description": "Development phase classification"
+    },
+    "Action": {
+      "type": "select",
+      "options": [
+        "Pending",
+        "Refine Task",
+        "Generate Prompt"
+      ],
+      "description": "Next action required for the task"
+    },
+    "Original To-Do Item Source": {
+      "type": "rich_text",
+      "description": "Original task description from TODO.md or other source"
+    },
+    "Gemini Refined Task": {
+      "type": "rich_text",
+      "description": "AI-refined task description"
+    },
+    "Gemini Codex Prompt": {
+      "type": "rich_text",
+      "description": "Generated prompt for AI coding assistance"
+    },
+    "Relevant Code File Path": {
+      "type": "rich_text",
+      "description": "File paths related to this task"
+    },
+    "Relevant Code Context": {
+      "type": "rich_text",
+      "description": "Code context and background information"
+    },
+    "GitHub Link": {
+      "type": "url",
+      "description": "Link to related GitHub issue or PR"
+    },
+    "Codex URL": {
+      "type": "url",
+      "description": "Link to AI coding assistant session"
+    },
+    "Due Date": {
+      "type": "date",
+      "description": "Target completion date"
+    },
+    "NotionID": {
+      "type": "unique_id",
+      "description": "Notion's unique identifier for the record"
+    },
+    "NotionID 1": {
+      "type": "unique_id",
+      "description": "Legacy field - can be removed"
+    },
+    "NotionID 2": {
+      "type": "unique_id", 
+      "description": "Legacy field - can be removed"
+    },
+    "Task ID 1": {
+      "type": "formula",
+      "description": "Legacy field - can be removed"
+    },
+    "Task ID 2": {
+      "type": "formula",
+      "description": "Legacy field - can be removed"
+    }
+  },
+  "workflows": {
+    "task_creation": [
+      "Create new task with Name and Description",
+      "Set Status to 'New'",
+      "Assign appropriate Phase",
+      "Set Action to 'Pending' or 'Refine Task'",
+      "Add Original To-Do Item Source if importing"
+    ],
+    "ai_assisted_development": [
+      "Refine task description using AI",
+      "Generate coding prompts",
+      "Link to relevant code files",
+      "Create GitHub issues",
+      "Track progress through Status updates"
+    ]
+  },
+  "views": {
+    "suggested_views": [
+      {
+        "name": "Current Sprint",
+        "filter": "Status not 'Done' and not 'Rejected'",
+        "sort": "Status, Phase, Due Date"
+      },
+      {
+        "name": "Critical Tasks",
+        "filter": "Status = 'Critical'",
+        "sort": "Due Date"
+      },
+      {
+        "name": "Ready for AI",
+        "filter": "Status = 'Approved for AI'",
+        "sort": "Phase, Due Date"
+      },
+      {
+        "name": "In Progress",
+        "filter": "Status = 'In Progress'",
+        "sort": "Due Date"
+      },
+      {
+        "name": "By Phase",
+        "group_by": "Phase",
+        "sort": "Status, Due Date"
+      }
+    ]
+  },
+  "integration_notes": {
+    "claude_code": "This schema can be used by Claude Code CLI to understand database structure and create/update tasks programmatically",
+    "github": "GitHub Link field should connect to repository issues at https://github.com/[username]/vsmonster",
+    "file_references": "Relevant Code File Path should use relative paths from repository root"
+  }
+}
