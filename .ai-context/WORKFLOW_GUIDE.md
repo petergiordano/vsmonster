@@ -1,5 +1,7 @@
 # AI-Assisted Development: The Complete Workflow Guide
 
+### **⚠️ MIGRATION NOTICE: VSMonster uses Notion-based task management instead of the template's file-based workflow described in this guide. See "VSMonster-Specific Workflow" section below.**
+
 ### **Purpose: A detailed guide for using this template with the 3-party collaboration model.**
 
 This document explains the guiding philosophies, the roles of each participant, and the step-by-step instructions for building features with this template.
@@ -462,4 +464,75 @@ This workflow leverages advanced context engineering principles:
 - **⚡ Command-Driven Structure:** Structured transitions between workflow phases
 - **🛡️ Plan Mode Integration:** Safe exploration and thoughtful planning before implementation
 
-**Ready to build? Start with Step 1 if this is a new project, or Step 2 if you have existing context!**
+---
+
+## 🎯 VSMonster-Specific Workflow (Notion-Based)
+
+**This project uses Notion for sophisticated task management instead of the template's file-based system.**
+
+### **Notion Database Integration**
+- **Database**: vmonster-dev-backlog
+- **Database ID**: `22f859c6-e596-8007-86c6-c1df9f865855`
+- **Schema**: `config/notion-database-schema.json`
+- **Task Prefix**: VSM-1, VSM-2, etc.
+
+### **Task Selection & Implementation**
+```bash
+# Get next priority task from Notion
+@next-task
+# → Queries database for Critical/New tasks
+# → Updates status to "In Progress"
+# → Shows implementation plan
+
+# Complete current task
+@finalize-task
+# → Tests implementation
+# → Generates commit message
+# → Updates Notion status to "Done"
+# → Links GitHub commit
+```
+
+### **Notion Integration Benefits**
+- **Dependency Tracking**: Smart task ordering
+- **Progress Visualization**: Real-time project status
+- **Team Collaboration**: Shared visibility
+- **Automated Selection**: AI picks optimal next task
+- **GitHub Integration**: Automatic commit linking
+
+### **Database Schema**
+```
+Name (Title) → Task ID (Formula: VSM-X) → Description
+Status: Critical | New | Refined | Approved for AI | In Progress | Done | Rejected
+Phase: Discovery | Design | Development | Testing | Deployment
+Action: Pending | Refine Task | Generate Prompt
+Original To-Do Item Source → AI Refined Task → AI Codex Prompt
+Relevant Code File Path → Relevant Code Context
+GitHub Link → Due Date
+```
+
+### **Migration from Template Workflow**
+
+**Template commands archived:**
+- `project-setup.md` → `archive/template-setup.md`
+- `start-coding.md` → `archive/template-workflow.md`
+
+**Active VSMonster commands:**
+- `@next-task` - Notion-based task selection
+- `@finalize-task` - Notion-based completion
+- `@orient` - Project navigation
+
+**Why Notion?**
+- **Sophisticated Dependencies**: Component pipeline requires smart ordering
+- **Cost Tracking**: API usage monitoring across 8 components
+- **Progress Metrics**: 104 episodes/year requires systematic tracking
+- **Team Coordination**: Multiple developers working on pipeline components
+
+### **Current Development Context**
+- **Phase**: Component 2 (Voice Generation)
+- **Active Tasks**: VSM-6 through VSM-30
+- **Priority**: ElevenLabs API integration
+- **Validation**: Episode 7 reference implementation
+
+This Notion-based approach provides the sophisticated project management needed for vsmonster's 8-component pipeline while maintaining the template's AI collaboration principles.
+
+**Ready to build? Start with `@next-task` to get your next development priority!** 🚀

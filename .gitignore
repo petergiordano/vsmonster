@@ -112,3 +112,4 @@ config/secrets.json
 # Claude/AI context (keep these in repo for collaboration)
 # .ai-context/
 # .ai-rules/
+.DS_Store
