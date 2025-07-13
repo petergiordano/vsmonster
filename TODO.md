@@ -104,4 +104,17 @@ mypy src/
 
 ---
 
+## 📚 References
+
+### Project Documentation
+- `/PRD.md` - Complete technical requirements for all 8 components
+- `/AI_CONTEXT.md` - Development guidelines and project context
+- `archive/COMPLETED_TASKS.md` - History of completed work and achievements
+
+### Completed Work
+**Component 1 (Script Parser)** completed 2025-01-08 with 100% Episode 7 validation.  
+See `archive/COMPLETED_TASKS.md` for full implementation history.
+
+---
+
 **Last Updated:** 2025-01-13

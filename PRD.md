@@ -59,9 +59,11 @@ versusMonster/
 
 ### Component 1: Script Parser ✅ COMPLETE
 
-**Status**: Complete (2025-07-08)  
+**Status**: Complete (2025-01-08)  
 **Performance**: 0.003s processing time (300x faster than requirement)  
 **Accuracy**: 100% successful parsing of Episode 7
+
+> **Implementation Details:** See `archive/COMPLETED_TASKS.md` for full development history and validation results.
 
 #### Overview
 Transforms markdown podcast scripts into structured JSON data that serves as the foundation for all downstream automation.
@@ -322,6 +324,20 @@ pytest tests/ --cov=src
 # Integration
 python parser.py episode_007.md && python voice_gen.py episode_007.json
 ```
+
+---
+
+## Project References
+
+### Development History
+- **Component Implementation:** See `archive/COMPLETED_TASKS.md` for detailed development history
+- **Task Management:** See `TODO.md` for current active tasks and upcoming work
+- **Context Guidelines:** See `AI_CONTEXT.md` for development patterns and context
+
+### Archive Documentation
+- `archive/COMPLETED_TASKS.md` - Complete history of implemented components and milestones
+- `archive/README.md` - Guide to archived PRD and task files
+- `archive/prd-*.md` - Original component-specific requirements (historical reference)
 
 ---
 
