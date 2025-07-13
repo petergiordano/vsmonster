@@ -1,0 +1,17 @@
+[flake8]
+max-line-length = 100
+extend-ignore = 
+    # W293: blank line contains whitespace (common in many files)
+    W293,
+    # W605: invalid escape sequence (we need these for markdown processing)
+    W605,
+    # F541: f-string is missing placeholders (sometimes used for consistency)
+    F541
+exclude = 
+    .git,
+    __pycache__,
+    docs/source/conf.py,
+    old,
+    build,
+    dist,
+    archive
