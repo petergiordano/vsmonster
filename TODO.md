@@ -1,209 +1,107 @@
-# Project TODO: versusMonster AVPS
+# TODO: versusMonster AVPS
 
-## 🚀 Current Status
-
-**Project Phase:** Component 2 (Voice Generation) Implementation  
-**Last Updated:** 2025-01-12  
-**PRD Source:** `/PRD.md` - Master consolidated requirements document
-
-This file tracks development progress for the versusMonster Automated Video Podcast System's 8-component iterative build strategy.
+**Current Phase:** Component 2 (Voice Generation)  
+**Status:** 1 of 8 components complete  
+**Objective:** Generate first complete audio podcast episode
 
 ---
 
-## 🎯 Current Sprint: Component 2 - Voice Generation
+## 🎯 Active Tasks: Voice Generation
 
-### Active Development Tasks
-- [ ] **Voice Generation Implementation** (Component 2 of 8)
-  - [ ] Add ElevenLabs API key to .env file
-  - [ ] Implement ElevenLabs API client wrapper
-  - [ ] Create character voice mapping (THORAK: scholarly, ZARA: energetic)
-  - [ ] Build voice direction processor
-  - [ ] Add cost tracking system
-  - [ ] Implement progress reporting
-  - [ ] Add error recovery
+### Implementation Tasks
+- [ ] Add ElevenLabs API key to .env file
+- [ ] Implement ElevenLabs API client wrapper (`src/utils/elevenlabs_client.py`)
+- [ ] Create character voice mapping
+  - [ ] THORAK: Scholarly, gravelly tone (Stability 0.75, Similarity 0.85)
+  - [ ] ZARA: Energetic, emotional variation (Stability 0.45, Similarity 0.75)
+- [ ] Build voice direction processor
+- [ ] Add cost tracking system ($3.06/episode estimate)
+- [ ] Implement progress reporting (5-step display)
+- [ ] Add error recovery and retry logic
 
-### Validation Commands for Component 2
+### Testing & Validation
+- [ ] Unit tests for voice generation (`tests/test_voice_gen.py`)
+- [ ] Integration test with Episode 7 JSON
+- [ ] Verify 69 voice files generated
+- [ ] Character voice distinctiveness check
+- [ ] Cost tracking accuracy validation
+
+### Success Criteria
+- [ ] Command: `python voice_gen.py episode_007.json` works
+- [ ] All Episode 7 dialogues convert to voice files
+- [ ] Processing completes in <5 minutes
+- [ ] Voice files ready for Audio Assembly (Component 3)
+
+---
+
+## 📅 Upcoming Components
+
+### Component 3: Audio Assembly
+- Combine voice files into complete audio track
+- Command: `python audio_mix.py episode_007`
+- Output: Single MP3 with proper dialogue timing
+
+### Component 4: Static Video
+- Create YouTube-uploadable video
+- Command: `python video_gen.py episode_007`
+- Output: MP4 with static background image
+
+### Components 5-8: Production & Automation
+- Image Transitions
+- Sound Effects
+- Background Music
+- Batch Processing
+
+---
+
+## 🔧 Technical Debt
+
+### Code Quality
+- [ ] Add type annotations to process_episode.py
+- [ ] Fix remaining line length warnings in process_episode.py
+- [ ] Create comprehensive test suite for parser.py
+
+### Documentation
+- [ ] Create setup guide for new developers
+- [ ] Document API key requirements
+- [ ] Add examples for each component
+
+### Infrastructure
+- [ ] Set up CI/CD pipeline
+- [ ] Configure pre-commit hooks
+- [ ] Add automated testing on push
+
+---
+
+## 📝 Quick Reference
+
+### Commands
 ```bash
-# Level 1 - Syntax & Style:
-black src/ --check        # Code formatting check
-flake8 src/               # Python linting
-mypy src/                 # Type checking
+# Component 1 (Complete)
+python parser.py episode_007.md
 
-# Level 2 - Unit Testing:
-pytest tests/test_voice_gen.py -v                    # Voice generation unit tests
-pytest tests/ --cov=src --cov-report=term           # Coverage report
+# Component 2 (Current)
+python voice_gen.py episode_007.json
 
-# Level 3 - Integration:
-python voice_gen.py output/json/episode_007.json    # Integration test with Episode 7
-python scripts/validate_voice_output.py             # Validate voice file structure
-
-# Level 4 - Feature Complete:
-pytest tests/ --cov=src --cov-fail-under=80         # Full test suite with coverage
-python voice_gen.py episode_007.json && echo "✓"    # PRD-v0 validation
+# Validation
+pytest tests/ -v --cov=src
+black src/ --check
+flake8 src/
+mypy src/
 ```
 
----
+### Key Files
+- `/PRD.md` - Master requirements
+- `/AI_CONTEXT.md` - Development context
+- `output/json/episode_007.json` - Parser output
+- `output/voices/` - Voice generation target
 
-## 📋 8-Component Pipeline Progress
-
-### ✅ Components Completed
-
-#### **Component 1: Script Parser** ✅ 2025-01-08
-**Status:** Complete - All functionality implemented and validated  
-**Performance:** 0.003s processing time (300x faster than requirement)  
-**Command:** `python parser.py episode_007.md`
-
-**Key Features:**
-- Scene extraction with proper markdown parsing
-- Character dialogue parsing with voice directions  
-- Multimedia tag extraction (IMG, SFX, MUSIC, AMBIENT, TRANSITION)
-- Timing calculation and cost estimation
-- Comprehensive validation and error handling
-- Output: Structured JSON ready for Voice Generation
-
-**Validation Results:**
-- ✅ Extracts all Thorak/Zara dialogue correctly
-- ✅ Parses Episode 7 with 100% accuracy  
-- ✅ Output serves as foundation for Components 2-8
-- ✅ Single command operation
-- ✅ Functions independently
-
-### 🚧 Components In Progress
-
-#### **Component 2: Voice Generation** 🚧 IN PROGRESS
-**Goal:** Transform JSON dialogue into individual character voice files  
-**Command:** `python voice_gen.py episode_007.json`  
-**Target:** Generate authentic THORAK/ZARA voices via ElevenLabs API
-
-**Current Tasks:**
-- [ ] Implement ElevenLabs API client wrapper
-- [ ] Create voice direction processor  
-- [ ] Build cost tracking system
-- [ ] Add progress reporting
-- [ ] Implement error recovery
-
-### 📝 Components Planned
-
-#### **Component 3: Audio Assembly** 📝 PLANNED
-**Goal:** Combine voice files into complete audio track  
-**Command:** `python audio_mix.py episode_007`
-
-#### **Component 4: Static Video** 📝 PLANNED  
-**Goal:** Create YouTube-uploadable video with audio + single image  
-**Command:** `python video_gen.py episode_007`
-
-#### **Component 5: Image Transitions** 📝 PLANNED
-**Goal:** Add visual storytelling with multiple images  
-
-#### **Component 6: Sound Effects** 📝 PLANNED
-**Goal:** Add immersive audio effects layer
-
-#### **Component 7: Background Music** 📝 PLANNED  
-**Goal:** Complete audio production with music layer
-
-#### **Component 8: Batch Processing** 📝 PLANNED
-**Goal:** Automate multiple episodes for 2 episodes/week target
+### Resources
+- Episode 7: Primary test case
+- Target: 104 episodes/year
+- Budget: <$10/episode
+- Performance: <30min/episode
 
 ---
 
-## 🏗️ Project Foundation (Completed)  
-
-**Project Setup & Environment** ✅ 2025-01-07  
-- [x] Template repository creation and local setup
-- [x] Python 3.11 environment with all dependencies  
-- [x] FFmpeg 7.1 with VideoToolbox hardware acceleration
-- [x] Project directory structure (scripts/, output/, assets/, etc.)
-- [x] Environment validation script (100% success rate)
-- [x] Security configuration (.env template, .gitignore)
-- [x] Episode 7 test case integration
-
-**Foundation Documents** ✅ 2025-01-07  
-- [x] AI_CONTEXT.md with versusMonster-specific context
-- [x] Pipeline Tag Specification for service integration  
-- [x] Standardized tags for ElevenLabs, image generation, SFX, music APIs
-- [x] Quality assurance and cost tracking framework
-- [x] Component library and roadmap documentation
-
----
-
-## 🔧 Technical Infrastructure
-
-### Development Environment
-- **Python:** 3.11+ with virtual environment
-- **Audio:** ElevenLabs API, FFmpeg  
-- **Video:** FFmpeg with VideoToolbox
-- **Testing:** pytest with coverage reporting
-- **Validation:** black, flake8, mypy
-
-### File Structure  
-```
-versusMonster/
-├── PRD.md                    # Master requirements document
-├── scripts/                  # Input markdown files
-├── output/
-│   ├── json/                # Component 1 output  
-│   ├── voices/              # Component 2 output
-│   ├── audio/               # Component 3 output
-│   └── videos/              # Components 4-8 output
-├── src/                     # Component implementations
-└── config.json              # Simple configuration
-```
-
-### Quality Standards
-- **Code Quality:** black + flake8 + mypy compliance
-- **Test Coverage:** ≥80% with pytest
-- **Performance:** <30 minutes per episode processing
-- **Independence:** Each component functions standalone
-- **Validation:** Episode 7 as primary test case
-
----
-
-## 📚 Documentation & References
-
-### Primary Documents
-- **`/PRD.md`** - Master Product Requirements Document (consolidated)
-- **`/AI_CONTEXT.md`** - Project context and development guidelines  
-- **`/CLAUDE.md`** - Claude Code workflow integration
-
-### Archived Documents  
-- **`/docs/PRD-v0.md`** - Original 8-component strategy (reference)
-- **`/tasks/prd-script-parser.md`** - Component 1 detailed requirements (reference)
-- **`/tasks/prd-voice-generation.md`** - Component 2 detailed requirements (reference)
-
-### Success Metrics
-- **Overall Project:** 104 episodes/year, <30min processing, <$10/episode
-- **Component Success:** Function + Quality + Reliability + Simplicity
-- **Validation:** Episode 7 compatibility across all components
-
----
-
-## 📝 Development Notes
-
-**Latest Updates:**
-
-- **2025-01-12:** PRD consolidation completed - single master document created
-- **2025-01-08:** Component 1 (Script Parser) completed with 100% Episode 7 validation
-- **2025-01-07:** Project foundation and environment setup completed
-
-**Development Philosophy:** Function Over Fashion - Build iteratively with compound value  
-**Primary Test Case:** Episode 7 serves as validation standard for all components
-
----
-
-## 🎯 Success Tracking
-
-### Key Milestones
-
-- [x] **Phase 1 Foundation:** Project setup and Component 1 ✅
-- [ ] **Phase 2 Audio:** Components 2-3 (Voice Generation + Audio Assembly)  
-- [ ] **Phase 3 Video:** Components 4-5 (Static Video + Image Transitions)
-- [ ] **Phase 4 Production:** Components 6-7 (Sound Effects + Background Music)
-- [ ] **Phase 5 Automation:** Component 8 (Batch Processing)
-
-### Current Objective
-
-**Generate first complete audio podcast episode** using Components 1-3 with Episode 7 as validation case.
-
----
-
-**Reference:** This consolidated TODO replaces scattered task files. See `/PRD.md` for complete technical requirements.
+**Last Updated:** 2025-01-13
