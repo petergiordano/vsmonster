@@ -23,3 +23,92 @@ __pycache__/
 *.log
 .env
 venv/
+
+# Test reference files (examples and test data)
+tests/reference/
+
+# Generated content and outputs
+output/
+*.mp3
+*.wav
+*.mp4
+*.avi
+*.mov
+*.json.processed
+
+# Python specific
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Testing
+.pytest_cache/
+.coverage
+.tox/
+.nox/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# AI/ML model files
+*.pkl
+*.model
+*.weights
+*.h5
+
+# Large data files
+*.zip
+*.tar.gz
+*.rar
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# API keys and secrets (additional patterns)
+.env.*
+!.env.example
+config/secrets.json
+*.key
+*.pem
+
+# Claude/AI context (keep these in repo for collaboration)
+# .ai-context/
+# .ai-rules/
