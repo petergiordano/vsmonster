@@ -2,7 +2,7 @@
 
 ## Goal
 
-To guide an AI assistant in conducting a structured interview with the user to populate all four initial project context documents (`Roadmap.md`, `VibeTesting.md`, `ComponentLibrary.md`, and `SLC_Session_Notes.md`) plus generate a project-specific `AI_CONTEXT.md` file. This process transforms blank templates into comprehensive project foundations through systematic questioning.
+To guide an AI assistant in conducting a structured interview with the user to populate all four initial project context documents (`Roadmap.md`, `Experience_Goals.md`, `ComponentLibrary.md`, and `SLC_Principles.md`) plus generate a project-specific `AI_CONTEXT.md` file. This process transforms blank templates into comprehensive project foundations through systematic questioning.
 
 ## Process Overview
 
@@ -55,7 +55,7 @@ Ask these questions to understand the project's core purpose and technical appro
 6. **Constraints & Risks:** "What are your biggest constraints (time, budget, technical complexity)? What could derail this project?"
 7. **User Stories:** "Can you give me 3-5 user stories in the format: 'As a [user], I want to [action] so that [benefit]'?"
 
-### **Phase B: User Experience & Emotional Design (→ VibeTesting.md)**
+### **Phase B: User Experience & Emotional Design (→ Experience_Goals.md)**
 Ask these questions to define the emotional journey and user experience:
 
 1. **Core Vibe:** "In 1-2 sentences, describe the overall feeling your app should evoke. How should users feel when using it?"
@@ -73,7 +73,7 @@ Ask these questions to establish the visual and design foundation:
 4. **Key Components:** "What UI components do you know you'll need? (buttons, forms, cards, navigation, etc.)"
 5. **Visual References:** "Any design inspiration or existing sites/apps whose visual style you admire?"
 
-### **Phase D: First Sprint Planning (→ SLC_Session_Notes.md)**
+### **Phase D: First Sprint Planning (→ SLC_Principles.md)****
 Ask these questions to plan the initial development sprint:
 
 1. **Core Feature:** "What's the single most important feature to build first? What's the core value proposition?"
@@ -131,7 +131,7 @@ Present each completed document clearly:
 
 ---
 
-## Generated Document: VibeTesting.md
+## Generated Document: Experience_Goals.md
 
 [Full populated content here]
 
@@ -143,7 +143,7 @@ Present each completed document clearly:
 
 ---
 
-## Generated Document: SLC_Session_Notes.md
+## Generated Document: SLC_Principles.md
 
 [Full populated content here]
 

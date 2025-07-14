@@ -23,7 +23,7 @@
 
 **Optional Project Knowledge (For Advanced Context):**
 - Upload `../_project-scaffolding/.project-docs/Roadmap.md` - Project planning template
-- Upload `../_project-scaffolding/.project-docs/VibeTesting.md` - UX planning template
+- Upload `../_project-scaffolding/.project-docs/Experience_Goals.md` - UX planning template
 
 ### 3. **Project Configuration**
 - **Knowledge Limit:** This project requires substantial context, so monitor knowledge usage

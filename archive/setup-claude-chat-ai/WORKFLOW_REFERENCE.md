@@ -94,8 +94,8 @@ Validation: Confirm understanding of project state
 .project-docs/
 ├── Roadmap.md                      # Project vision and strategy
 ├── ComponentLibrary.md            # Design system and UI patterns
-├── VibeTesting.md                  # User experience design
-└── SLC_Session_Notes.md           # Sprint planning (Simple, Lovable, Complete)
+├── Experience_Goals.md             # User experience design
+└── SLC_Principles.md               # Sprint planning (Simple, Lovable, Complete)
 ```
 
 ### **Dynamic Context Structure**
