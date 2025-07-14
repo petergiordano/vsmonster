@@ -19,6 +19,21 @@ Key commands for managing the development workflow:
 *   **`@update-prd`** - Sync Notion task completion status with PRD.md component progress
 *   **`@orient`** - Get oriented in the project and see next best actions
 
+## 📂 Codebase Structure
+
+Here is a simplified visual outline of the project's directory structure. For a more detailed breakdown, please see the **[Codebase Structure Document](docs/specifications/codebase_structure.md)**.
+
+```
+/
+├── .ai-context/     # AI agent context and guides
+├── config/          # Project configuration files
+├── docs/            # Project documentation
+├── output/          # Generated output (audio, video, etc.)
+├── src/             # Main source code
+├── tests/           # Test files and reference data
+├── ...              # Other project files
+```
+
 ## 📋 Current Status
 
 The project is currently in active development. For the latest status on each component, please refer to the **[Project Requirements Document (PRD)](docs/specifications/PRD.md)**.
