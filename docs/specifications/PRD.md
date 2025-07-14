@@ -20,7 +20,7 @@ An automated Python-based system that transforms markdown scripts into complete 
 
 ### 1.3. Guiding Principles
 *   **Function Over Fashion**: Build iteratively with compound value. No fancy UI/UX - purely command-line tools that deliver functional value immediately.
-*   **Simple, Lovable, and Complete (SLC)**: Each component should be built with a focus on being simple, lovable, and complete. For a detailed breakdown of this philosophy, see the **[SLC Principles](docs/architecture/SLC_Principles.md)**.
+*   **Simple, Lovable, and Complete (SLC)**: Each component should be built with a focus on being simple, lovable, and complete. For a detailed breakdown of this philosophy, see the **[SLC Principles](../architecture/SLC_Principles.md)**.
 
 ## 2. System Architecture & Status
 
@@ -48,7 +48,7 @@ An automated Python-based system that transforms markdown scripts into complete 
 *   **Status**: Complete (2025-01-08)
 *   **Performance**: 0.003s processing time (300x faster than requirement)
 *   **Accuracy**: 100% successful parsing of Episode 7
-*   **Implementation Details**: See `archive/COMPLETED_TASKS.md` for full development history.
+*   **Implementation Details**: See `../../archive/COMPLETED_TASKS.md` for full development history.
 
 ### 3.2. Component 2: Voice Generation 🚧 IN PROGRESS
 *   **Status**: In Development
