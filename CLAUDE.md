@@ -27,7 +27,6 @@ Sequential pipeline where each component delivers independent value:
 - Database ID: `22f859c6-e596-8007-86c6-c1df9f865855`
 - Schema: See `config/notion-database-schema.json`
 - Tasks prefixed: VSM-1, VSM-2, etc.
-- **PRD Sync:** `@finalize-task` auto-updates `docs/specifications/PRD.md` component status
 
 ## Essential Commands
 
@@ -66,15 +65,6 @@ pytest tests/ --cov=src --cov-fail-under=80  # Coverage gate
 # Integration testing with Episode 7 (gold standard)
 python parser.py scripts/episode_007.md
 python voice_gen.py output/json/episode_007.json
-```
-
-### Task Management Commands
-```bash
-# Start next available task
-@next-task
-
-# Complete and track task (auto-detects current task)
-@finalize-task
 ```
 
 ## Data Flow and File Structure
@@ -131,6 +121,8 @@ THORAK: (Voice direction) "Dialogue" # Character speech
 
 ## Development Workflow
 
+Refer to the main [WORKFLOW_GUIDE.md](.ai-context/WORKFLOW_GUIDE.md) for the complete development process.
+
 ### 1. Planning Phase (Claude Chat)
 - Chief Product Officer (user) and Claude Chat determine tasks
 - PRD and roadmap planning in browser session
@@ -138,14 +130,8 @@ THORAK: (Voice direction) "Dialogue" # Character speech
 - Tasks assigned phases: Discovery → Design → Development → Testing → Deployment
 
 ### 2. Development Phase (Claude Code)
-**Workflow:**
-- Run `@next-task` to get highest priority available task
-- Updates task status to "In Progress" automatically
-- Creates implementation plan with file paths and steps
-- Implement according to plan with Episode 7 validation
+- Implement according to the plan with Episode 7 validation
 - Test thoroughly using quality assurance commands
-- Run `@finalize-task` to complete and track (auto-detects current task)
-- Updates Notion with completion status and suggests next task
 
 ### 3. Validation Requirements
 Each component must achieve:
@@ -182,10 +168,6 @@ You have access to:
 - **Memory MCP**: Maintain context across sessions
 
 Use these tools to maintain the single source of truth in Notion while implementing pipeline components.
-
-## Available Commands (Located in .claude/commands/)
-- `@next-task` - Auto-selects highest priority task, updates to "In Progress", creates implementation plan
-- `@finalize-task` - Auto-detects current task, tests, generates commit commands, updates Notion to "Done"
 
 ## Success Criteria
 

@@ -357,26 +357,17 @@ python parser.py episode_007.md && python voice_gen.py episode_007.json
 
 ---
 
-## PRD Maintenance & Automation
+## PRD Maintenance
 
 ### Source of Truth Protocol
 This PRD.md file serves as the definitive source of truth for component specifications and progress tracking.
 
-### Automated Updates
-- **Component Status**: Auto-updated via `@finalize-task` when Notion tasks complete
-- **Validation Commands**: Added when components reach completion
-- **Progress Tracking**: Synced from Notion database (VSM task completion)
+### PRD Updates
+The status of components in this document is updated as development progresses. These updates are managed through the project's task management system in Notion.
 
 ### Manual Update Rules
 **Never Change**: Core requirements, success criteria, component architecture  
 **Always Update**: Status markers, completion dates, validation results, task progress
-
-### Update Commands
-```bash
-@finalize-task     # Completes task + updates PRD component status
-@update-prd        # Sync all component progress from Notion
-@next-task         # Get next priority based on current component
-```
 
 ### Validation Requirements
 Each completed component must include:

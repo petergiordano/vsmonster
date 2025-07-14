@@ -3,7 +3,7 @@
 PRD Auto-Update Script
 
 Syncs Notion task completion with PRD.md component status.
-Called by @finalize-task and @update-prd commands.
+This script is intended to be run as part of the development workflow.
 """
 
 import json

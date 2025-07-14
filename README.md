@@ -8,22 +8,11 @@
 
 ## 🚀 Quick Start
 
-### **Development Workflow**
-```bash
-# Start Claude Code in project directory
-claude
-
-# Get next Notion task and create implementation plan
-@next-task
-
-# Complete current task and update Notion
-@finalize-task
-```
+For a detailed guide on the development process, please refer to the [**Development Workflow Guide**](.ai-context/WORKFLOW_GUIDE.md).
 
 ### **Task Management**
 - **System**: Notion Database (vmonster-dev-backlog)
 - **Schema**: `config/notion-database-schema.json`
-- **Commands**: `@next-task`, `@finalize-task`
 - **Database ID**: `22f859c6-e596-8007-86c6-c1df9f865855`
 
 ---
@@ -64,12 +53,7 @@ Sequential pipeline where each component delivers independent value:
 python parser.py episode_007.md          # Component 1 (Complete)
 python voice_gen.py episode_007.json     # Component 2 (Target)
 
-# Development
-@next-task                               # Get next Notion task
-@finalize-task                          # Complete and update Notion
-@orient                                 # Check current state
-
-# Testing
+# Testing & Quality Assurance
 pytest tests/ -v --cov=src
 black src/ --check
 flake8 src/
@@ -110,9 +94,7 @@ python voice_gen.py output/json/episode_007.json
 
 ---
 
-## Project Structure (After Setup)
-
-After running `/setup-project`, your workspace becomes:
+## Project Structure
 
 ```
 versusMonster/
@@ -134,47 +116,20 @@ versusMonster/
 
 ### **AI-Assisted Development**
 
-This project uses a structured AI collaboration workflow:
-
-- **Chat AI (Strategy):** Claude/ChatGPT/Gemini for planning and context
-- **CLI AI (Implementation):** Claude Code/Gemini CLI for technical execution
-- **Progressive Validation:** 4-level quality gates ensure reliable code
-
-### **Adding New Features**
-
-```bash
-# Start feature development workflow
-/start-coding
-
-# The system will guide you through:
-# 1. Feature definition (PRD creation)
-# 2. Task breakdown (implementation planning)
-# 3. Code execution (with validation)
-```
-
-### **Project State Management**
-
-```bash
-# Check where you are and what's next
-/orient
-
-# Examples of what you might see:
-# "Foundation complete → Ready for first feature"
-# "PRD exists → Generate task list"
-# "Tasks ready → Begin implementation"
-```
+This project uses a structured AI collaboration workflow. Please refer to the [**Development Workflow Guide**](.ai-context/WORKFLOW_GUIDE.md) and the specific AI agent documentation for details:
+- [**CLAUDE.md**](CLAUDE.md)
+- [**GEMINI.md**](GEMINI.md)
+- [**AGENTS.md**](AGENTS.md) (for CODEX)
 
 ### Running Tests
 
 ```bash
-[test commands - will be defined during development]
+pytest tests/ -v --cov=src
 ```
 
 ### Building
 
-```bash
-[build commands - will be defined during development]
-```
+This project does not have a traditional build step. Each component is run as a Python script.
 
 ## AI Development Context
 
@@ -184,7 +139,7 @@ Your project's AI context is maintained in `.ai-context/AI_CONTEXT.md` and inclu
 - Dependencies and constraints
 - Testing requirements
 
-This context automatically loads when using Claude Code or Gemini CLI.
+This context is used by the various AI assistants to stay aligned with the project.
 
 ## Contributing
 
@@ -192,9 +147,9 @@ This context automatically loads when using Claude Code or Gemini CLI.
 
 ### For Contributors Using AI Assistance
 
-1. **Read the project context:** Check `.ai-context/AI_CONTEXT.md` and `CLAUDE.md`
-2. **Use the workflow:** Follow the `/start-coding` process for new features
-3. **Maintain quality:** Leverage the built-in validation systems
+1. **Read the project context:** Check `.ai-context/AI_CONTEXT.md` and the AI agent documentation.
+2. **Use the workflow:** Follow the process outlined in the [**Development Workflow Guide**](.ai-context/WORKFLOW_GUIDE.md).
+3. **Maintain quality:** Leverage the built-in validation systems (`pytest`, `black`, `flake8`).
 
 ## License
 
@@ -202,6 +157,4 @@ This context automatically loads when using Claude Code or Gemini CLI.
 
 ---
 
-**🎯 Ready to build?** Start with `/setup-project` then `/start-coding`
-
-Built using the AI-Assisted Development Framework for efficient, high-quality development.
+**🎯 Ready to build?** Start by following the [Getting Started](#getting-started) instructions.

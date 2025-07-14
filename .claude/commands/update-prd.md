@@ -34,4 +34,3 @@ python component_command.py episode_007.json
 ## Output Format:
 **PRD Updated:** Component status, validation commands, current phase
 **Commit:** Auto-generated with Notion sync reference
-**Next:** Suggest running @next-task for current priorities
