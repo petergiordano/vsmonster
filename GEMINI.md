@@ -4,9 +4,9 @@ This file provides specific guidance for using **Gemini CLI** within your Visual
 
 ## 1\. Project Context & Master Rulebook
 
-**Your primary source of project context is the dynamic `AI_CONTEXT.md` file.** Gemini CLI automatically loads this file into its hierarchical memory system upon startup. This ensures Gemini is always up-to-date with the project's goals, tech stack, coding conventions, current development status, and architectural decisions.
+**Your primary source of project context is the dynamic `.ai-context/AI_CONTEXT.md` file.** Gemini CLI automatically loads this file into its hierarchical memory system upon startup. This ensures Gemini is always up-to-date with the project's goals, tech stack, coding conventions, current development status, and architectural decisions.
 
-  * **Master Context File:** [AI\_CONTEXT.md](https://www.google.com/search?q=uploaded:petergiordano/vsmonster/vsmonster-a3752057e465e1dba5bb2129e827a8e3fb7613bd/.ai-context/AI_CONTEXT.md)
+  * **Master Context File:** `.ai-context/AI_CONTEXT.md`
 
 ### Gemini CLI Context Validation
 
@@ -21,9 +21,9 @@ Gemini CLI is your **Implementer AI**, responsible for executing specific techni
 
 ### Context Loading and Management
 
-  * **Automatic Loading:** Gemini automatically loads `GEMINI.md` (and by reference, `AI_CONTEXT.md`) on startup, ensuring immediate project awareness.
-  * **Context Refresh:** If `AI_CONTEXT.md` or other context files are updated, restart Gemini CLI or use `/memory refresh` to load the latest information.
-  * **Context Handoff Protocol:** When receiving prompts from a Chat AI, ensure they include relevant sections from `AI_CONTEXT.md` for complete understanding.
+  * **Automatic Loading:** Gemini automatically loads `GEMINI.md` (and by reference, `.ai-context/AI_CONTEXT.md`) on startup, ensuring immediate project awareness.
+  * **Context Refresh:** If `.ai-context/AI_CONTEXT.md` or other context files are updated, restart Gemini CLI or use `/memory refresh` to load the latest information.
+  * **Context Handoff Protocol:** When receiving prompts from a Chat AI, ensure they include relevant sections from `.ai-context/AI_CONTEXT.md` for complete understanding.
 
 ## 3\. File Operations Guidance
 
@@ -76,7 +76,7 @@ Gemini will guide you through progressive validation levels after each code modi
 
 ## 6\. Key Reminders for Gemini CLI Usage
 
-  * **Prioritize `AI_CONTEXT.md`:** Always refer to it for project standards and status.
+  * **Prioritize `.ai-context/AI_CONTEXT.md`:** Always refer to it for project standards and status.
   * **Use Validation Commands:** Run validation steps diligently after each change to ensure code quality and functionality.
   * **Follow Conventions:** Adhere to established coding and file naming conventions.
   * **Ask for Clarification:** If any instruction or context is unclear, ask for more details.

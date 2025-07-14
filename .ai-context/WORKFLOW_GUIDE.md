@@ -1,10 +1,8 @@
-# AI-Assisted Development: The Complete Workflow Guide
+# WORKFLOW_GUIDE.md
 
-### **⚠️ MIGRATION NOTICE: VSMonster uses Notion-based task management instead of the template's file-based workflow described in this guide. See "VSMonster-Specific Workflow" section below.**
+### **Purpose: Complete workflow guide for the versusMonster AVPS multi-agent development system.**
 
-### **Purpose: A detailed guide for using this template with the 3-party collaboration model.**
-
-This document explains the guiding philosophies, the roles of each participant, and the step-by-step instructions for building features with this template.
+This document outlines the 3-party collaboration model, Notion-based task management, and step-by-step development process for the versusMonster AVPS (Automated Video Podcast System) project.
 
 ---
 

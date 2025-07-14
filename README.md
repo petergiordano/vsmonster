@@ -116,17 +116,21 @@ After running `/setup-project`, your workspace becomes:
 
 ```
 [project-name]/
-├── .ai-rules/              # AI workflow instructions
-├── .claude/                # Claude Code CLI configuration
-├── .project-docs/          # Project foundation documents
+├── docs/                   # Project documentation
+│   ├── architecture/       # Project foundation documents  
+│   ├── specifications/     # Technical specifications
+│   └── setup/              # Development setup guides
+├── config/                 # Configuration files
 ├── src/                    # Source code
 ├── tasks/                  # Feature PRDs and task lists
 ├── tests/                  # Test files
 ├── setup-claude-chat-ai/   # Chat AI Strategist setup (optional)
-├── AI_CONTEXT.md          # AI assistant project briefing
+├── .ai-context/           # AI assistant documentation
+│   ├── AI_CONTEXT.md      # Master project context file
+│   └── WORKFLOW_GUIDE.md  # Multi-agent workflow guide
 ├── README.md              # This file - project documentation
 ├── TODO.md                # Development task tracking
-└── WORKFLOW_GUIDE.md      # Complete development workflow
+├── WORKFLOW_GUIDE.md      # Complete development workflow (template)
 ```
 
 ## Development
@@ -177,7 +181,7 @@ This project uses a structured AI collaboration workflow:
 
 ## AI Development Context
 
-Your project's AI context is maintained in `AI_CONTEXT.md` and includes:
+Your project's AI context is maintained in `.ai-context/AI_CONTEXT.md` and includes:
 - Project goals and technical approach
 - Coding conventions and architecture patterns
 - Dependencies and constraints
@@ -191,7 +195,7 @@ This context automatically loads when using Claude Code or Gemini CLI.
 
 ### For Contributors Using AI Assistance
 
-1. **Read the project context:** Check `AI_CONTEXT.md` and `.project-docs/`
+1. **Read the project context:** Check `.ai-context/AI_CONTEXT.md` and `CLAUDE.md`
 2. **Use the workflow:** Follow the `/start-coding` process for new features
 3. **Maintain quality:** Leverage the built-in validation systems
 

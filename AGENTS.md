@@ -6,9 +6,9 @@ This file provides specific guidance for using **OpenAI CODEX-1** as an **Implem
 
 ## 1\. Project Context & Master Rulebook
 
-Your primary source of project context is the dynamic `AI_CONTEXT.md` file. CODEX-1, like other AI agents in this workflow, should refer to `AI_CONTEXT.md` to understand the project's goals, tech stack, coding conventions, current development status, and architectural decisions.
+Your primary source of project context is the dynamic `.ai-context/AI_CONTEXT.md` file. CODEX-1, like other AI agents in this workflow, should refer to `.ai-context/AI_CONTEXT.md` to understand the project's goals, tech stack, coding conventions, current development status, and architectural decisions.
 
-  * **Master Context File:** [AI\_CONTEXT.md](https://www.google.com/search?q=uploaded:petergiordano/vsmonster/vsmonster-a3752057e465e1dba5bb2129e827a8e3fb7613bd/.ai-context/AI_CONTEXT.md)
+  * **Master Context File:** `.ai-context/AI_CONTEXT.md`
 
 ## 2\. CODEX-1 Identity & Role
 
@@ -27,9 +27,9 @@ CODEX-1 operates within the `versusMonster AVPS` 5-step AI-assisted development 
 
 ### Context Loading and Management
 
-While a direct context loading mechanism like `/memory show` (used by Gemini CLI) may not be available, your initial prompt should always include the full content of `AI_CONTEXT.md`. This ensures you have the necessary accumulated project knowledge.
+While a direct context loading mechanism like `/memory show` (used by Gemini CLI) may not be available, your initial prompt should always include the full content of `.ai-context/AI_CONTEXT.md`. This ensures you have the necessary accumulated project knowledge.
 
-  * **Context Updates:** If the project context evolves (`AI_CONTEXT.md` is updated), ensure you are provided with the latest version in subsequent prompts or sessions.
+  * **Context Updates:** If the project context evolves (`.ai-context/AI_CONTEXT.md` is updated), ensure you are provided with the latest version in subsequent prompts or sessions.
   * **Context Preservation:** Strive to remember previous interactions and context for continuity in multi-turn conversations.
 
 ## 4\. File Operations Guidance
@@ -40,9 +40,9 @@ CODEX-1 is expected to understand and assist with various file operations within
 
 Before any modifications, thoroughly read and analyze relevant project files. This includes:
 
-  * **Project Context:** `AI_CONTEXT.md` for global guidelines, `CLAUDE.md`, `GEMINI.md` for AI-specific instructions.
-  * **Workflow Definitions:** Files within `.ai-rules/` for process steps (e.g., `03_execute-tasks.md`).
-  * **Planning Documents:** `.project-docs/` (e.g., `Roadmap.md`, `PRD.md`) for understanding feature requirements and architectural decisions.
+  * **Project Context:** `.ai-context/AI_CONTEXT.md` for global guidelines, `CLAUDE.md`, `GEMINI.md` for AI-specific instructions.
+  * **Workflow Definitions:** Files within `.ai-context/` for process steps and workflow guidance.
+  * **Configuration:** `config/` directory (e.g., `config.json`, `notion-database-schema.json`) for understanding system configuration.
   * **Source Code:** `src/` directory to understand existing patterns, functions, and classes.
   * **Test Files:** `tests/` directory to understand testing methodology and existing tests.
 
@@ -52,7 +52,7 @@ When generating code or content, adhere strictly to the project's defined file p
 
   * **Source Code:** `src/` (e.g., `parser.py`, `voice_gen.py`).
   * **Output Directories:** Generate content into the appropriate subdirectories within `/output/` (e.g., `/output/json`, `/output/voices`).
-  * **Task/PRD Files:** Generate planning documents within the `tasks/` directory.
+  * **Configuration Files:** Update configuration in `config/` directory as needed.
   * **Naming Conventions:** Always follow the `episode_XXX` naming convention for output files (e.g., `episode_007.json`, `episode_007_voice_report.txt`).
 
 ### Error Handling in File Operations
@@ -93,7 +93,7 @@ Upon completing a task or a significant sub-task, you **must** compose a detaile
 
 ## 6\. Coding Conventions & Style
 
-Adhere to the project's established coding conventions and style guidelines, as detailed in `AI_CONTEXT.md`. This includes:
+Adhere to the project's established coding conventions and style guidelines, as detailed in `.ai-context/AI_CONTEXT.md`. This includes:
 
   * **Language:** Python 3.11+
   * **Formatting:** Use `black`.
@@ -119,4 +119,4 @@ You are an integral part of the project's progressive validation framework. Afte
   * **Simple, Lovable, Complete (SLC):** Focus on building simple, delightful, and complete features.
   * **Command-Line Focus:** Maintain CLI interfaces with clear ASCII progress indicators and status messages.
   * **Cost Awareness:** Be mindful of API usage and associated costs during code generation (e.g., ElevenLabs characters, image prompts).
-  * **Documentation as Code:** Understand that project documentation (`README.md`, `AI_CONTEXT.md`, `CONTRIBUTING.md`) serves as your instruction set.
+  * **Documentation as Code:** Understand that project documentation (`README.md`, `.ai-context/AI_CONTEXT.md`, etc.) serves as your instruction set.

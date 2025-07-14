@@ -27,24 +27,25 @@ Sequential pipeline where each component delivers independent value:
 - Database ID: `22f859c6-e596-8007-86c6-c1df9f865855`
 - Schema: See `config/notion-database-schema.json`
 - Tasks prefixed: VSM-1, VSM-2, etc.
+- **PRD Sync:** `@finalize-task` auto-updates `docs/specifications/PRD.md` component status
 
 ## Essential Commands
 
 ### Pipeline Operations
 ```bash
 # Component 1: Parse markdown script
-python parser.py episode_007.md
-python src/parser.py episode_007.md  # Alternative path
+python parser.py scripts/episode_007.md
+python src/parser.py scripts/episode_007.md  # Alternative path
 
 # Component 2: Generate character voices
-python voice_gen.py episode_007.json
-python src/voice_gen.py episode_007.json  # Alternative path
+python voice_gen.py output/json/episode_007.json
+python src/voice_gen.py output/json/episode_007.json  # Alternative path
 
 # Episode post-processing (fix tag escaping)
-python tools/process_episode.py episode_007.md
+python tools/process_episode.py scripts/episode_007.md
 
 # Cost analysis and reporting
-python src/cost_reporter.py episode_007.json
+python src/cost_reporter.py output/json/episode_007.json
 ```
 
 ### Development Workflow
@@ -63,8 +64,8 @@ pytest tests/ --cov=src         # With coverage
 pytest tests/ --cov=src --cov-fail-under=80  # Coverage gate
 
 # Integration testing with Episode 7 (gold standard)
-python parser.py episode_007.md
-python voice_gen.py episode_007.json
+python parser.py scripts/episode_007.md
+python voice_gen.py output/json/episode_007.json
 ```
 
 ### Task Management Commands
@@ -80,18 +81,18 @@ python voice_gen.py episode_007.json
 
 ### Pipeline Data Flow:
 ```
-episode_007.md → episode_007.json → individual voice WAV files → [future: complete audio/video]
+scripts/episode_007.md → output/json/episode_007.json → output/voices/episode_007/*.wav → [future: complete audio/video]
 ```
 
 ### Key Directories:
 ```
-/scripts/          # Input markdown episodes
-/output/json/      # Parsed JSON (Component 1 output)
-/output/voices/    # Generated voice files (Component 2 output)  
-/output/audio/     # Mixed audio tracks (Component 3 target)
-/output/videos/    # Final videos (Components 4-8 target)
-/src/              # Core pipeline components
-/tests/            # Test suite
+scripts/           # Input markdown episodes
+output/json/       # Parsed JSON (Component 1 output)
+output/voices/     # Generated voice files (Component 2 output)  
+output/audio/      # Mixed audio tracks (Component 3 target)
+output/videos/     # Final videos (Components 4-8 target)
+src/               # Core pipeline components
+tests/             # Test suite
 ```
 
 ### Configuration:
@@ -171,7 +172,7 @@ Closes VSM-6
 - **Dependencies**: Components 1-2 complete and validated
 - **Input**: Voice files from `output/voices/episode_007/`
 - **Target**: Single MP3 with proper dialogue timing
-- **Next Command**: `python audio_mix.py episode_007`
+- **Next Command**: `python audio_mix.py output/voices/episode_007/`
 
 ## MCP Tool Access
 

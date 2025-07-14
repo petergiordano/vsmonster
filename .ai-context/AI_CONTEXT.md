@@ -3,10 +3,11 @@
 ### **Purpose: This document serves as the evolving master briefing for any AI assistant working on this project. It accumulates context across the 5-step workflow and must be provided at the beginning of any new development session.**
 
 ### CLI Context Files Integration
-- **CLAUDE.md** and **GEMINI.md** automatically reference this file for complete project context
-- **Claude Code** automatically loads CLAUDE.md on startup
-- **Gemini CLI** automatically loads GEMINI.md into hierarchical memory
-- Both CLI assistants get the same comprehensive context through this centralized approach
+- **CLAUDE.md**, **GEMINI.md**, and **AGENTS.md** automatically reference this file for complete project context
+- **Claude Code** automatically loads CLAUDE.md on startup (primary development AI)
+- **Gemini CLI** loads GEMINI.md into hierarchical memory (specialized file operations)
+- **OpenAI CODEX-1** references AGENTS.md for implementation guidance
+- All AI assistants get the same comprehensive context through this centralized approach
 
 ---
 
@@ -33,21 +34,36 @@
 
 ## 3. File & Folder Structure
 
-- **`/src`**: Contains all application source code for the 8-component pipeline.
-- **`/scripts`**: Input markdown episodes (e.g., episode_007.md).
-- **`/output`**: Generated content organized by episode and component.
-  - `/json`: Parsed script data
-  - `/voices`: Generated voice files
-  - `/audio`: Mixed audio tracks
-  - `/videos`: Final video outputs
-- **`/assets`**: Reusable media library.
-  - `/images`: Background images, character portraits, scenes
-  - `/sfx`: Sound effects (combat, ambient, UI)
-  - `/music`: Themes, ambient music, stings
-- **`/reference`**: Test episodes and validation content.
-- **`.project-docs/`**: High-level planning documents (Roadmap, VibeTesting, etc.).
-- **`.ai-rules/`**: Step-by-step instruction templates for development workflow.
-- **`/tasks`**: Will contain PRDs and task lists for feature development.
+- **`src/`**: Contains all application source code for the 8-component pipeline
+- **`scripts/`**: Input markdown episodes (e.g., episode_007.md)
+- **`output/`**: Generated content organized by episode and component
+  - `output/json/`: Parsed script data (includes debug/ subdirectory)
+  - `output/voices/`: Generated voice files (organized by episode)
+  - `output/audio/`: Mixed audio tracks (Component 3 target)
+  - `output/videos/`: Final video outputs (Components 4-8 target)
+- **`assets/`**: Reusable media library
+  - `assets/branding/`: Logo and brand assets
+  - `assets/images/`: Background images, character portraits, scenes
+  - `assets/sfx/`: Sound effects (combat, ambient, UI)
+  - `assets/music/`: Themes, ambient music, stings
+  - `assets/templates/`: Template files for episodes
+- **`tests/`**: Test suite for all pipeline components
+  - `tests/fixtures/`: Test fixtures
+  - `tests/reference/`: Reference test episodes
+- **`.ai-context/`**: AI agent documentation and context files
+  - `.ai-context/AI_CONTEXT.md`: This master context file
+  - `.ai-context/WORKFLOW_GUIDE.md`: Multi-agent workflow guide
+- **`config/`**: Configuration files and schema definitions
+  - `config/config.json`: Central pipeline configuration
+  - `config/notion-database-schema.json`: Task management schema
+- **`docs/`**: Project documentation
+  - `docs/architecture/`: Foundation documents (Roadmap, VibeTesting, etc.)
+  - `docs/specifications/`: Technical specs and schemas
+  - `docs/setup/`: Development setup guides
+- **`tools/`**: Utility scripts and setup tools
+  - `tools/process_episode.py`: Episode post-processing
+  - `tools/setup_validation.py`: Environment validation
+- **`archive/`**: Historical documents and deprecated files
 
 ---
 
@@ -201,12 +217,12 @@ flake8 src/
 pytest tests/ -v
 
 # Level 3: Integration testing with Episode 7
-python src/parser.py scripts/episode_007.md
-python setup_validation.py
+python parser.py scripts/episode_007.md
+python tools/setup_validation.py
 
 # Level 4: Full validation suite
 python -m pytest tests/ --cov=src
-python setup_validation.py
+python tools/setup_validation.py
 ```
 
 ---
@@ -265,12 +281,12 @@ pytest tests/test_parser.py -v  # Parser unit tests
 pytest tests/ --cov=src         # Test coverage reporting
 
 # Level 3 (Integration):
-python parser.py episode_007.md # Integration test with Episode 7
-python scripts/validate_parser_output.py # Validate JSON structure
+python parser.py scripts/episode_007.md # Integration test with Episode 7
+# Validation integrated into parser output
 
 # Level 4 (Full Validation):
 pytest tests/ --cov=src --cov-fail-under=80 # Full test suite with coverage
-python parser.py episode_007.md && echo "✓" # PRD-v0 validation
+python parser.py scripts/episode_007.md && echo "✓" # PRD-v0 validation
 ```
 
 ### **CLI Assistant Best Practices**
