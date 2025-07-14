@@ -52,7 +52,7 @@
   - `tests/reference/`: Reference test episodes
 - **`.ai-context/`**: AI agent documentation and context files
   - `.ai-context/AI_CONTEXT.md`: This master context file
-  - `.ai-context/WORKFLOW_GUIDE.md`: Multi-agent workflow guide
+  - `.ai-context/WORKFLOW_GUIDE.md`: VSMonster workflow guide
 - **`config/`**: Configuration files and schema definitions
   - `config/config.json`: Central pipeline configuration
   - `config/notion-database-schema.json`: Task management schema

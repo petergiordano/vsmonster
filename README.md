@@ -115,22 +115,19 @@ python voice_gen.py output/json/episode_007.json
 After running `/setup-project`, your workspace becomes:
 
 ```
-[project-name]/
+versusMonster/
 ├── docs/                   # Project documentation
 │   ├── architecture/       # Project foundation documents  
 │   ├── specifications/     # Technical specifications
 │   └── setup/              # Development setup guides
 ├── config/                 # Configuration files
 ├── src/                    # Source code
-├── tasks/                  # Feature PRDs and task lists
 ├── tests/                  # Test files
-├── setup-claude-chat-ai/   # Chat AI Strategist setup (optional)
 ├── .ai-context/           # AI assistant documentation
 │   ├── AI_CONTEXT.md      # Master project context file
-│   └── WORKFLOW_GUIDE.md  # Multi-agent workflow guide
+│   └── WORKFLOW_GUIDE.md  # VSMonster workflow guide
 ├── README.md              # This file - project documentation
-├── TODO.md                # Development task tracking
-├── WORKFLOW_GUIDE.md      # Complete development workflow (template)
+└── TODO.md                # Development task tracking
 ```
 
 ## Development
