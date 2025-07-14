@@ -1,5 +1,3 @@
-Here is the `AGENTS.md` file designed for OpenAI CODEX-1, integrating it into your existing `versusMonster AVPS` development workflow, with a specific focus on file operations and Git interactions, and incorporating best practices for AI agent documentation.
-
 # AGENTS.md
 
 This file provides specific guidance for using **OpenAI CODEX-1** as an **Implementer AI** within your `versusMonster AVPS` project. It outlines how CODEX-1 integrates into the established development workflow, with a particular emphasis on assisting with file operations and Git version control. Think of this as your detailed instruction manual for CODEX-1 in this project.
@@ -109,7 +107,7 @@ You are an integral part of the project's progressive validation framework. Afte
 
   * **Level 1: Syntax & Style:** Guide user to run `black src/ --check`, `flake8 src/`, `mypy src/`.
   * **Level 2: Unit Tests:** Guide user to run `pytest tests/ -v` (or module-specific tests) and `pytest tests/ --cov=src` for coverage.
-  * **Level 3: Integration Tests:** Guide user to run `python src/parser.py scripts/episode_007.md` and `python setup_validation.py` for integration testing with the `Episode 7` reference.
+  * **Level 3: Integration Tests:** Guide user to run `python src/parser.py tests/reference/episode_007.md` and `python tools/setup_validation.py` for integration testing with the `Episode 7` reference.
   * **Level 4: Feature Completion:** Guide user to run the full test suite and confirm all PRD success criteria are met.
   * **Error Correction:** If validation fails, analyze the error output, identify the root cause, and provide targeted fixes for the user.
 
