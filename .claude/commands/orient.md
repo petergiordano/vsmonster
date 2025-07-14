@@ -50,11 +50,10 @@ Analyze the current directory structure and files:
 **Key Files to Check:**
 - `AI_CONTEXT.md` - Project context and accumulated knowledge
 - `CLAUDE.md` / `GEMINI.md` - CLI context configuration  
-- `.ai-rules/` directory - Workflow instruction files
-- `.project-docs/` directory - Planning documents
-- `tasks/` directory - PRD and task files
+- `.ai-context/` directory - AI agent documentation
+- `docs/specifications/` directory - Planning documents
 - `src/` directory - Source code structure
-- `_project-scaffolding/` directory - Indicates fresh template (setup needed)
+- `tests/` directory - Test files and references
 - Git remotes - Check template remote connection
 
 **Workflow Stage Detection Logic:**
@@ -142,9 +141,9 @@ For any project state:
 - Read current workflow stage documentation
 
 For specific stages:
-- PRD Creation: Read .ai-rules/01_create-prd.md
-- Task Generation: Read .ai-rules/02_generate-tasks.md  
-- Task Execution: Read .ai-rules/03_execute-tasks.md
+- PRD Creation: Read .ai-context/WORKFLOW_GUIDE.md
+- Task Generation: Use Task Master tools
+- Task Execution: Follow CLAUDE.md guidelines
 ```
 
 ## Output Format

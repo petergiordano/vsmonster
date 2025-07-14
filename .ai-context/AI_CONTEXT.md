@@ -35,7 +35,7 @@
 ## 3. File & Folder Structure
 
 - **`src/`**: Contains all application source code for the 8-component pipeline
-- **`scripts/`**: Input markdown episodes (e.g., episode_007.md)
+- **`tests/reference/`**: Test episodes and reference files (e.g., episode_007.md)
 - **`output/`**: Generated content organized by episode and component
   - `output/json/`: Parsed script data (includes debug/ subdirectory)
   - `output/voices/`: Generated voice files (organized by episode)

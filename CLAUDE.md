@@ -33,15 +33,15 @@ Sequential pipeline where each component delivers independent value:
 ### Pipeline Operations
 ```bash
 # Component 1: Parse markdown script
-python parser.py scripts/episode_007.md
-python src/parser.py scripts/episode_007.md  # Alternative path
+python parser.py tests/reference/episode_007.md
+python src/parser.py tests/reference/episode_007.md  # Alternative path
 
 # Component 2: Generate character voices
 python voice_gen.py output/json/episode_007.json
 python src/voice_gen.py output/json/episode_007.json  # Alternative path
 
 # Episode post-processing (fix tag escaping)
-python tools/process_episode.py scripts/episode_007.md
+python tools/process_episode.py tests/reference/episode_007.md
 
 # Cost analysis and reporting
 python src/cost_reporter.py output/json/episode_007.json
@@ -63,7 +63,7 @@ pytest tests/ --cov=src         # With coverage
 pytest tests/ --cov=src --cov-fail-under=80  # Coverage gate
 
 # Integration testing with Episode 7 (gold standard)
-python parser.py scripts/episode_007.md
+python parser.py tests/reference/episode_007.md
 python voice_gen.py output/json/episode_007.json
 ```
 
@@ -71,12 +71,12 @@ python voice_gen.py output/json/episode_007.json
 
 ### Pipeline Data Flow:
 ```
-scripts/episode_007.md → output/json/episode_007.json → output/voices/episode_007/*.wav → [future: complete audio/video]
+tests/reference/episode_007.md → output/json/episode_007.json → output/voices/episode_007/*.wav → [future: complete audio/video]
 ```
 
 ### Key Directories:
 ```
-scripts/           # Input markdown episodes
+tests/reference/   # Test episodes and reference files
 output/json/       # Parsed JSON (Component 1 output)
 output/voices/     # Generated voice files (Component 2 output)  
 output/audio/      # Mixed audio tracks (Component 3 target)
@@ -93,7 +93,7 @@ tests/             # Test suite
 
 ## Episode 7 as Universal Test Case
 
-**All components validate against `scripts/episode_007.md`:**
+**All components validate against `tests/reference/episode_007.md`:
 - Contains 69 dialogues (THORAK/ZARA characters)
 - Includes all multimedia tags: IMG, SFX, MUSIC, AMBIENT, TRANSITION
 - Target processing: <5 minutes, ~$4.41 total cost

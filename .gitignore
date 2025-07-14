@@ -24,8 +24,8 @@ __pycache__/
 .env
 venv/
 
-# Test reference files (examples and test data)
-tests/reference/
+# Test reference files (examples and test data) - episode_007.md is tracked as gold standard
+# tests/reference/
 
 # Generated content and outputs
 output/
