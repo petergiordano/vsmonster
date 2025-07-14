@@ -50,9 +50,9 @@ Your project needs foundation documents before feature development.
 
 I'll guide you through Step 1: Project Initialization to create:
 - Roadmap.md (vision, goals, technical approach)
-- VibeTesting.md (user experience design)
+- Experience_Goals.md (user experience design)
 - ComponentLibrary.md (design system)
-- SLC_Session_Notes.md (development planning)
+- SLC_Principles.md (development planning)
 - AI_CONTEXT.md (populated with project context)
 
 This takes 10-15 minutes and creates the foundation for all future features.

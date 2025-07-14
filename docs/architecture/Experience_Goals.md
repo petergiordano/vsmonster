@@ -1,4 +1,17 @@
-# Vibe Testing: versusMonster AVPS
+# Experience Goals & Design Vibe
+
+**Version**: 2.0
+**Last Updated**: 2025-07-14
+
+This document defines the **emotional and experiential goals** for the versusMonster AVPS project. It answers the question: "How should this application make the user feel?"
+
+## Core Design Philosophy
+
+Our design is guided by three core documents. It is crucial to understand all three to make effective design decisions:
+
+1.  **[SLC Principles](./SLC_Principles.md)**: Defines **how** we approach building features (our process).
+2.  **This Document**: Defines **why** we are building and how users should feel (our emotional target).
+3.  **[Component Library & Design System](./ComponentLibrary.md)**: Defines the **what**—the specific visual and structural components to use (our toolkit).
 
 ## Core Vibe Statement
 *The fundamental emotional experience the application should create.*

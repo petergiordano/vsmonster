@@ -6,7 +6,7 @@ This document describes the JSON output format from the versusMonster Script Par
 
 ## Schema Location
 
-- **Schema File:** `schema/output_schema.json`
+- **Schema File:** `output_schema.json`
 - **Schema ID:** `https://versusmonster.com/schemas/parser-output.json`
 - **JSON Schema Version:** Draft 07
 
@@ -176,7 +176,7 @@ Ordered list of episode scenes with complete parsing data.
 
 The parser automatically validates output against the JSON schema:
 
-- **Schema File:** `schema/output_schema.json`
+- **Schema File:** `output_schema.json`
 - **Validation Library:** jsonschema (Python)
 - **Validation Status:** Recorded in `metadata.validation_status`
 - **Error Reporting:** Schema errors added to `warnings[]`
@@ -229,7 +229,7 @@ estimated_voice_cost = total_characters * 0.0003  # Example rate
 
 ## Schema File Reference
 
-The complete JSON Schema is available at `schema/output_schema.json` and includes:
+The complete JSON Schema is available at `output_schema.json` and includes:
 
 - **Type Definitions:** All field types and constraints
 - **Required Fields:** Mandatory vs. optional fields
