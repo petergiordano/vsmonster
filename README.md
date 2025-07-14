@@ -10,6 +10,15 @@ To get started with this project, please refer to the following documents:
 *   **[Project Requirements Document (PRD)](docs/specifications/PRD.md):** This document outlines the project's goals, requirements, and success criteria.
 *   **[AI Agent Guides](.ai-context/):** This directory contains specific instructions for interacting with the various AI assistants used in this project.
 
+### 🛠️ Available Commands
+
+Key commands for managing the development workflow:
+
+*   **`@next-task`** - Get the next available task and create implementation plan
+*   **`@finalize-task`** - Complete current task and update Notion
+*   **`@update-prd`** - Sync Notion task completion status with PRD.md component progress
+*   **`@orient`** - Get oriented in the project and see next best actions
+
 ## 📋 Current Status
 
 The project is currently in active development. For the latest status on each component, please refer to the **[Project Requirements Document (PRD)](docs/specifications/PRD.md)**.

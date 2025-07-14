@@ -45,7 +45,7 @@ The development process follows a consistent, repeatable cycle:
 *   Once the implementation is complete, it is thoroughly tested.
 *   A commit message is generated, referencing the completed task.
 *   The task is marked as "Done" in the Notion database.
-*   The `docs/specifications/PRD.md` is updated to reflect the new component progress.
+*   The `docs/specifications/PRD.md` is automatically updated to reflect the new component progress using the `@update-prd` command.
 
 ---
 
@@ -80,3 +80,12 @@ To begin a new development session:
 2.  Consult the AI assistant guides ([CLAUDE.md](CLAUDE.md), [GEMINI.md](GEMINI.md), [AGENTS.md](AGENTS.md)) for specific instructions on how to interact with them.
 3.  Select the next task from the [Notion backlog](https://www.notion.so/22f859c6e596800786c6c1df9f865855).
 4.  Follow the development process to implement and complete the task.
+
+## 🛠️ Available Commands
+
+Key commands for managing the development workflow:
+
+*   **`@next-task`** - Get the next available task and create implementation plan
+*   **`@finalize-task`** - Complete current task and update Notion
+*   **`@update-prd`** - Sync Notion task completion status with PRD.md component progress
+*   **`@orient`** - Get oriented in the project and see next best actions

@@ -159,9 +159,17 @@ Closes VSM-6
 - **Target**: Single MP3 with proper dialogue timing
 - **Next Command**: `python audio_mix.py output/voices/episode_007/`
 
+## Available Commands (Located in .claude/commands/)
+
+- `@next-task` - Auto-selects highest priority task, updates to "In Progress", creates implementation plan
+- `@finalize-task` - Auto-detects current task, tests, generates commit commands, updates Notion to "Done"
+- `@update-prd` - Syncs Notion task completion status with PRD.md component progress
+- `@orient` - Get oriented in project and see next best actions
+
 ## MCP Tool Access
 
 You have access to:
+
 - **Notion MCP**: Read/update task database (22f859c6-e596-8007-86c6-c1df9f865855)
 - **Filesystem MCP**: File operations and project management
 - **Memory MCP**: Maintain context across sessions
