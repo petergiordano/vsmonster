@@ -1,62 +1,23 @@
-# Component Library: versusMonster AVPS
+# Component Library & Design System
 
-## Design Philosophy
-*Simple, Lovable, Complete (SLC) framework with command-line first approach.*
+**Version**: 2.0
+**Last Updated**: 2025-07-14
 
-**Core Principles**:
-- **Simple**: Clean CLI interfaces with ASCII progress indicators
-- **Lovable**: Exciting generative content with reliable fault tolerance  
-- **Complete**: Professional broadcast-quality output ready for YouTube
+This document is the **Design System Guide** for the versusMonster AVPS project. It defines the reusable components, patterns, and styles that ensure a consistent, high-quality user experience across the entire application.
 
-## System Architecture Components
+## Core Design Philosophy
 
-### **Pipeline Components (8-Stage Process)**
+Our design is guided by three core documents. It is crucial to understand all three to make effective design decisions:
 
-#### **1. Script Parser**
-- **Purpose**: Transform markdown scripts into structured JSON
-- **Input**: Episode markdown (e.g., `episode_007.md`)
-- **Output**: Structured JSON with dialogue, timing, and multimedia cues
-- **Interface**: `python src/parser.py episode_007.md`
-- **Status Display**: Component progress with validation checkpoints
+1.  **[SLC Principles](./SLC_Principles.md)**: Defines **how** we approach building features (our process).
+2.  **[Experience Goals](./Experience_Goals.md)**: Defines **why** we are building and how users should feel (our emotional target).
+3.  **This Document**: Defines the **what**—the specific visual and structural components to use (our toolkit).
 
-#### **2. Voice Generation**
-- **Purpose**: Generate character voices using ElevenLabs API
-- **Input**: Parsed JSON with dialogue segments
-- **Output**: Individual WAV files for each character line
-- **Interface**: `python src/voice_gen.py episode_007.json`
-- **Characters**: Thorak (deep Scottish), Zara (energetic, uses "honey/sweetie")
+## System Architecture & Components
 
-#### **3. Audio Assembly**
-- **Purpose**: Combine voice files into complete audio track
-- **Input**: Individual voice files + timing data
-- **Output**: Single MP3 with proper dialogue timing
-- **Interface**: `python src/audio_mix.py episode_007`
+The system is built on an 8-component pipeline. For a detailed breakdown of each component's specifications and status, refer to the **[Project Requirements Document (PRD)](../specifications/PRD.md)**, which is the source of truth for implementation details.
 
-#### **4. Video Generation** 
-- **Purpose**: Combine audio with visual elements
-- **Input**: Audio track + background images
-- **Output**: MP4 video file (1920x1080, 30fps)
-- **Interface**: `python src/video_gen.py episode_007`
-
-#### **5. Image Integration**
-- **Purpose**: Add dynamic image transitions
-- **Input**: Video + multiple episode images
-- **Output**: Video with image changes at scene breaks
-
-#### **6. Sound Effects**
-- **Purpose**: Layer SFX over existing video
-- **Input**: Video + SFX cues from script
-- **Output**: Enhanced video with battle sounds, dice rolling, etc.
-
-#### **7. Background Music**
-- **Purpose**: Add music layer for complete audio mix
-- **Input**: Enhanced video + music cues
-- **Output**: Full production video with complete audio
-
-#### **8. Batch Processing**
-- **Purpose**: Process multiple episodes automatically
-- **Input**: Multiple script files
-- **Output**: Queue of complete videos
+This library provides the patterns and standards that should be applied when building those components.
 
 ### **User Interface Components**
 
