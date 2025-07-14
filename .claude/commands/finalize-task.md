@@ -9,10 +9,10 @@ Mark current in-progress task complete, prepare commit, and sync with Notion.
 4. Test implementation (run relevant tests)
 5. Generate commit message: "VSM-XX: [brief description]"
 6. Show commit command for user to execute
-7. After user confirms commit/push, update Notion task:
-   - Status: "Done"
-   - Add GitHub commit reference to "GitHub Link" field
-   - Add completion timestamp
+7. After user confirms commit/push:
+   - Update Notion task: Status "Done", GitHub link, timestamp
+   - Update PRD.md component status automatically
+   - Commit PRD.md changes: "Update Component X status - VSM-XX complete"
 8. Suggest next available task
 
 ## Output Format:

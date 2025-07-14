@@ -12,10 +12,26 @@ An automated Python-based system that transforms markdown scripts into complete 
 ### Business Goal
 Generate **2 podcast episodes per week for a full year (104 episodes)** to build an audience and explore monetization through advertising and sponsorships.
 
-### Current Status
-- **Component 1 (Script Parser)**: ✅ COMPLETE (2025-01-08)
-- **Component 2 (Voice Generation)**: 🚧 IN PROGRESS
-- **Components 3-8**: 📝 PLANNED
+### Component Status (Auto-Updated: 2025-07-13)
+- **Component 1**: ✅ COMPLETE (2025-01-08) - Script Parser validated with Episode 7
+- **Component 2**: 🚧 IN PROGRESS (1/9 tasks) - Voice Generation: ElevenLabs integration  
+- **Component 3**: 📝 PLANNED - Audio Assembly (pending Component 2)
+- **Component 4**: 📝 PLANNED - Static Video (pending Component 3)
+- **Components 5-8**: 📝 PLANNED - Advanced features (pending core pipeline)
+
+#### Component 1 Validation ✅
+```bash
+python parser.py episode_007.md
+# Output: output/json/episode_007.json (69 dialogues parsed)
+```
+**Last Validated:** 2025-01-08 ✅ **Status:** All success criteria met
+
+#### Component 2 Target
+```bash
+python voice_gen.py episode_007.json  
+# Target: output/voices/ with 69 voice files, <5min processing
+```
+**Status:** 🚧 Implementation in progress (Notion tasks VSM-31 to VSM-39)
 
 ### Development Philosophy
 **Function Over Fashion**: Build iteratively in simple steps where each step compounds the benefit from the previous one. No fancy UI/UX - purely command-line tools that deliver functional value immediately.
@@ -338,6 +354,35 @@ python parser.py episode_007.md && python voice_gen.py episode_007.json
 - `archive/COMPLETED_TASKS.md` - Complete history of implemented components and milestones
 - `archive/README.md` - Guide to archived PRD and task files
 - `archive/prd-*.md` - Original component-specific requirements (historical reference)
+
+---
+
+## PRD Maintenance & Automation
+
+### Source of Truth Protocol
+This PRD.md file serves as the definitive source of truth for component specifications and progress tracking.
+
+### Automated Updates
+- **Component Status**: Auto-updated via `@finalize-task` when Notion tasks complete
+- **Validation Commands**: Added when components reach completion
+- **Progress Tracking**: Synced from Notion database (VSM task completion)
+
+### Manual Update Rules
+**Never Change**: Core requirements, success criteria, component architecture  
+**Always Update**: Status markers, completion dates, validation results, task progress
+
+### Update Commands
+```bash
+@finalize-task     # Completes task + updates PRD component status
+@update-prd        # Sync all component progress from Notion
+@next-task         # Get next priority based on current component
+```
+
+### Validation Requirements
+Each completed component must include:
+1. **Command validation** - Exact command that proves component works
+2. **Success criteria verification** - All PRD requirements met
+3. **Episode 7 test case** - Validated against reference implementation
 
 ---
 
