@@ -22,6 +22,7 @@ This library provides the patterns and standards that should be applied when bui
 ### **User Interface Components**
 
 #### **Command-Line Interface**
+These commands are often invoked by AI agents (e.g., via `.claude/commands/*.md` files) to automate development workflows.
 ```bash
 # Primary Commands
 avps parse episode_007.md          # Run script parser

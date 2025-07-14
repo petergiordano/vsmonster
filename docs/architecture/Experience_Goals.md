@@ -84,7 +84,7 @@ Our design is guided by three core documents. It is crucial to understand all th
 *How the vibe requirements translate to system design decisions.*
 
 ### **Interface Design**
-- **Command-Line Simplicity**: Clean, minimal commands that feel powerful
+- **Command-Line Simplicity**: Clean, minimal commands that feel powerful (for both human users and AI agents, often invoked via `.claude/commands/*.md` files)
 - **Status Communication**: Rich ASCII progress indicators and informative messages
 - **Error Handling**: Clear, actionable error messages with suggested fixes
 - **Recovery Options**: Always provide "what to do next" guidance

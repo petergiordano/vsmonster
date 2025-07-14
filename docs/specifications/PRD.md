@@ -93,7 +93,7 @@ This document is the definitive source of truth for component specifications and
 
 ### 6.2. PRD Maintenance
 *   **Never Change**: Core requirements, success criteria, component architecture.
-*   **Always Update**: Status markers, completion dates, validation results, task progress.
+*   **Always Update**: Status markers, completion dates, validation results, task progress (often facilitated by AI commands like `@update-prd`).
 
 ---
 

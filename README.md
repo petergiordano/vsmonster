@@ -8,11 +8,11 @@ To get started with this project, please refer to the following documents:
 
 *   **[Development Workflow Guide](.ai-context/WORKFLOW_GUIDE.md):** This document provides a comprehensive overview of the development process, from task management to implementation and validation.
 *   **[Project Requirements Document (PRD)](docs/specifications/PRD.md):** This document outlines the project's goals, requirements, and success criteria.
-*   **[AI Agent Guides](.ai-context/):** This directory contains specific instructions for interacting with the various AI assistants used in this project.
+*   **[AI Agent Guides](.ai-context/):** This directory contains specific instructions for interacting with the various AI assistants used in this project, including the `.claude/commands/` directory which houses the executable command files for the Claude AI.
 
-### 🛠️ Available Commands
+### 🛠️ Available AI Commands
 
-Key commands for managing the development workflow:
+Key commands for managing the development workflow, often executed by AI agents via `.claude/commands/*.md` files:
 
 *   **`@next-task`** - Get the next available task and create implementation plan
 *   **`@finalize-task`** - Complete current task and update Notion

@@ -32,7 +32,7 @@ SLC is a mindset for building features that are focused, delightful, and robust.
 
 ### Principles in Practice:
 *   **One Job at a Time**: Each component should do one thing exceptionally well.
-*   **Minimalist Interface**: Start with command-line interfaces and file-based I/O. Avoid GUIs or databases until absolutely necessary.
+*   **Minimalist Interface**: Start with command-line interfaces and file-based I/O. Avoid GUIs or databases until absolutely necessary. These interfaces are often invoked by AI agents (e.g., via `.claude/commands/*.md` files).
 *   **Clear, Predictable Schema**: Define a simple and stable data contract (e.g., a JSON schema) for inputs and outputs.
 
 ### Case Study: The Script Parser
