@@ -33,8 +33,7 @@ Sequential pipeline where each component delivers independent value:
 ### Pipeline Operations
 ```bash
 # Component 1: Parse markdown script
-python parser.py tests/reference/episode_007.md
-python src/parser.py tests/reference/episode_007.md  # Alternative path
+python src/parser.py tests/reference/episode_007.md
 
 # Component 2: Generate character voices
 python voice_gen.py output/json/episode_007.json
@@ -63,8 +62,8 @@ pytest tests/ --cov=src         # With coverage
 pytest tests/ --cov=src --cov-fail-under=80  # Coverage gate
 
 # Integration testing with Episode 7 (gold standard)
-python parser.py tests/reference/episode_007.md
-python voice_gen.py output/json/episode_007.json
+python src/parser.py tests/reference/episode_007.md
+python src/voice_gen.py output/json/episode_007.json
 ```
 
 ## Data Flow and File Structure
