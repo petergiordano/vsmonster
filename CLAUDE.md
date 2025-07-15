@@ -176,6 +176,32 @@ You have access to:
 
 Use these tools to maintain the single source of truth in Notion while implementing pipeline components.
 
+## 6. Context Maintenance Protocol
+
+To ensure the `.ai-context/AI_CONTEXT.md` file remains the single source of truth, Claude Code will adhere to the following protocol:
+
+### 1. Task Completion Trigger
+- **Action:** When using `@finalize-task` to complete a task, Claude will automatically review the "Current Project Context State" in `.ai-context/AI_CONTEXT.md`.
+- **Prompt:** After successful task validation, Claude will ask if the completed task warrants an update to the active/completed features, planned features, or lessons learned.
+- **Example:** "Task `VSM-XX` is complete and validated. Should I update the `AI_CONTEXT.md` to reflect this architectural change/new pattern/completed milestone?"
+
+### 2. Architectural & Pattern Trigger  
+- **Action:** When development work results in a new architectural decision, reusable code pattern, or established convention.
+- **Prompt:** Claude will recognize significant architectural discussions and ask if they should be documented in the "Architecture Decisions Made" or "Known Patterns & Conventions Discovered" sections of `.ai-context/AI_CONTEXT.md`.
+- **Example:** "We just established a new pattern for [X]. Should I add this to the `AI_CONTEXT.md` patterns section?"
+
+### 3. Pre-Commit Check
+- **Action:** Before generating commit messages (especially when using `@finalize-task`), Claude will perform a final context check.
+- **Prompt:** Before finalizing commits, Claude will ask if any changes to the project's context, state, or architecture need to be recorded in `.ai-context/AI_CONTEXT.md`.
+- **Example:** "Before I generate the commit message, does `AI_CONTEXT.md` need to be updated with any new context from this implementation work?"
+
+### 4. Session Initialization Check
+- **Action:** When starting new development sessions, especially when using `@orient` or `@next-task`, Claude will verify context currency.
+- **Prompt:** If significant time has passed or major work was completed, Claude will ask if the project context needs refreshing.
+- **Example:** "I notice significant development has occurred since the last context update. Should we refresh `AI_CONTEXT.md` before proceeding?"
+
+By following this protocol, Claude Code will ensure that the project's master context file stays synchronized with the actual codebase state, providing reliable foundation for all AI assistants.
+
 ## Success Criteria
 
 **Component Success**: Function + Quality + Reliability + Simplicity  
