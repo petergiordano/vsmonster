@@ -58,12 +58,16 @@
   - `config/notion-database-schema.json`: Task management schema
 - **`docs/`**: Project documentation
   - `docs/architecture/`: Foundation documents (Roadmap, VibeTesting, etc.)
-  - `docs/specifications/`: Technical specs and schemas
+  - `docs/specifications/`: Technical specs, schemas, and feature specifications
+    - `docs/specifications/PRD.md`: Master product requirements
+    - `docs/specifications/dev-cycle.md`: High-level development workflow
+    - `docs/specifications/feat_spec-[component-name].md`: Component feature specifications
   - `docs/setup/`: Development setup guides
 - **`tools/`**: Utility scripts and setup tools
   - `tools/process_episode.py`: Episode post-processing
   - `tools/setup_validation.py`: Environment validation
 - **`archive/`**: Historical documents and deprecated files
+  - `archive/codex_task_logs/`: Detailed implementation logs from Codex
 
 ---
 
@@ -92,7 +96,64 @@
 
 ---
 
-## 6. Context Handoff Protocols
+## 6. Development Workflow Architecture
+
+### **Two-Tier Workflow System**
+The project employs a two-tier development process:
+
+#### High-Level Component Development Cycle
+- **Location**: `docs/specifications/dev-cycle.md`
+- **Process**: PRD Review → Feature Spec Generation → Codex Implementation → PR Review → PRD Update
+- **Purpose**: Macro workflow for complete component development
+- **AI Coordination**: Claude Chat (planning) → Codex (implementation) → Claude Code (review)
+
+#### Detailed Implementation Workflow  
+- **Location**: `.ai-context/WORKFLOW_GUIDE.md`
+- **Process**: Task selection → Implementation → Validation → Completion
+- **Purpose**: Micro workflow for task management and quality assurance
+- **AI Coordination**: Claude Code primary with Gemini CLI for specific operations
+
+### **Feature Specification System**
+- **Template**: `docs/specifications/FEATURE_SPEC_TEMPLATE.md`
+- **Naming**: `feat_spec-[component-name].md`
+- **Required Sections**: Purpose, scope, user flows, edge cases, logic requirements, constraints, test plan
+- **Usage**: Input for Codex implementation, reference for all development work
+
+### **Two-Tier Logging System**
+- **High-Level Dashboard**: `docs/specifications/workflow-log.md` - executive overview and metrics
+- **Detailed Task Logs**: `archive/codex_task_logs/feat_spec-[component-name]-tasks.md` - comprehensive implementation audit trail
+- **Template**: `archive/codex_task_logs/TASK_LOG_TEMPLATE.md`
+- **Purpose**: Scalable tracking from quick status checks to deep implementation details
+
+## 7. Task Management Architecture
+
+### **Two-Tier Task Management System**
+The project employs a clear division of task management responsibilities:
+
+#### Codex-Managed Tasks (Core Product Components)
+- **Scope**: Components 1-8 of the main pipeline (Script Parser → Batch Processing)
+- **Task Creation**: Codex breaks down feature specifications into granular implementation tasks
+- **Task Execution**: Codex self-manages implementation according to feature specs
+- **Task Tracking**: Detailed logs maintained in `archive/codex_task_logs/feat_spec-[component-name]-tasks.md`
+- **Autonomy**: Codex operates independently without Notion database dependency
+
+#### Notion Database Tasks (Non-Core Support)
+- **Scope**: Housekeeping, architectural, infrastructure, process, research, and maintenance tasks
+- **Database**: `vmonster-dev-backlog` (22f859c6-e596-8007-86c6-c1df9f865855)
+- **Access Control**: Claude Code accesses ONLY when explicitly instructed by user
+- **Task Examples**: Documentation updates, refactoring, tooling, CI/CD, security, performance optimization
+- **User Direction Required**: No autonomous Notion database access permitted
+
+#### Task Type Decision Matrix
+- **Feature Implementation** → Codex self-manages
+- **Bug Fixes in Core Components** → Codex self-manages  
+- **New Core Component** → Codex self-manages
+- **Documentation Updates** → Notion database (user-directed)
+- **Tool/Infrastructure Changes** → Notion database (user-directed)
+- **Process Improvements** → Notion database (user-directed)
+- **Architecture Decisions** → Notion database (user-directed)
+
+## 8. Context Handoff Protocols
 
 ### **Between Chat AI (Strategist) and CLI AI (Implementer)**
 - **Context Transfer Method:** Always provide this complete AI_CONTEXT.md file.
