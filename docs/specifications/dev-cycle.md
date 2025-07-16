@@ -2,6 +2,8 @@
 
 **Note:** This document describes the high-level component development cycle. For detailed implementation guidance, AI coordination, and task management, see [WORKFLOW_GUIDE.md](../../.ai-context/WORKFLOW_GUIDE.md).
 
+## Claude [Chat Session] (https://claude.ai/chat/0d6af6f8-eff7-49af-a663-ba87c0339ae6)
+
 ---
 ## 🧠 Step 1: Use the PRD as the Source of Truth
 - The `docs/specifications/PRD.md` file is the master vision and roadmap for the product.
