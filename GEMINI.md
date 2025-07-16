@@ -17,7 +17,10 @@ Before starting any work, you can verify that Gemini has loaded the correct cont
 
 ## 2\. Gemini CLI Workflow Integration
 
-Gemini CLI is your **Implementer AI**, responsible for executing specific technical tasks provided by you (the Project Director) or prepared by a Chat AI (the Strategist). It works within the established 5-step AI-assisted development workflow.
+Gemini CLI is your **Implementer AI**, responsible for executing specific technical tasks provided by you (the Project Director) or prepared by a Chat AI (the Strategist). It works within the established development workflow which includes:
+
+- **High-Level Cycle**: PRD → Feature Spec → Implementation → PR (see [dev-cycle.md](docs/specifications/dev-cycle.md))
+- **Implementation Details**: Task management and AI coordination (see [WORKFLOW_GUIDE.md](.ai-context/WORKFLOW_GUIDE.md))
 
 ### Context Loading and Management
 
@@ -25,7 +28,21 @@ Gemini CLI is your **Implementer AI**, responsible for executing specific techni
   * **Context Refresh:** If `.ai-context/AI_CONTEXT.md` or other context files are updated, restart Gemini CLI or use `/memory refresh` to load the latest information.
   * **Context Handoff Protocol:** When receiving prompts from a Chat AI, ensure they include relevant sections from `.ai-context/AI_CONTEXT.md` for complete understanding.
 
-## 3\. File Operations Guidance
+## 3\. Feature Specifications & Workflow Tracking
+
+### Feature Specification Awareness
+Gemini understands the feature specification system:
+- **Location**: `docs/specifications/feat_spec-[component-name].md`
+- **Structure**: Purpose, scope, user flows, edge cases, logic requirements, constraints, test plan
+- **Usage**: Can read and reference feature specs during implementation tasks
+
+### Workflow Logging
+Gemini can help maintain the two-tier logging system:
+- **High-Level Dashboard**: `docs/specifications/workflow-log.md` - status overview and metrics
+- **Detailed Task Logs**: `archive/codex_task_logs/feat_spec-[component-name]-tasks.md` - comprehensive implementation details
+- **Updates**: Can update both log levels as tasks progress through the development cycle
+
+## 4\. File Operations Guidance
 
 Gemini CLI has direct access to your project files and can assist with various file operations.
 
@@ -33,16 +50,17 @@ Gemini CLI has direct access to your project files and can assist with various f
 
 Gemini will provide the content or instructions for creating and modifying files based on the current task.
 
-  * **File Paths:** When generating code or content, Gemini will specify the exact file paths (e.g., `src/parser.py`, `output/json/episode_007.json`).
-  * **Directory Structure:** Gemini understands and adheres to the established project directory structure (e.g., `/scripts`, `/output/json`, `/src`).
-  * **Output Files:** Gemini will guide the generation of various output files like JSON reports, voice files, and video outputs.
+  * **File Paths:** When generating code or content, Gemini will specify the exact file paths (e.g., `src/parser.py`, `output/json/episode_007.json`, `docs/specifications/feat_spec-component-name.md`).
+  * **Directory Structure:** Gemini understands and adheres to the established project directory structure (e.g., `/src`, `/output/json`, `/docs/specifications`).
+  * **Output Files:** Gemini will guide the generation of various output files like JSON reports, voice files, video outputs, and workflow tracking documents.
 
 ### Reading and Analyzing Files
 
 Gemini can read and analyze existing code and documentation to understand how it works, identify issues, or describe architecture.
 
   * **Plan Mode:** When performing complex analysis or planning, Gemini will enter "Plan Mode" (a read-only state) to safely explore the codebase without accidental modifications. You will be prompted to exit Plan Mode before any file modifications occur.
-  * **Contextual Reading:** Gemini will leverage its ability to read relevant project files (e.g., `config.json`, `requirements.txt`, `parser.py`, `voice_gen.py`) to provide informed suggestions.
+  * **Contextual Reading:** Gemini will leverage its ability to read relevant project files (e.g., `config.json`, `requirements.txt`, `parser.py`, `voice_gen.py`, feature specs in `docs/specifications/`) to provide informed suggestions.
+  * **Feature Spec Integration:** When working on component tasks, Gemini can read the corresponding feature specification to understand requirements and constraints.
 
 ### Error Handling in File Operations
 
@@ -74,7 +92,21 @@ Gemini will guide you through progressive validation levels after each code modi
   * **Level 3: Integration Validation:** Commands for integration tests, often using `episode_2_ex_final.md` as the primary test case.
   * **Level 4: Feature Completion Validation:** Running the full test suite and checking overall PRD success criteria.
 
-## 6. Context Maintenance Protocol
+## 6. Task Management Integration
+
+### Notion Database Access Control
+**CRITICAL**: Gemini CLI accesses the Notion database (`vmonster-dev-backlog`) ONLY when explicitly instructed by the user:
+- **No Autonomous Access**: Gemini cannot independently read, create, or update Notion tasks
+- **User-Directed Operations**: All Notion operations require explicit user instruction (e.g., "Update task VSM-15 to complete")
+- **Task Type Scope**: Notion database reserved for non-core tasks (housekeeping, infrastructure, process improvements)
+- **Core Components**: Components 1-8 are managed autonomously by Codex without Notion dependency
+
+### Available Notion Commands (User-Directed Only)
+- `@next-task` - Get next non-core task from Notion (when user requests)
+- `@finalize-task` - Complete current non-core task in Notion (when user requests)
+- `@update-prd` - Sync Notion completion status with PRD.md (when user requests)
+
+## 7. Context Maintenance Protocol
 
 To ensure the `.ai-context/AI_CONTEXT.md` file remains the single source of truth, Gemini will adhere to the following protocol:
 
