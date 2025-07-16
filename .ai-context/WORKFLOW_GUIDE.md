@@ -2,15 +2,18 @@
 
 This document outlines the stable and reliable development workflow for the versusMonster AVPS (Automated Video Podcast System) project. It is intended to be a persistent guide that does not change frequently.
 
+**Note:** This document focuses on implementation details and AI coordination. For the high-level component development cycle (PRD → Feature Spec → Implementation → PR), see [dev-cycle.md](../docs/specifications/dev-cycle.md).
+
 ---
 
 ## 🎯 Core Principles
 
 This workflow is designed around a few core principles:
 
-*   **Task-Driven Development:** All work is managed through a Notion-based task backlog.
+*   **Two-Tier Task Management:** Core product components are self-managed by Codex; non-core tasks use Notion database with user-directed access only.
 *   **Component-Based Architecture:** The system is built as a series of independent, interoperable components.
 *   **AI-Assisted Implementation:** AI assistants are leveraged for various tasks, from planning to implementation and testing.
+*   **User-Controlled Database Access:** All Notion database operations require explicit user instruction - no autonomous access.
 *   **Continuous Validation:** A multi-layered validation process ensures code quality and correctness.
 
 ---
@@ -25,14 +28,54 @@ This project utilizes a multi-agent AI team. Each agent has a specific role and 
 
 ---
 
+## 📊 High-Level Development Cycle
+
+For major component development, the project follows a structured cycle:
+
+1. **PRD Review** → Identify next component from `docs/specifications/PRD.md`
+2. **Feature Spec Generation** → Create detailed specification in Claude Chat
+3. **Implementation** → Codex reads spec and implements with tests
+4. **Review & Merge** → Code review and integration
+5. **PRD Update** → Mark component complete and loop back
+
+See [dev-cycle.md](../docs/specifications/dev-cycle.md) for the complete high-level workflow.
+
+---
+
 ## 🔄 Development Process
 
 The development process follows a consistent, repeatable cycle:
 
 ### 1. Task Selection
 
-*   Tasks are prioritized and managed in the [vmonster-dev-backlog](https://www.notion.so/22f859c6e596800786c6c1df9f865855).
-*   The next task is selected based on priority and component dependencies.
+#### Core Product Components (Codex-Managed)
+*   **Components 1-8:** Tasks self-generated and managed by Codex during implementation
+*   **Task Source:** Feature specifications in `docs/specifications/feat_spec-[component-name].md`
+*   **Task Tracking:** Detailed logs in `archive/codex_task_logs/feat_spec-[component-name]-tasks.md`
+
+#### Non-Core Tasks (Notion-Managed)
+*   **Scope:** Housekeeping, architectural, infrastructure, process, research, and maintenance tasks
+*   **Database:** [vmonster-dev-backlog](https://www.notion.so/22f859c6e596800786c6c1df9f865855)
+*   **Access Control:** Claude Code accesses only when explicitly instructed by user
+*   **Selection:** Based on user priority and project needs
+
+#### Task Type Examples
+
+**Codex-Managed Tasks (Core Components):**
+- Script parsing implementation
+- Voice generation with ElevenLabs
+- Audio assembly and mixing
+- Video generation and processing
+- Component integration and testing
+
+**Notion-Managed Tasks (Non-Core):**
+- Update documentation files
+- Refactor shared utilities
+- Add new development tools
+- Update CI/CD configuration
+- Performance optimization analysis
+- Security audit implementation
+- Dependency updates and maintenance
 
 ### 2. Implementation
 
