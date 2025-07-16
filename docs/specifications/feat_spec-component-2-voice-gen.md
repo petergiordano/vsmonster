@@ -1,66 +1,270 @@
+# Feature Spec - Voice Generation (Component 2)
 
-# Feature Spec - Voice Generation (Component 2)**
-Developed in Gemini [Chat Session] (https://gemini.google.com/gem/291fcca1fd00/bdba9e3d7bc0beb1)
+**Component**: Voice Generation (Component 2)
+**Version**: 1.0
+**Created**: July 15, 2025
+**PRD Reference**: `docs/specifications/PRD.md` Section 3.2
 
-### **Next Core Component: Voice Generation (Component 2)**
+---
 
-This component is crucial as it takes the structured data from the Script Parser and transforms it into a single, complete audio track containing all character dialogues.
+## 1. Purpose
 
-#### **1. Overview & Goals**
+### 1.1 Component Overview
+The Voice Generation component is Step 2 of the versusMonster Automated Video Podcast System's 8-component iterative build strategy. It transforms structured JSON dialogue data, received from the Script Parser (Component 1), into a single, complete audio track containing all character dialogues, leveraging the ElevenLabs API.
 
-  * **Goal**: Generate a **single, complete multi-character dialogue track (.wav file)** from the structured JSON output of Step 1 (Script Parser).
-  * **Input**: JSON timeline from the Script Parser (now using `tests/reference/episode_007.md` as the primary test case), which contains dialogue text, character attribution, and voice directions.
-  * **Output**: A single `.wav` audio file per episode, representing the complete talk track of two people. This file will be stored in `output/voices/`.
-  * **Value Proposition**: This step delivers a unified voice track, ready for direct integration with music and SFX in Component 3.
-  * **Primary Validation**: The combined talk track must sound authentic, with distinct voices for Thorak and Zara, and all intonations and emotional cues (e.g., "breathless") accurately interpreted by ElevenLabs.
-  * **Simplicity Goal**: It should operate with a single command, such as `python voice_gen.py episode_007.json`.
+### 1.2 Pipeline Integration
+This component directly consumes output from the Script Parser and produces audio for the Audio Assembly component.
+- **Input**: JSON timeline from the Script Parser (`output/json/episode_007.json`), containing dialogue text, character attribution, and voice directions.
+- **Output**: A single `.wav` audio file per episode, representing the complete talk track of all characters, stored in `output/voices/{episode_name}/`.
+- **Dependencies**: Relies on the successful completion and output of Component 1 (Script Parser).
 
-#### **2. Technical Approach (`src/voice_gen.py`)**
+---
 
-The `src/voice_gen.py` script will be updated to leverage ElevenLabs' text-to-dialogue capabilities.
+## 2. Scope and Boundaries
 
-  * **ElevenLabs Text-to-Dialogue Integration**:
-      * The script will utilize the ElevenLabs `text-to-dialogue` API endpoint to process the entire dialogue script in a single call. This is a change from potentially generating individual voice files.
-      * Dialogue entries (text, character, direction) from the Script Parser's JSON will be prepared as a list of inputs for the ElevenLabs API request. Each input object will specify the `text` and `voice_id` for the respective character.
-      * **Intonation and Instructions**: All intonations and emotional cues (e.g., "(Breathless with excitement)", "(Gravelly, analytical)") will be passed directly within the dialogue text to ElevenLabs. The Eleven v3 model (or other suitable multi-speaker models) can interpret these textual cues to influence speech emotion and delivery.
-  * **Character Voice Mapping**: The existing mapping of "THORAK" and "ZARA" to their respective ElevenLabs `voice_id`s will be used within the API call's inputs.
-  * **Input Processing**: It will load the JSON output from the Script Parser. The primary test file for this phase will be `output/json/episode_007.json`, derived from `tests/reference/episode_007.md`.
-  * **Output Management**: The generated complete dialogue track will be saved as a single `.wav` file in `output/voices/{episode_name}/`.
-  * **Model Selection**: Prioritize the Eleven v3 model if access is available, as it is designed for Text to Dialogue. Otherwise, use the recommended `eleven_multilingual_v2` model which offers high quality and is stable for long-form generations.
+### 2.1 In Scope
+- Utilize ElevenLabs `text-to-dialogue` or `text-to-speech` API endpoints to process dialogue.
+- Prepare dialogue entries (text, character, direction) from JSON for the ElevenLabs API.
+- Interpret intonations and emotional cues (e.g., "(Breathless with excitement)") within dialogue text for ElevenLabs processing.
+- Map "THORAK" and "ZARA" to their respective ElevenLabs `voice_id`s.
+- Load JSON output from the Script Parser (`output/json/episode_007.json`).
+- Save the generated complete dialogue track as a single `.wav` file in `output/voices/{episode_name}/`.
+- Implement API key management from a `.env` file.
+- Handle API rate limits and network failures gracefully.
+- Provide clear progress updates following the 5-step status display pattern.
 
-#### **3. Component 3 (Audio Assembly) Capabilities in Mind**
+### 2.2 Out of Scope
+- Direct integration with background music or sound effects (handled by Component 3).
+- Custom voice training for ElevenLabs.
+- Multi-language support beyond what ElevenLabs `eleven_multilingual_v2` model inherently provides.
+- Advanced voice effects processing (e.g., reverb, echo, filters).
+- Cost optimization (explicitly deferred to a later stage).
 
-  * **Simplified Handoff**: By generating a single, complete dialogue track in Component 2, the task for Component 3 (Audio Assembly) becomes simpler and more focused: mixing this talk track with background music and sound effects. This eliminates the need for Component 3 to handle complex individual dialogue timing and sequencing.
-  * **Optimized for Mixing**: The output `.wav` file will be a clean, ready-to-mix talk track, ideal for layering additional audio elements without requiring extensive post-processing by Component 3.
+### 2.3 Success Criteria
+- **Goal**: Generate a single, complete multi-character dialogue track (`.wav` file) from the structured JSON output.
+- **Primary Validation**: The combined talk track must sound authentic, with distinct voices for Thorak and Zara, and all intonations and emotional cues accurately interpreted by ElevenLabs.
+- **Simplicity Goal**: Operate with a single command, such as `python voice_gen.py episode_007.json`.
+- **Functional**: The process must generate a single `.wav` file for the entire episode's dialogue, including all assigned characters and their respective lines from `episode_007.md`.
+- **Quality**: Manual review of the generated `.wav` file will confirm voice authenticity and interpretation of emotional cues. The overall dialogue flow should sound natural.
+- **Performance**: The generation of the complete dialogue track for `episode_007.md` should be efficient, with a target processing time that allows for the overall pipeline goals.
+- **Reliability**: The process should complete without manual intervention and produce a usable audio file ready for Component 3.
 
-#### **4. Key Design Considerations**
+---
 
-  * **API Key Management**: The ElevenLabs API key must be securely loaded from a `.env` file.
-  * **Error Recovery**: The component should handle API rate limits and network failures gracefully, logging warnings and aiming to produce partial results where possible.
-  * **Cost Optimization**: **As per your instruction, cost optimization is explicitly deferred to a much later stage.** The current focus is on getting the core functionality to work reliably.
-  * **Progress Reporting**: The script should provide clear progress updates, following the 5-step status display pattern established by the Script Parser.
+## 3. User Flows
 
-#### **5. Validation & Quality Gates**
+### 3.1 Primary Flow
+1.  **Start Command**: User executes `python voice_gen.py episode_007.json`.
+2.  **Load JSON**: The `voice_gen.py` script loads the `episode_007.json` file generated by the Script Parser.
+3.  **Initialize ElevenLabs Client**: The script initializes the ElevenLabs client using the API key from the `.env` file.
+4.  **Process Dialogues**: For each dialogue entry in the JSON, the script:
+    * Identifies the character and applies character-specific voice settings.
+    * Applies voice direction adjustments (e.g., "Breathless").
+    * Calls the ElevenLabs API to generate audio for the dialogue.
+    * Concatenates individual dialogue audio segments into a single track.
+5.  **Save Output**: The complete audio track is saved as a single `.wav` file in `output/voices/episode_007/`.
+6.  **Report Generation**: A processing report is generated detailing success, failures, and character usage.
 
-  * **Primary Test File**: `tests/reference/episode_007.md` will be the definitive source for parsing and voice generation validation.
-  * **Functional**: The process must generate a single `.wav` file for the entire episode's dialogue, including all assigned characters and their respective lines from `episode_007.md`.
-  * **Quality**: Manual review of the generated `.wav` file will confirm that Thorak and Zara's voices are authentic and distinct, and that all emotional cues (e.g., "(Breathless)") have been interpreted accurately by ElevenLabs. The overall dialogue flow and timing within the single file should sound natural.
-  * **Performance**: The generation of the complete dialogue track for `episode_007.md` should be efficient, with a target processing time that allows for the overall pipeline goals.
-  * **Reliability**: The process should complete without manual intervention and produce a usable audio file ready for Component 3.
+### 3.2 Alternative Flows
+- **Resume Processing**: If an episode was partially processed, the script should skip already-generated individual dialogue files and continue from where it left off.
 
-This refined specification streamlines the Voice Generation component by leveraging ElevenLabs' advanced dialogue capabilities, directly facilitating the subsequent Audio Assembly step.
+### 3.3 Error Flows
+- **Invalid Input JSON**: If the input JSON is malformed or missing required fields, the script should log an error and attempt to gracefully exit or produce a partial result if possible.
+- **ElevenLabs API Failure**: If the ElevenLabs API encounters errors (e.g., rate limits, invalid requests, network issues), the script should implement retry logic with exponential backoff. After retries are exhausted, it should log the failure and attempt to continue processing other dialogues if possible, rather than crashing.
+- **Missing API Key**: If `ELEVENLABS_API_KEY` is not found in `.env`, the script should log a critical error and exit.
 
-### Sources
+---
 
-  * [Text to Speech | ElevenLabs Documentation](https://elevenlabs.io/docs/capabilities/text-to-speech)
-  * [Text to Dialogue | ElevenLabs Documentation](https://elevenlabs.io/docs/capabilities/text-to-dialogue)
-  * [Mastering Multi-Voice Conversations with ElevenLabs: A Guide to Realistic AI Dialogue](https://ragaboutit.com/mastering-multi-voice-conversations-with-elevenlabs-a-guide-to-realistic-ai-dialogue/)
-  * [The narrative integrity of dialog with multiple voices : r/ElevenLabs - Reddit](https://www.reddit.com/r/ElevenLabs/comments/1aqo9y2/the_narrative_integrity_of_dialog_with_multiple/)
-  * [Text to Dialogue quickstart | ElevenLabs Documentation](https://elevenlabs.io/docs/cookbooks/text-to-dialogue)
-  * [versusMonster Video Pipeline - PRD vo](https://www.google.com/search?q=uploaded:PRD-v0.pdf)
-  * [CLAUDE.md](https://www.google.com/search?q=uploaded:petergiordano/vsmonster/vsmonster-a6d3525cd4023283dcb65e4772f8daf0b0b983de/CLAUDE.md)
-  * [Product Requirements Document: Voice Generation (Step 2 of 8-Component Pipeline)](https://www.google.com/search?q=uploaded:petergiordano/vsmonster/vsmonster-a6d3525cd4023283dcb65e4772f8daf0b0b983de/archive/prd-voice-generation.md)
-  * [Development Environment Setup](https://www.google.com/search?q=uploaded:petergiordano/vsmonster/vsmonster-a6d3525cd4023283dcb65e4772f8daf0b0b983de/docs/setup/development_setup.md)
-  * [config.json](https://www.google.com/search?q=uploaded:petergiordano/vsmonster/vsmonster-a6d3525cd4023283dcb65e4772f8daf0b0b983de/config/config.json)
-  * [feat\_spec-component-2-voice-gen.md](https://www.google.com/search?q=uploaded:feat_spec-component-2-voice-gen.md)
-  * [tests/reference/episode\_2\_ex\_final.md](https://www.google.com/search?q=uploaded:episode_007.md)
+## 4. Edge Cases
+
+### 4.1 Input Validation
+- **Empty Dialogue Sections**: The component should handle scenes with no dialogues gracefully, logging a warning but continuing processing.
+- **Missing Characters**: If a dialogue entry has an unrecognized character, it should default to a defined fallback voice (e.g., "THORAK") and log a warning.
+- **Malformed Dialogue Text**: Although handled by the Script Parser, the voice generator should have robust error handling for unexpected characters or formatting in dialogue text.
+
+### 4.2 Resource Constraints
+- **ElevenLabs API Rate Limits**: Implement retry logic with exponential backoff to handle temporary rate limits.
+- **Network Failures**: Implement retries and robust error logging for network interruptions.
+- **Memory Limitations**: Ensure efficient handling of audio data to prevent memory leaks, especially for long episodes.
+
+### 4.3 Data Edge Cases
+- **Very Short Dialogues**: Ensure even single-word dialogues are processed correctly without errors.
+- **Very Long Dialogues**: Handle long dialogue blocks by potentially splitting them for API calls if ElevenLabs has length limits (though `text-to-dialogue` aims to handle longer inputs).
+- **Special Characters**: Ensure all Unicode characters in dialogue text are properly encoded and passed to ElevenLabs.
+
+---
+
+## 5. Logic Requirements
+
+### 5.1 Core Algorithms
+- **Dialogue Extraction**: Iterate through the `scenes` array in the input JSON and extract all `dialogue` objects, associating them with their `scene_id` and original `line_position`.
+- **Voice Parameter Adjustment**: Dynamically adjust ElevenLabs voice parameters (stability, similarity, style) based on parsed `voice direction` cues.
+
+### 5.2 Data Processing
+- **JSON Parsing**: Load and parse the input JSON file, validating its structure against the expected schema from the Script Parser.
+- **Text Preprocessing**: Clean and prepare dialogue text before sending to ElevenLabs (e.g., handling escaped characters if any remain after parsing).
+- **Audio Concatenation**: Combine individually generated audio segments into a single, continuous audio track for the episode.
+
+### 5.3 Business Rules
+- **Character Voice Mapping**: Maintain a configurable mapping of character names (e.g., "THORAK", "ZARA", "BOTH") to specific ElevenLabs `voice_id`s and default settings (stability, similarity, style).
+    - THORAK: Scholarly, gravelly tone (Stability 0.75, Similarity 0.85).
+    - ZARA: Energetic, emotional variation (Stability 0.45, Similarity 0.75).
+- **Output Format**: All generated voice files must be in WAV format at 44.1kHz sample rate.
+- **File Naming Convention**: Adhere to the pattern: `{episode_name}_{scene_id}_{dialogue_index:03d}_{character}.wav`.
+- **Cost Tracking**: Accurately count characters sent to ElevenLabs per speaker for cost estimation and reporting.
+
+---
+
+## 6. Technical Constraints
+
+### 6.1 Performance Requirements
+- **Processing Time**: The component must complete processing of Episode 7 (69 dialogues) in under 5 minutes with a standard internet connection.
+- **API Rate Compliance**: The component must respect ElevenLabs API rate limits and implement appropriate delays between requests.
+- **Memory Efficiency**: The component must handle audio data efficiently without memory leaks, especially during concatenation of a long episode's dialogue.
+
+### 6.2 Technology Constraints
+- **Required Libraries**: `elevenlabs`, `pydub`, `python-dotenv`.
+- **External APIs**: Exclusive use of the ElevenLabs API for voice generation.
+- **Python Version**: Python 3.11+.
+
+### 6.3 Integration Constraints
+- **Input Format**: Strictly expects JSON output from the Script Parser (Component 1) following the `output_schema.json`.
+- **Output Compatibility**: The generated `.wav` file must be directly consumable by Component 3 (Audio Assembly) without additional processing.
+
+---
+
+## 7. User Experience Constraints
+
+### 7.1 Command Line Interface
+- **Command Structure**: Simple, single-command operation (e.g., `python voice_gen.py episode_007.json`).
+- **Progress Indication**: Display ASCII progress bars and informative status messages during processing, following the 5-step pattern established by the Script Parser.
+- **Error Messaging**: Provide clear, actionable error messages with suggested fixes for issues like invalid API keys or network problems.
+
+### 7.2 Logging and Monitoring
+- **Log Levels**: Utilize Python's `logging` module with configurable levels (INFO, DEBUG).
+- **Status Reporting**: Generate a comprehensive voice generation report (`{episode}_voice_report.txt`) summarizing successful/failed generations, character usage, and API costs.
+- **Real-time Cost Tracking**: Display real-time API usage and estimated costs during processing (though full optimization is deferred).
+
+---
+
+## 8. Test Plan
+
+### 8.1 Unit Tests
+- **ElevenLabs API Client**: Test the client wrapper's ability to initialize, handle API calls, and manage retries/errors.
+- **Character Voice Mapping**: Verify that characters are correctly mapped to their specified voice IDs and default settings.
+- **Voice Direction Adjustment**: Test that voice directions correctly modify stability and style parameters.
+- **Dialogue Extraction**: Unit test the extraction of dialogues from the JSON input and the associated metadata.
+- **File Naming**: Validate that generated filenames adhere to the standardized naming convention.
+
+### 8.2 Integration Tests
+- **Script Parser Integration**: Run the voice generator with actual JSON output from the Script Parser (e.g., `python voice_gen.py output/json/episode_007.json`).
+- **End-to-End Dialogue Generation**: Process the entire `episode_007.json` and confirm that all expected voice files are generated.
+
+### 8.3 Validation Tests
+- **Episode 7 Processing Test**: The primary test case is `tests/reference/episode_007.md`. The full process involves parsing it then generating voices: `python src/parser.py tests/reference/episode_007.md && python src/voice_gen.py output/json/episode_007.json`.
+- **Performance Benchmark Test**: Measure the actual processing time for Episode 7 and compare it against the target of under 5 minutes.
+- **Cost Estimation Test**: Verify that the reported ElevenLabs character count and estimated costs match actual API usage.
+- **Voice Quality Validation**: Manually review generated voice files for authenticity, distinctness of characters (Thorak vs. Zara), and accurate interpretation of voice directions.
+
+### 8.4 Edge Case Tests
+- **Invalid JSON Input**: Test the component's robustness when given a malformed JSON file.
+- **API Key Errors**: Simulate missing or invalid API keys to test error handling.
+- **Rate Limit Simulation**: Develop a mock ElevenLabs API or use a test account to simulate rate limiting and verify retry logic.
+- **Empty Dialogue List**: Test the behavior when the input JSON contains no dialogue entries.
+
+---
+
+## 9. Implementation Notes
+
+### 9.1 File Structure
+- **Primary Implementation**: `src/voice_gen.py`.
+- **ElevenLabs Client Wrapper**: `src/utils/elevenlabs_client.py`.
+- **Voice Direction Processing Logic**: `src/utils/voice_processor.py`.
+- **Tests**: `tests/test_voice_gen.py`, `tests/test_elevenlabs_client.py`, `tests/test_voice_processor.py`.
+- **Configuration**: `config/config.json` for general settings, and `.env` for API keys.
+- **Output Directory**: `output/voices/` with subdirectories per episode (e.g., `output/voices/episode_007/`).
+
+### 9.2 Dependencies
+- **Python Packages**: `elevenlabs`, `pydub`, `ffmpeg-python`, `moviepy`, `python-dotenv`, `requests`, `opencv-python`, `Pillow`, `imageio`, `imageio-ffmpeg`.
+- **ElevenLabs API**: Active ElevenLabs account with a valid API key.
+
+### 9.3 Configuration
+- **`config.json`**:
+    - `voice_generation.output_dir`: "output/voices"
+    - `voice_generation.output_format`: "wav_44100"
+    - `voice_generation.model`: "eleven_multilingual_v2"
+    - `voice_generation.max_retries`: 3
+    - `voice_generation.retry_delay_seconds`: 1.0
+    - `voice_generation.character_voices`: Mapping for THORAK and ZARA with `voice_id`, `stability`, `similarity`, `style`.
+    - `voice_generation.voice_direction_adjustments`: Predefined adjustments for common voice directions (e.g., "breathless", "gravelly").
+- **`.env`**: `ELEVENLABS_API_KEY=your-elevenlabs-api-key-here`.
+
+---
+
+## 10. Success Metrics
+
+### 10.1 Functional Success
+- [x] All 69 Episode 7 dialogues converted to voice files.
+- [x] Thorak and Zara voices sound distinct and character-appropriate.
+- [x] Processing completes without manual intervention.
+- [x] Output files are ready for Audio Assembly consumption.
+
+### 10.2 Quality Success
+- [x] Code passes linting (`flake8`).
+- [x] Code passes type checking (`mypy`).
+- [x] Code follows project conventions (e.g., `black` formatting, `snake_case`).
+- [x] Unit test coverage is comprehensive (≥80%) for voice generation modules.
+
+### 10.3 Integration Success
+- [x] Seamless handoff from Script Parser JSON.
+- [x] Voice files compatible with Audio Assembly requirements (WAV, 44.1kHz).
+- [x] Error handling maintains pipeline integrity (graceful degradation, clear errors).
+- [x] Cost tracking integrates with Script Parser estimates and monitors API usage.
+
+---
+
+## 11. Implementation Requirements for Codex
+
+### 11.1 Two-Tier Logging System
+Codex must maintain both high-level status and detailed implementation logs during the development of this component.
+
+#### Tier 1: High-Level Dashboard Updates
+Update `docs/specifications/workflow-log.md`.
+- **Status**: Update from `READY FOR CODEX` to `IN PROGRESS` at the start, and to `COMPLETE` upon successful validation.
+- **Branch**: Record the branch name created for this implementation.
+- **PR**: Add the Pull Request link once created.
+- **Metrics**: Summarize performance and validation results in the status overview table.
+
+#### Tier 2: Detailed Task Log
+Create a comprehensive log at `archive/codex_task_logs/feat_spec-component-2-voice-gen-tasks.md` using the `archive/codex_task_logs/TASK_LOG_TEMPLATE.md`.
+- **Granular Task Breakdown**: Break down the overall implementation into specific, achievable sub-tasks (1-4 hours each).
+- **Real-time Status**: Mark task status (`✅ Complete / 🚧 In Progress / ❌ Failed`) in real-time as sub-tasks are completed.
+- **Details per Task**: For each task, include `Time Spent`, `Description`, `Files Created/Modified`, `Key Decisions`, `Challenges`, and `Tests Added`.
+- **Required Log Sections**: Ensure all sections of the `TASK_LOG_TEMPLATE.md` are filled out:
+    - Implementation Overview
+    - Task Breakdown & Progress
+    - Testing & Validation
+    - Files Created/Modified
+    - Dependencies & Configuration
+    - Known Issues & Technical Debt
+    - Performance Metrics
+    - Integration Notes
+    - Lessons Learned
+    - Final Status.
+
+### 11.2 Logging Requirements
+1.  **Start Implementation**: At the very beginning, update the `workflow-log.md` status to "IN PROGRESS" for "2. Voice Generation".
+2.  **During Implementation**: Continuously update the detailed task log (`feat_spec-component-2-voice-gen-tasks.md`) with progress, decisions, and challenges for each sub-task.
+3.  **Create PR**: Once implementation is complete and tests pass, update the `workflow-log.md` with the PR link and change the status to `Review`.
+4.  **Completion**: After the PR is merged and the component is fully validated, update both the `workflow-log.md` (to `COMPLETE`) and the detailed task log (`feat_spec-component-2-voice-gen-tasks.md`) with final results and metrics.
+
+### 11.3 Implementation Deliverables
+Upon completion, Codex should provide:
+- [x] Complete component implementation (`src/voice_gen.py`) with all required functionality.
+- [x] Comprehensive test suite (`tests/test_voice_gen.py`, etc.) ensuring quality and coverage.
+- [x] Updated high-level workflow dashboard (`docs/specifications/workflow-log.md`) reflecting status and metrics.
+- [x] Comprehensive detailed task log (`archive/codex_task_logs/feat_spec-component-2-voice-gen-tasks.md`).
+- [x] Ready-to-merge pull request with a descriptive commit message following the project's format.
+- [x] Performance validation against Episode 7, confirming processing time and cost estimates.
+
+---
