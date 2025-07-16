@@ -120,7 +120,14 @@ THORAK: (Voice direction) "Dialogue" # Character speech
 
 ## Development Workflow
 
-Refer to the main [WORKFLOW_GUIDE.md](.ai-context/WORKFLOW_GUIDE.md) for the complete development process.
+The project follows a two-tier development process:
+
+### High-Level Component Development Cycle
+Refer to [dev-cycle.md](docs/specifications/dev-cycle.md) for the macro workflow:
+1. PRD Review → Feature Spec Generation → Implementation → PR → Loop
+
+### Detailed Implementation Process
+Refer to [WORKFLOW_GUIDE.md](.ai-context/WORKFLOW_GUIDE.md) for implementation details and AI coordination.
 
 ### 1. Planning Phase (Claude Chat)
 - Chief Product Officer (user) and Claude Chat determine tasks
@@ -159,14 +166,24 @@ Closes VSM-6
 - **Target**: Single MP3 with proper dialogue timing
 - **Next Command**: `python audio_mix.py output/voices/episode_2_ex_final/`
 
+## Feature Specifications
+
+Component development follows a structured specification process:
+- **Location**: `docs/specifications/feat_spec-[component-name].md`
+- **Generation**: Created in Claude Chat using PRD context
+- **Contents**: Purpose, scope, user flows, edge cases, logic requirements, constraints, test plan
+- **Implementation**: Read by Codex for automated implementation
+
 ## Available Commands (Located in .claude/commands/)
 
-- `@next-task` - Auto-selects highest priority task, updates to "In Progress", creates implementation plan
-- `@finalize-task` - Auto-detects current task, tests, generates commit commands, updates Notion to "Done"
+**Note: These commands are for NON-CORE tasks only. Core product components (1-8) are managed by Codex.**
+
+- `@next-task` - Auto-selects highest priority NON-CORE task, updates to "In Progress", creates implementation plan
+- `@finalize-task` - Auto-detects current NON-CORE task, tests, generates commit commands, updates Notion to "Done"  
 - `@update-prd` - Syncs Notion task completion status with PRD.md component progress
 - `@orient` - Get oriented in project and see next best actions
 
-## MCP Tool Access
+## MCP Tool Access & Usage Policy
 
 You have access to:
 
@@ -174,7 +191,21 @@ You have access to:
 - **Filesystem MCP**: File operations and project management
 - **Memory MCP**: Maintain context across sessions
 
-Use these tools to maintain the single source of truth in Notion while implementing pipeline components.
+### CRITICAL: User-Directed Notion Access Only
+
+**Access Control**: Claude Code accesses Notion database ONLY when explicitly instructed by the user.
+
+**Prohibited**: 
+- Autonomous Notion database access
+- Auto-executing Notion commands without user instruction
+- Reading/updating Notion tasks without explicit user direction
+
+**Required**:
+- User must specifically instruct Claude Code to access Notion
+- All Notion operations must be user-visible and approved
+- User controls when and how Notion database is accessed
+
+**Scope**: Notion database is reserved for housekeeping, architectural, infrastructure, process, research, and maintenance tasks - NOT core product components.
 
 ## 6. Context Maintenance Protocol
 
@@ -189,6 +220,11 @@ To ensure the `.ai-context/AI_CONTEXT.md` file remains the single source of trut
 - **Action:** When development work results in a new architectural decision, reusable code pattern, or established convention.
 - **Prompt:** Claude will recognize significant architectural discussions and ask if they should be documented in the "Architecture Decisions Made" or "Known Patterns & Conventions Discovered" sections of `.ai-context/AI_CONTEXT.md`.
 - **Example:** "We just established a new pattern for [X]. Should I add this to the `AI_CONTEXT.md` patterns section?"
+
+### 2.1. Feature Specification Trigger
+- **Action:** When a new feature specification is created or when feature specs need updates based on implementation learnings.
+- **Prompt:** Claude will ask if feature specs in `docs/specifications/` need updates or if new specs should be created.
+- **Example:** "Should I update the feature spec for Component 2 based on the implementation changes we just made?"
 
 ### 3. Pre-Commit Check
 - **Action:** Before generating commit messages (especially when using `@finalize-task`), Claude will perform a final context check.
