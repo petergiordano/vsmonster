@@ -408,10 +408,10 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python process_episode.py episode_007.md
-  python process_episode.py episode_007.md --dry-run
-  python process_episode.py episode_007.md --output fixed_episode.md
-  python process_episode.py episode_007.md --verify
+  python process_episode.py episode_2_ex_final.md
+  python process_episode.py episode_2_ex_final.md --dry-run
+  python process_episode.py episode_2_ex_final.md --output fixed_episode.md
+  python process_episode.py episode_2_ex_final.md --verify
   python process_episode.py --test
         """
     )

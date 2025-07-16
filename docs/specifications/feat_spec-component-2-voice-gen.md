@@ -1,5 +1,6 @@
 
 # Feature Spec - Voice Generation (Component 2)**
+Developed in Gemini [Chat Session] (https://gemini.google.com/gem/291fcca1fd00/bdba9e3d7bc0beb1)
 
 ### **Next Core Component: Voice Generation (Component 2)**
 
@@ -8,11 +9,11 @@ This component is crucial as it takes the structured data from the Script Parser
 #### **1. Overview & Goals**
 
   * **Goal**: Generate a **single, complete multi-character dialogue track (.wav file)** from the structured JSON output of Step 1 (Script Parser).
-  * **Input**: JSON timeline from the Script Parser (now using `tests/reference/episode_2_ex_final.md` as the primary test case), which contains dialogue text, character attribution, and voice directions.
+  * **Input**: JSON timeline from the Script Parser (now using `tests/reference/episode_007.md` as the primary test case), which contains dialogue text, character attribution, and voice directions.
   * **Output**: A single `.wav` audio file per episode, representing the complete talk track of two people. This file will be stored in `output/voices/`.
   * **Value Proposition**: This step delivers a unified voice track, ready for direct integration with music and SFX in Component 3.
   * **Primary Validation**: The combined talk track must sound authentic, with distinct voices for Thorak and Zara, and all intonations and emotional cues (e.g., "breathless") accurately interpreted by ElevenLabs.
-  * **Simplicity Goal**: It should operate with a single command, such as `python voice_gen.py episode_2_ex_final.json`.
+  * **Simplicity Goal**: It should operate with a single command, such as `python voice_gen.py episode_007.json`.
 
 #### **2. Technical Approach (`src/voice_gen.py`)**
 
@@ -23,7 +24,7 @@ The `src/voice_gen.py` script will be updated to leverage ElevenLabs' text-to-di
       * Dialogue entries (text, character, direction) from the Script Parser's JSON will be prepared as a list of inputs for the ElevenLabs API request. Each input object will specify the `text` and `voice_id` for the respective character.
       * **Intonation and Instructions**: All intonations and emotional cues (e.g., "(Breathless with excitement)", "(Gravelly, analytical)") will be passed directly within the dialogue text to ElevenLabs. The Eleven v3 model (or other suitable multi-speaker models) can interpret these textual cues to influence speech emotion and delivery.
   * **Character Voice Mapping**: The existing mapping of "THORAK" and "ZARA" to their respective ElevenLabs `voice_id`s will be used within the API call's inputs.
-  * **Input Processing**: It will load the JSON output from the Script Parser. The primary test file for this phase will be `output/json/episode_2_ex_final.json`, derived from `tests/reference/episode_2_ex_final.md`.
+  * **Input Processing**: It will load the JSON output from the Script Parser. The primary test file for this phase will be `output/json/episode_007.json`, derived from `tests/reference/episode_007.md`.
   * **Output Management**: The generated complete dialogue track will be saved as a single `.wav` file in `output/voices/{episode_name}/`.
   * **Model Selection**: Prioritize the Eleven v3 model if access is available, as it is designed for Text to Dialogue. Otherwise, use the recommended `eleven_multilingual_v2` model which offers high quality and is stable for long-form generations.
 
@@ -41,10 +42,10 @@ The `src/voice_gen.py` script will be updated to leverage ElevenLabs' text-to-di
 
 #### **5. Validation & Quality Gates**
 
-  * **Primary Test File**: `tests/reference/episode_2_ex_final.md` will be the definitive source for parsing and voice generation validation.
-  * **Functional**: The process must generate a single `.wav` file for the entire episode's dialogue, including all assigned characters and their respective lines from `episode_2_ex_final.md`.
+  * **Primary Test File**: `tests/reference/episode_007.md` will be the definitive source for parsing and voice generation validation.
+  * **Functional**: The process must generate a single `.wav` file for the entire episode's dialogue, including all assigned characters and their respective lines from `episode_007.md`.
   * **Quality**: Manual review of the generated `.wav` file will confirm that Thorak and Zara's voices are authentic and distinct, and that all emotional cues (e.g., "(Breathless)") have been interpreted accurately by ElevenLabs. The overall dialogue flow and timing within the single file should sound natural.
-  * **Performance**: The generation of the complete dialogue track for `episode_2_ex_final.md` should be efficient, with a target processing time that allows for the overall pipeline goals.
+  * **Performance**: The generation of the complete dialogue track for `episode_007.md` should be efficient, with a target processing time that allows for the overall pipeline goals.
   * **Reliability**: The process should complete without manual intervention and produce a usable audio file ready for Component 3.
 
 This refined specification streamlines the Voice Generation component by leveraging ElevenLabs' advanced dialogue capabilities, directly facilitating the subsequent Audio Assembly step.
@@ -62,4 +63,4 @@ This refined specification streamlines the Voice Generation component by leverag
   * [Development Environment Setup](https://www.google.com/search?q=uploaded:petergiordano/vsmonster/vsmonster-a6d3525cd4023283dcb65e4772f8daf0b0b983de/docs/setup/development_setup.md)
   * [config.json](https://www.google.com/search?q=uploaded:petergiordano/vsmonster/vsmonster-a6d3525cd4023283dcb65e4772f8daf0b0b983de/config/config.json)
   * [feat\_spec-component-2-voice-gen.md](https://www.google.com/search?q=uploaded:feat_spec-component-2-voice-gen.md)
-  * [tests/reference/episode\_2\_ex\_final.md](https://www.google.com/search?q=uploaded:episode_2_ex_final.md)
+  * [tests/reference/episode\_2\_ex\_final.md](https://www.google.com/search?q=uploaded:episode_007.md)

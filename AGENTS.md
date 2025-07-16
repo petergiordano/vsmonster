@@ -109,7 +109,7 @@ You are an integral part of the project's progressive validation framework. Afte
 
   * **Level 1: Syntax & Style:** Guide user to run `black src/ --check`, `flake8 src/`, `mypy src/`.
   * **Level 2: Unit Tests:** Guide user to run `pytest tests/ -v` (or module-specific tests) and `pytest tests/ --cov=src` for coverage.
-  * **Level 3: Integration Tests:** Guide user to run `python src/parser.py scripts/episode_007.md` and `python setup_validation.py` for integration testing with the `Episode 7` reference.
+  * **Level 3: Integration Tests:** Guide user to run `python src/parser.py tests/reference/episode_2_ex_final.md` and `python setup_validation.py` for integration testing with the `Episode 7` reference.
   * **Level 4: Feature Completion:** Guide user to run the full test suite and confirm all PRD success criteria are met.
   * **Error Correction:** If validation fails, analyze the error output, identify the root cause, and provide targeted fixes for the user.
 

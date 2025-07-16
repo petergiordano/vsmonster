@@ -1,6 +1,6 @@
 # AI Project Context & Master Rulebook (Dynamic)
 
-### **Purpose: This document serves as the evolving master briefing for any AI assistant working on this project. It accumulates context across the 5-step workflow and must be provided at the beginning of any new development session.**
+### **Purpose: This document serves as the evolving master briefing for any AI assistant working on this project. It accumulates context across the 5-phase workflow detailed in the [WORKFLOW_GUIDE.md](.ai-context/WORKFLOW_GUIDE.md) and must be provided at the beginning of any new development session.**
 
 ### CLI Context Files Integration
 - **CLAUDE.md**, **GEMINI.md**, and **AGENTS.md** automatically reference this file for complete project context
@@ -35,7 +35,7 @@
 ## 3. File & Folder Structure
 
 - **`src/`**: Contains all application source code for the 8-component pipeline
-- **`tests/reference/`**: Test episodes and reference files (e.g., episode_007.md)
+- **`tests/reference/`**: Test episodes and reference files (e.g., episode_2_ex_final.md)
 - **`output/`**: Generated content organized by episode and component
   - `output/json/`: Parsed script data (includes debug/ subdirectory)
   - `output/voices/`: Generated voice files (organized by episode)
@@ -76,7 +76,7 @@
 - **Docstrings:** All functions must have Google-style docstrings
 - **Error Handling:** Fail fast with clear error messages; all external API calls wrapped in try/except
 - **CLI Design:** ASCII progress bars, clear status messages, actionable error guidance
-- **File Naming:** Use episode naming convention (e.g., episode_007.md, episode_007.json)
+- **File Naming:** Use episode naming convention (e.g., episode_2_ex_final.md, episode_007.json)
 
 ---
 
@@ -95,15 +95,16 @@
 ## 6. Context Handoff Protocols
 
 ### **Between Chat AI (Strategist) and CLI AI (Implementer)**
-- **Context Transfer Method:** Always provide this complete AI_CONTEXT.md file
-- **Role Boundaries:** Chat AI plans and prepares prompts; CLI AI executes specific technical tasks
-- **Validation Points:** CLI AI should confirm understanding of context before beginning implementation
+- **Context Transfer Method:** Always provide this complete AI_CONTEXT.md file.
+- **Role Boundaries:** The Chat AI (Strategist) plans and prepares prompts. The CLI AI (Implementer) executes specific technical tasks.
+- **Validation Points:** The CLI AI should confirm its understanding of the context before beginning implementation.
 
 ### **Workflow Context Accumulation**
-- **Step 1-2:** Foundation context (project setup, goals, constraints)
-- **Step 3:** Feature context (PRD requirements, user stories, acceptance criteria)
-- **Step 4:** Implementation context (task breakdown, file structure, dependencies)
-- **Step 5:** Execution context (code patterns, validation results, lessons learned)
+- **Phase 1: Project Initialization:** Foundation context (project setup, goals, constraints).
+- **Phase 2: Brief AI Assistants:** Shared contextual understanding across the AI team.
+- **Phase 3: Create PRD:** Feature context (PRD requirements, user stories, acceptance criteria).
+- **Phase 4: Generate Task List:** Implementation context (task breakdown, file structure, dependencies).
+- **Phase 5: Execute Task List:** Execution context (code patterns, validation results, lessons learned).
 
 ---
 
@@ -126,7 +127,7 @@
   - Clear progress reporting with 5-step status updates
 - **Performance:** 0.003s processing time (well under 10s requirement)
 - **Output:** Structured JSON ready for Voice Generation (Component 2)
-- **Command:** `python parser.py episode_007.md`
+- **Command:** `python parser.py episode_2_ex_final.md`
 
 ### **Active Features** (Features currently in development)
 **Ready to Start: Voice Generation (Component 2)**
@@ -217,7 +218,7 @@ flake8 src/
 pytest tests/ -v
 
 # Level 3: Integration testing with Episode 7
-python parser.py scripts/episode_007.md
+python parser.py scripts/episode_2_ex_final.md
 python tools/setup_validation.py
 
 # Level 4: Full validation suite
@@ -281,12 +282,12 @@ pytest tests/test_parser.py -v  # Parser unit tests
 pytest tests/ --cov=src         # Test coverage reporting
 
 # Level 3 (Integration):
-python parser.py scripts/episode_007.md # Integration test with Episode 7
+python parser.py scripts/episode_2_ex_final.md # Integration test with Episode 7
 # Validation integrated into parser output
 
 # Level 4 (Full Validation):
 pytest tests/ --cov=src --cov-fail-under=80 # Full test suite with coverage
-python parser.py scripts/episode_007.md && echo "✓" # PRD-v0 validation
+python parser.py scripts/episode_2_ex_final.md && echo "✓" # PRD-v0 validation
 ```
 
 ### **CLI Assistant Best Practices**

@@ -26,7 +26,7 @@ For completed components, add validation section:
 ```markdown
 #### Component X Validation
 ```bash
-python component_command.py tests/reference/episode_007.md
+python component_command.py tests/reference/episode_2_ex_final.md
 ```
 **Last Validated:** 2025-07-XX ✅ **Status:** All success criteria met
 ```

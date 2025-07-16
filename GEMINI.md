@@ -71,10 +71,31 @@ Gemini will guide you through progressive validation levels after each code modi
 
   * **Level 1: Syntax & Style Validation:** Includes commands for code formatting (`black`), linting (`flake8`), and type checking (`mypy`).
   * **Level 2: Unit Test Validation:** Commands for running unit tests and checking test coverage.
-  * **Level 3: Integration Validation:** Commands for integration tests, often using `episode_007.md` as the primary test case.
+  * **Level 3: Integration Validation:** Commands for integration tests, often using `episode_2_ex_final.md` as the primary test case.
   * **Level 4: Feature Completion Validation:** Running the full test suite and checking overall PRD success criteria.
 
-## 6\. Key Reminders for Gemini CLI Usage
+## 6. Context Maintenance Protocol
+
+To ensure the `.ai-context/AI_CONTEXT.md` file remains the single source of truth, Gemini will adhere to the following protocol:
+
+### 1. Task Completion Trigger
+- **Action:** After a task is successfully validated (passes all relevant validation levels), Gemini will automatically review the "Current Project Context State" in `.ai-context/AI_CONTEXT.md`.
+- **Prompt:** Gemini will ask if the completed task warrants an update to the active/completed features, planned features, or lessons learned.
+- **Example:** "Task `[Task Name]` is complete and validated. Should I update the `AI_CONTEXT.md` to reflect this?"
+
+### 2. Architectural & Pattern Trigger
+- **Action:** If a conversation leads to a new architectural decision, a reusable code pattern, or a convention to be followed.
+- **Prompt:** Gemini will recognize this and ask if it should be documented in the "Architecture Decisions Made" or "Known Patterns & Conventions Discovered" sections of `.ai-context/AI_CONTEXT.md`.
+- **Example:** "This seems like a new architectural decision. Shall I add it to `AI_CONTEXT.md`?"
+
+### 3. Pre-Commit Check
+- **Action:** When generating a commit message, Gemini will perform a final check.
+- **Prompt:** Before finalizing the commit message, Gemini will ask one last time if any changes to the project's context, state, or architecture need to be recorded in `.ai-context/AI_CONTEXT.md`.
+- **Example:** "Before I generate the commit message, does `AI_CONTEXT.md` need to be updated with any new context from the work we've just done?"
+
+By following this protocol, Gemini will ensure that the project's master context file is always synchronized with the state of the codebase, providing a reliable foundation for all AI assistants.
+
+## 7\. Key Reminders for Gemini CLI Usage
 
   * **Prioritize `.ai-context/AI_CONTEXT.md`:** Always refer to it for project standards and status.
   * **Use Validation Commands:** Run validation steps diligently after each change to ensure code quality and functionality.

@@ -280,7 +280,7 @@ def test_elevenlabs_api(result: ValidationResult) -> bool:
 
 def check_episode_7_reference(result: ValidationResult) -> bool:
     """Check if Episode 7 reference file exists."""
-    episode_path = Path('tests/reference/episode_007.md')
+    episode_path = Path('tests/reference/episode_2_ex_final.md')
     
     if episode_path.exists():
         # Check file size to ensure it's not empty
@@ -293,7 +293,7 @@ def check_episode_7_reference(result: ValidationResult) -> bool:
             return True
     else:
         result.add_fail("Episode 7 reference file not found")
-        result.add_info("Should be at: tests/reference/episode_007.md")
+        result.add_info("Should be at: tests/reference/episode_2_ex_final.md")
         return False
 
 def check_gitignore(result: ValidationResult) -> bool:

@@ -33,12 +33,12 @@
 
 ### ✅ Component 1: Script Parser (Complete)
 - Completed 2025-01-08 with 100% Episode 7 validation
-- Command: `python parser.py episode_007.md`
-- Output: `output/json/episode_007.json`
+- Command: `python parser.py episode_2_ex_final.md`
+- Output: `output/json/episode_2_ex_final.json`
 
 ### 🔄 Component 2: Voice Generation (In Progress)
 - **Notion Tasks:** VSM-6 through VSM-30
-- **Target Command:** `python voice_gen.py episode_007.json`
+- **Target Command:** `python voice_gen.py episode_2_ex_final.json`
 - **Expected Output:** 69 voice files in `output/voices/`
 - **Success Criteria:** Processing in <5 minutes, all dialogues converted
 
@@ -60,8 +60,8 @@
 ### Commands Reference
 ```bash
 # Development
-python parser.py episode_007.md          # Component 1 (Complete)
-python voice_gen.py episode_007.json     # Component 2 (Target)
+python parser.py episode_2_ex_final.md          # Component 1 (Complete)
+python voice_gen.py episode_2_ex_final.json     # Component 2 (Target)
 
 # Testing
 pytest tests/ -v --cov=src
@@ -74,7 +74,7 @@ mypy src/
 - `/PRD.md` - Master requirements
 - `/AI_CONTEXT.md` - Development context  
 - `/notion-database-schema.json` - Database schema for Claude Code
-- `output/json/episode_007.json` - Parser output
+- `output/json/episode_2_ex_final.json` - Parser output
 - `output/voices/` - Voice generation target
 
 ---

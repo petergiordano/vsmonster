@@ -3,7 +3,7 @@
 versusMonster Script Parser - Step 1 of 8-Component Pipeline
 Transforms markdown podcast scripts into structured JSON for downstream processing.
 
-PRD-v0 Command: python parser.py episode_007.md
+PRD-v0 Command: python parser.py episode_2_ex_final.md
 """
 
 import argparse
@@ -916,12 +916,12 @@ def main() -> int:
     # Parse command line arguments
     parser = argparse.ArgumentParser(
         description="Parse versusMonster podcast scripts into structured JSON",
-        epilog="Example: python parser.py episode_007.md",
+        epilog="Example: python parser.py episode_2_ex_final.md",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
     parser.add_argument(
-        "input_file", help="Path to the markdown script file (e.g., episode_007.md)"
+        "input_file", help="Path to the markdown script file (e.g., episode_2_ex_final.md)"
     )
 
     parser.add_argument(

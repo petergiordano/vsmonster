@@ -33,17 +33,17 @@ Sequential pipeline where each component delivers independent value:
 ### Pipeline Operations
 ```bash
 # Component 1: Parse markdown script
-python src/parser.py tests/reference/episode_007.md
+python src/parser.py tests/reference/episode_2_ex_final.md
 
 # Component 2: Generate character voices
-python voice_gen.py output/json/episode_007.json
-python src/voice_gen.py output/json/episode_007.json  # Alternative path
+python voice_gen.py output/json/episode_2_ex_final.json
+python src/voice_gen.py output/json/episode_2_ex_final.json  # Alternative path
 
 # Episode post-processing (fix tag escaping)
-python tools/process_episode.py tests/reference/episode_007.md
+python tools/process_episode.py tests/reference/episode_2_ex_final.md
 
 # Cost analysis and reporting
-python src/cost_reporter.py output/json/episode_007.json
+python src/cost_reporter.py output/json/episode_2_ex_final.json
 ```
 
 ### Development Workflow
@@ -62,15 +62,15 @@ pytest tests/ --cov=src         # With coverage
 pytest tests/ --cov=src --cov-fail-under=80  # Coverage gate
 
 # Integration testing with Episode 7 (gold standard)
-python src/parser.py tests/reference/episode_007.md
-python src/voice_gen.py output/json/episode_007.json
+python src/parser.py tests/reference/episode_2_ex_final.md
+python src/voice_gen.py output/json/episode_2_ex_final.json
 ```
 
 ## Data Flow and File Structure
 
 ### Pipeline Data Flow:
 ```
-tests/reference/episode_007.md → output/json/episode_007.json → output/voices/episode_007/*.wav → [future: complete audio/video]
+tests/reference/episode_2_ex_final.md → output/json/episode_2_ex_final.json → output/voices/episode_2_ex_final/*.wav → [future: complete audio/video]
 ```
 
 ### Key Directories:
@@ -92,11 +92,11 @@ tests/             # Test suite
 
 ## Episode 7 as Universal Test Case
 
-**All components validate against `tests/reference/episode_007.md`:
+**All components validate against `tests/reference/episode_2_ex_final.md`:
 - Contains 69 dialogues (THORAK/ZARA characters)
 - Includes all multimedia tags: IMG, SFX, MUSIC, AMBIENT, TRANSITION
 - Target processing: <5 minutes, ~$4.41 total cost
-- Expected voice output: 69 WAV files in `output/voices/episode_007/`
+- Expected voice output: 69 WAV files in `output/voices/episode_2_ex_final/`
 
 ## Character Voice Configuration
 
@@ -155,9 +155,9 @@ Closes VSM-6
 
 **Active Development**: Component 3 (Audio Assembly)
 - **Dependencies**: Components 1-2 complete and validated
-- **Input**: Voice files from `output/voices/episode_007/`
+- **Input**: Voice files from `output/voices/episode_2_ex_final/`
 - **Target**: Single MP3 with proper dialogue timing
-- **Next Command**: `python audio_mix.py output/voices/episode_007/`
+- **Next Command**: `python audio_mix.py output/voices/episode_2_ex_final/`
 
 ## Available Commands (Located in .claude/commands/)
 
