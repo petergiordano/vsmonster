@@ -11,7 +11,7 @@
 | Component | Status | Feature Spec | Branch | PR | Detailed Log |
 |-----------|--------|-------------|--------|----|-----------| 
 | 1. Script Parser | ✅ **COMPLETE** | Pre-existing | N/A | N/A | N/A (pre-workflow) |
-| 2. Voice Generation | 🚧 **READY FOR CODEX** | [feat_spec-component-2-voice-gen.md](feat_spec-component-2-voice-gen.md) | TBD | TBD | [→ Tasks](../../archive/codex_task_logs/feat_spec-component-2-voice-gen-tasks.md) |
+| 2. Voice Generation | 🚧 **IN PROGRESS** | [feat_spec-component-2-voice-gen.md](feat_spec-component-2-voice-gen.md) | feature/component-2-voice-gen | [Codex Job](https://github.com/codex/jobs/petergiordano-vsmonster-component-2) | [→ Tasks](../../archive/codex_task_logs/feat_spec-component-2-voice-gen-tasks.md) |
 | 3. Audio Assembly | 📝 **PLANNED** | TBD | TBD | TBD | TBD |
 | 4. Static Video | 📝 **PLANNED** | TBD | TBD | TBD | TBD |
 | 5. Image Transitions | 📝 **PLANNED** | TBD | TBD | TBD | TBD |

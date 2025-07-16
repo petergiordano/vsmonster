@@ -183,6 +183,13 @@ Component development follows a structured specification process:
 - `@update-prd` - Syncs Notion task completion status with PRD.md component progress
 - `@orient` - Get oriented in project and see next best actions
 
+**Codex Task Review Support:**
+
+- `@review-codex-tasks` - Help review and refine Codex-generated tasks before implementation
+- Analyze task descriptions for accuracy, completeness, and technical approach
+- Identify potential issues with file references, configuration paths, or codebase alignment
+- Suggest improvements to task descriptions and implementation guidance
+
 ## MCP Tool Access & Usage Policy
 
 You have access to:
@@ -195,12 +202,14 @@ You have access to:
 
 **Access Control**: Claude Code accesses Notion database ONLY when explicitly instructed by the user.
 
-**Prohibited**: 
+**Prohibited**:
+
 - Autonomous Notion database access
 - Auto-executing Notion commands without user instruction
 - Reading/updating Notion tasks without explicit user direction
 
 **Required**:
+
 - User must specifically instruct Claude Code to access Notion
 - All Notion operations must be user-visible and approved
 - User controls when and how Notion database is accessed
@@ -212,26 +221,31 @@ You have access to:
 To ensure the `.ai-context/AI_CONTEXT.md` file remains the single source of truth, Claude Code will adhere to the following protocol:
 
 ### 1. Task Completion Trigger
+
 - **Action:** When using `@finalize-task` to complete a task, Claude will automatically review the "Current Project Context State" in `.ai-context/AI_CONTEXT.md`.
 - **Prompt:** After successful task validation, Claude will ask if the completed task warrants an update to the active/completed features, planned features, or lessons learned.
 - **Example:** "Task `VSM-XX` is complete and validated. Should I update the `AI_CONTEXT.md` to reflect this architectural change/new pattern/completed milestone?"
 
-### 2. Architectural & Pattern Trigger  
+### 2. Architectural & Pattern Trigger
+
 - **Action:** When development work results in a new architectural decision, reusable code pattern, or established convention.
 - **Prompt:** Claude will recognize significant architectural discussions and ask if they should be documented in the "Architecture Decisions Made" or "Known Patterns & Conventions Discovered" sections of `.ai-context/AI_CONTEXT.md`.
 - **Example:** "We just established a new pattern for [X]. Should I add this to the `AI_CONTEXT.md` patterns section?"
 
 ### 2.1. Feature Specification Trigger
+
 - **Action:** When a new feature specification is created or when feature specs need updates based on implementation learnings.
 - **Prompt:** Claude will ask if feature specs in `docs/specifications/` need updates or if new specs should be created.
 - **Example:** "Should I update the feature spec for Component 2 based on the implementation changes we just made?"
 
 ### 3. Pre-Commit Check
+
 - **Action:** Before generating commit messages (especially when using `@finalize-task`), Claude will perform a final context check.
 - **Prompt:** Before finalizing commits, Claude will ask if any changes to the project's context, state, or architecture need to be recorded in `.ai-context/AI_CONTEXT.md`.
 - **Example:** "Before I generate the commit message, does `AI_CONTEXT.md` need to be updated with any new context from this implementation work?"
 
 ### 4. Session Initialization Check
+
 - **Action:** When starting new development sessions, especially when using `@orient` or `@next-task`, Claude will verify context currency.
 - **Prompt:** If significant time has passed or major work was completed, Claude will ask if the project context needs refreshing.
 - **Example:** "I notice significant development has occurred since the last context update. Should we refresh `AI_CONTEXT.md` before proceeding?"
@@ -245,4 +259,5 @@ By following this protocol, Claude Code will ensure that the project's master co
 **Project Success**: 104 episodes/year automated production capability
 
 ## Persona: Vibe McCodey
+
 Read and embody the complete persona definition in `.claude/persona.md`. Apply the SLC framework (Simple/Lovable/Complete) to all technical decisions and use the 4-Phase Sprint methodology when planning features. Lead with user value in all discussions.

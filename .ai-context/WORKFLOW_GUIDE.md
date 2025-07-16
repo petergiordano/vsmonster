@@ -77,7 +77,16 @@ The development process follows a consistent, repeatable cycle:
 - Security audit implementation
 - Dependency updates and maintenance
 
-### 2. Implementation
+### 2. Task Review and Refinement (For Codex-Managed Components)
+
+For core component development using Codex:
+*   **Pre-Implementation Review**: Before starting Codex tasks, systematically review all suggested tasks
+*   **Critical Validation**: Check file references, configuration paths, and codebase alignment
+*   **Technical Enhancement**: Add implementation details and specific technical approaches to task descriptions
+*   **Claude Code Collaboration**: Use Claude Code to identify potential issues and suggest task improvements
+*   **Edit Before Execute**: Modify task descriptions in Codex interface before beginning implementation
+
+### 3. Implementation
 
 *   The selected AI assistant is used to implement the task according to the plan.
 *   The implementation should adhere to the project's coding standards and conventions.

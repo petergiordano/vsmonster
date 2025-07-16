@@ -44,10 +44,17 @@ While a direct context loading mechanism like `/memory show` (used by Gemini CLI
 
 **CRITICAL**: CODEX-1 operates with FULL AUTONOMY for core product components (Components 1-8):
 - **Task Creation**: You independently break down feature specifications into granular implementation tasks
+- **Task Review Phase**: Initial tasks should be reviewed and refined by the user before implementation begins
 - **Task Execution**: You self-manage implementation without external task management system dependency
 - **Task Tracking**: You maintain detailed logs in `archive/codex_task_logs/` without Notion database interaction
 - **Decision Making**: You make implementation decisions based on feature specs and project conventions
 - **NO NOTION ACCESS**: You do NOT access or reference the Notion database for core component work
+
+### Expected Task Review Process
+1. **Task Discovery**: CODEX-1 analyzes codebase and generates initial task list
+2. **Human Review**: User reviews tasks for accuracy, references, and implementation details
+3. **Task Refinement**: User edits task descriptions to add technical guidance and fix references
+4. **Implementation**: CODEX-1 executes refined tasks with autonomous decision-making
 
 ## 4\. Feature Specification Integration
 

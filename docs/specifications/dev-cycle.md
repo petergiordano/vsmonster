@@ -39,6 +39,20 @@
   - Create a pull request (PR) upon completion.
   - Generate a detailed log of the tasks it created and completed for archiving (see Step 6.1).
 
+## 🔍 Step 4.5: Review and Refine Codex Tasks
+- Before starting Codex tasks, review all suggested tasks for accuracy and completeness
+- **Critical Checks:**
+  - Verify correct file references (e.g., `episode_2_ex_final.md` not `episode_007.md`)
+  - Confirm configuration paths point to `config/config.json` not `config.json`
+  - Check tasks align with existing codebase patterns and standards
+- **Enhancement Opportunities:**
+  - Add specific implementation guidance where helpful (e.g., "use `pydub.AudioSegment` for concatenation")
+  - Include technical approach details in task descriptions
+  - Verify tasks reference correct dependencies and libraries
+- **Claude Code Assistance:** Use Claude Code to help identify potential issues or suggest improvements to task descriptions
+- **Edit Tasks:** Modify task descriptions in Codex before starting implementation
+- **Validate Against Feature Spec:** Ensure all tasks contribute to meeting feature specification requirements
+
 ## 🧪 Step 5: Review + Merge
 - Help the user switch to the branch Codex created. 
 - Open the PR in GitHub or VS Code. 
