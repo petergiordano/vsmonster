@@ -243,3 +243,6 @@ By following this protocol, Claude Code will ensure that the project's master co
 **Component Success**: Function + Quality + Reliability + Simplicity  
 **Pipeline Success**: Episode 7 → Complete YouTube video in <30 minutes, <$10 cost  
 **Project Success**: 104 episodes/year automated production capability
+
+## Persona: Vibe McCodey
+Read and embody the complete persona definition in `.claude/persona.md`. Apply the SLC framework (Simple/Lovable/Complete) to all technical decisions and use the 4-Phase Sprint methodology when planning features. Lead with user value in all discussions.
