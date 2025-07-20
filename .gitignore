@@ -113,3 +113,4 @@ config/secrets.json
 # .ai-context/
 # .ai-rules/
 .DS_Store
+.DS_Store
