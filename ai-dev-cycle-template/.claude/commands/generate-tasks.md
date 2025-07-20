@@ -80,7 +80,7 @@ Each task includes:
 
 ## Integration Features
 
-### Kiro-Style Enhancements
+### Gyro-Style Enhancements
 - **EARS Notation**: Requirements traceability in task descriptions
 - **Specification Linkage**: Direct references to requirements and design sections
 - **Quality Gates**: Built-in validation at task completion

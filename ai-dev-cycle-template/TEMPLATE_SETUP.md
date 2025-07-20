@@ -54,13 +54,49 @@ The script will prompt you for:
 - **Project description**: Brief description of what it does
 - **Primary language**: Python, JavaScript, Go, etc.
 - **Component count**: Number of pipeline components (4-8 recommended)
+- **Project domain**: data-processing, content-generation, api-integration, or general
+- **Enable Gyro features**: Enhanced AI development capabilities (recommended: yes)
 
 ### 3. Validate Setup
 ```bash
+# Basic validation
 python scripts/validate-setup.py
+
+# If you enabled Gyro features, run comprehensive validation:
+python scripts/validation/run-all-validations.py .
 ```
 
 If validation passes, proceed to [AI Integration](#-ai-integration-setup). If not, see [Manual Setup](#-manual-setup-detailed) below.
+
+## 🚀 Gyro Features Overview
+
+If you enabled Gyro features during setup, you get these enhanced capabilities:
+
+### 🎯 Spec-Driven Development
+- **Requirements → Design → Tasks** workflow
+- Automated specification generation and validation
+- Requirements traceability throughout development
+
+### 🧭 Agent Steering System
+- **Persistent AI context** through `.claude/steering/` files
+- **Domain-specific guidance** for data processing, content generation, API integration
+- **Project-specific patterns** that improve with use
+
+### 🪝 Automated Quality Gates
+- **Event-driven validation** through hooks framework
+- **Pre-commit checks** for code quality and consistency
+- **Production readiness** automated assessment
+
+### ⚙️ Execution Modes
+- **Autopilot**: Autonomous AI assistance for routine tasks
+- **Supervised**: Step-by-step approval for complex changes
+- **Hybrid**: Intelligent mode switching based on risk assessment
+
+### 📊 Enhanced Validation
+- **Specification consistency** checking
+- **Architecture compliance** validation
+- **Security and performance** automated assessment
+- **Comprehensive reporting** for project health
 
 ## 🔧 Manual Setup (Detailed)
 

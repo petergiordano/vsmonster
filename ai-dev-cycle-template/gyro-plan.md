@@ -1,18 +1,18 @@
-# AI Development Cycle Template - Kiro Enhancement Plan
+# AI Development Cycle Template - Gyro Enhancement Plan
 
 **Status**: 🚧 IN PROGRESS  
 **Created**: 2025-07-19  
-**Purpose**: Enhance ai-dev-cycle-template with Amazon Kiro IDE capabilities for production-ready AI development
+**Purpose**: Enhance ai-dev-cycle-template with Amazon Gyro IDE capabilities for production-ready AI development
 
 ## 🎯 Executive Summary
 
-This plan transforms the ai-dev-cycle-template framework to incorporate Amazon Kiro IDE's advanced features, bridging the gap between "vibe coding" (rapid prototyping) and "viable code" (production-ready systems). The enhancement focuses on structured AI development with formal specifications, automated quality gates, and enterprise-grade governance.
+This plan transforms the ai-dev-cycle-template framework to incorporate Amazon Gyro IDE's advanced features, bridging the gap between "vibe coding" (rapid prototyping) and "viable code" (production-ready systems). The enhancement focuses on structured AI development with formal specifications, automated quality gates, and enterprise-grade governance.
 
-## 🔍 Kiro IDE Analysis
+## 🔍 Gyro IDE Analysis
 
 ### Core Capabilities Identified
 1. **Spec-Driven Development** - Requirements → Design → Tasks workflow
-2. **Agent Steering** - Project-specific AI guidance through `.kiro/steering/` files
+2. **Agent Steering** - Project-specific AI guidance through `.gyro/steering/` files
 3. **Agent Hooks** - Event-driven automation for quality gates
 4. **MCP Integration** - Secure external data source connections
 5. **Autopilot/Supervised Modes** - Controlled AI autonomy levels
@@ -27,7 +27,7 @@ This plan transforms the ai-dev-cycle-template framework to incorporate Amazon K
 ## 🏗️ Enhancement Strategy
 
 ### Philosophy Alignment
-Our current template already embodies many Kiro principles:
+Our current template already embodies many Gyro principles:
 - ✅ **PRD-driven development** (aligns with spec-driven approach)
 - ✅ **Component-by-component workflow** (similar to task breakdown)
 - ✅ **AI coordination system** (`.claude/commands/` structure)
@@ -44,7 +44,7 @@ Our current template already embodies many Kiro principles:
 
 ### Phase 1: Spec-Driven Development Integration 🎯
 
-**Objective**: Implement Kiro's three-phase specification workflow
+**Objective**: Implement Gyro's three-phase specification workflow
 
 #### 1.1 Requirements Generation System
 ```
@@ -95,7 +95,7 @@ Enhancements to: .claude/commands/
 
 ### Phase 2: Agent Steering System 🧭
 
-**Objective**: Implement Kiro's steering system for persistent AI context
+**Objective**: Implement Gyro's steering system for persistent AI context
 
 #### 2.1 Steering Directory Structure
 ```
@@ -285,7 +285,7 @@ Enhanced: scripts/
 ### Enhanced Initialization Script
 ```bash
 # Updates to: scripts/initialize-project.sh
-- Add Kiro-style specification workflow setup
+- Add Gyro-style specification workflow setup
 - Create steering directory structure
 - Configure domain-specific hooks
 - Set up MCP integration templates
@@ -295,7 +295,7 @@ Enhanced: scripts/
 ### New Configuration Files
 ```
 .claude/
-├── kiro-config.json               # Master Kiro integration configuration
+├── gyro-config.json               # Master Gyro integration configuration
 ├── steering-config.json           # Steering system configuration
 ├── hooks-config.json              # Hook system configuration
 └── execution-config.json          # Execution mode configuration
@@ -304,7 +304,7 @@ Enhanced: scripts/
 ### Validation Enhancements
 ```python
 # Enhanced: scripts/validate-setup.py
-- Validate Kiro-style directory structure
+- Validate Gyro-style directory structure
 - Check specification workflow completeness
 - Verify steering file consistency
 - Test hook configuration validity
@@ -316,7 +316,7 @@ Enhanced: scripts/
 ### New Documentation Files
 ```
 docs/
-├── kiro-integration.md            # Kiro feature integration guide
+├── gyro-integration.md            # Gyro feature integration guide
 ├── specification-workflow.md      # Spec-driven development process
 ├── steering-system.md             # Agent steering configuration
 ├── hooks-framework.md             # Hook system usage guide
@@ -324,9 +324,9 @@ docs/
 ```
 
 ### Enhanced Setup Guides
-- Updated TEMPLATE_SETUP.md with Kiro features
+- Updated TEMPLATE_SETUP.md with Gyro features
 - Enhanced TEST_PLAN.md with specification workflow testing
-- New KIRO_MIGRATION.md for existing project upgrades
+- New GYRO_MIGRATION.md for existing project upgrades
 
 ## 🎯 Success Metrics
 
@@ -383,7 +383,7 @@ docs/
 4. **Training**: Update team on new capabilities
 
 ### For New Projects
-1. **Enhanced Initialization**: New projects get full Kiro capabilities
+1. **Enhanced Initialization**: New projects get full Gyro capabilities
 2. **Domain Selection**: Choose appropriate domain-specific configurations
 3. **Customization**: Tailor steering and hooks for project needs
 4. **Validation**: Comprehensive setup verification
@@ -416,7 +416,7 @@ docs/
 
 ## 💡 Innovation Opportunities
 
-### Beyond Kiro Capabilities
+### Beyond Gyro Capabilities
 - **Multi-Language Support**: Enhanced support for Go, Rust, Java
 - **Cloud Integration**: Direct deployment and monitoring
 - **AI Model Training**: Project-specific AI fine-tuning

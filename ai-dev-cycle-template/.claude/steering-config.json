@@ -1,7 +1,7 @@
 {
   "steering_system": {
     "version": "1.0",
-    "description": "Kiro-style agent steering configuration for AI-powered development",
+    "description": "Gyro-style agent steering configuration for AI-powered development",
     "last_updated": "2025-07-19"
   },
   "inclusion_modes": {
