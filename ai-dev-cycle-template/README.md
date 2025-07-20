@@ -126,71 +126,91 @@ Each component follows **SLC principles**:
 
 ```
 ai-dev-cycle-template/
-├── README.md                           # This file
-├── TEMPLATE_SETUP.md                   # Detailed setup instructions
-├── TEST_PLAN.md                        # Standalone testing guide
+├── .ai-context/
+│   ├── AI_CONTEXT_TEMPLATE.md
+│   └── WORKFLOW_GUIDE.md
+├── .claude/
+│   ├── commands/
+│   │   ├── advanced/
+│   │   │   ├── context-analyzer.md
+│   │   │   ├── dependency-mapper.md
+│   │   │   ├── production-readiness.md
+│   │   │   ├── quality-assessor.md
+│   │   │   └── workflow-orchestrator.md
+│   │   ├── finalize-task.md
+│   │   ├── generate-tasks.md
+│   │   ├── next-task.md
+│   │   ├── orient.md
+│   │   └── update-prd.md
+│   ├── execution-modes/
+│   │   ├── autopilot-config.md
+│   │   ├── hybrid-config.md
+│   │   └── supervised-config.md
+│   ├── hooks/
+│   │   ├── development-events/
+│   │   ├── file-events/
+│   │   └── templates/
+│   ├── steering/
+│   │   ├── domain-specific/
+│   │   ├── api-standards.md
+│   │   ├── product.md
+│   │   ├── structure.md
+│   │   ├── tech.md
+│   │   └── testing.md
+│   ├── hooks-config.json
+│   ├── persona.md
+│   ├── settings.template.json
+│   ├── steering-config.json
+│   └── validation-config.json
+├── .github/
+│   └── REPOSITORY_INFO.md
+├── config/
+│   ├── api-integration-templates/
+│   │   ├── graphql-template.json
+│   │   ├── rest-api-template.json
+│   │   └── websocket-template.json
+│   ├── mcp-servers.json
+│   ├── private-knowledge-config.json
+│   ├── project-config.template.json
+│   └── test-config-template.json
 ├── docs/
-│   ├── architecture/                   # Design principles and patterns
-│   │   ├── SLC_Principles.md           # Simple, Lovable, Complete framework
-│   │   ├── ComponentLibrary.md         # Reusable design patterns
-│   │   └── Experience_Goals.md         # User experience guidelines
-│   └── specifications/                 # Project planning templates
-│       ├── PRD_TEMPLATE.md             # Product requirements template
-│       ├── FEATURE_SPEC_TEMPLATE.md    # Component specification template
-│       ├── requirements-template.md    # EARS-formatted user stories
-│       ├── design-template.md          # Technical architecture template
-│       ├── tasks-template.md           # Task breakdown with dependencies
-│       └── dev-cycle.md                # Development workflow guide
-├── .claude/                            # Claude Code + Gyro integration
-│   ├── persona.md                      # AI development expert persona
-│   ├── settings.template.json          # Claude settings template
-│   ├── gyro-config.json               # Gyro integration configuration
-│   ├── validation-config.json          # Validation framework settings
-│   ├── steering/                       # 🧭 Agent steering system
-│   │   ├── product.md                  # Product purpose and users
-│   │   ├── tech.md                     # Technology stack and constraints
-│   │   ├── structure.md                # File organization patterns
-│   │   └── domain-specific.md          # Domain specialized guidance
-│   ├── hooks/                          # 🪝 Event-driven automation
-│   │   ├── file-events/                # File save, create, delete triggers
-│   │   ├── development-events/         # Pre-commit, post-implementation
-│   │   ├── templates/                  # Reusable automation templates
-│   │   └── hooks-config.json           # Hook configuration
-│   ├── execution-modes/                # ⚙️ AI assistance levels
-│   │   ├── autopilot-config.md         # Autonomous execution settings
-│   │   ├── supervised-config.md        # Step-by-step approval
-│   │   └── hybrid-config.md            # Adaptive mode switching
-│   └── commands/                       # Enhanced workflow automation
-│       ├── orient.md                   # Project orientation
-│       ├── next-task.md                # Task selection and planning
-│       ├── finalize-task.md            # Work completion and validation
-│       ├── update-prd.md               # Progress synchronization
-│       └── advanced/                   # 🚀 Gyro advanced commands
-│           ├── workflow-orchestrator.md # Multi-step automation
-│           ├── context-analyzer.md     # Project state analysis
-│           ├── dependency-mapper.md    # Component dependencies
-│           ├── quality-assessor.md     # Code quality evaluation
-│           └── production-readiness.md # Deployment validation
-├── .ai-context/                        # AI coordination documentation
-│   ├── AI_CONTEXT_TEMPLATE.md          # Project knowledge base
-│   └── WORKFLOW_GUIDE.md               # Implementation coordination
-├── config/                             # Configuration templates
-│   ├── project-config.template.json    # Project settings
-│   ├── test-config-template.json       # Enhanced testing framework
-│   ├── mcp-servers.json               # MCP server configurations
-│   ├── private-knowledge-config.json   # Internal docs access
-│   └── api-integration-templates/      # Standardized API patterns
-└── scripts/                            # 🔧 Automation and validation
-    ├── initialize-project.sh           # Enhanced Gyro-style setup
-    ├── validate-setup.py               # Environment validation
-    ├── test-framework.py               # Comprehensive testing
-    ├── copy-validation-scripts.sh      # Validation deployment
-    └── validation/                     # 🔍 Quality assurance
-        ├── validate-specifications.py  # Spec consistency checking
-        ├── validate-steering.py        # Steering validation
-        ├── validate-hooks.py           # Hook configuration validation
-        ├── validate-production-ready.py # Production readiness
-        └── run-all-validations.py      # Comprehensive validation
+│   ├── architecture/
+│   │   ├── ComponentLibrary.md
+│   │   ├── Experience_Goals.md
+│   │   └── SLC_Principles.md
+│   └── specifications/
+│       ├── design-template.md
+│       ├── dev-cycle.md
+│       ├── FEATURE_SPEC_TEMPLATE.md
+│       ├── PRD_TEMPLATE.md
+│       ├── requirements-template.md
+│       └── tasks-template.md
+├── scripts/
+│   ├── validation/
+│   │   ├── run-all-validations.py
+│   │   ├── validate-hooks.py
+│   │   ├── validate-production-ready.py
+│   │   ├── validate-specifications.py
+│   │   └── validate-steering.py
+│   ├── copy-validation-scripts.sh
+│   ├── generate-design.py
+│   ├── generate-requirements.py
+│   ├── initialize-project.sh
+│   ├── test-framework.py
+│   └── validate-setup.py
+├── src/
+│   └── .gitkeep
+├── tests/
+│   └── .gitkeep
+├── CHANGELOG.md
+├── CLAUDE_CODE_PROMPT.md
+├── FAQ.md
+├── LICENSE
+├── QUICKSTART.md
+├── README.md
+├── TEMPLATE_SETUP.md
+├── TEST_PLAN.md
+└── TROUBLESHOOTING.md
 ```
 
 ## 🎛️ Key Features
