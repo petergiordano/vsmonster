@@ -364,7 +364,7 @@ Config → Authentication → Data Mapping → Processing → Validation → Res
    ```bash
    code .
    # Install Claude Code extension if needed
-   # Use @orient to get started with enhanced Gyro capabilities
+   # Use the starter prompt from CLAUDE_CODE_PROMPT.md for optimal AI assistance
    ```
 
 ## 📖 Documentation
@@ -406,6 +406,7 @@ This template is open source and free to use for any purpose.
 
 ### Quick Help Navigation
 - 🚀 **Getting Started**: [QUICKSTART.md](QUICKSTART.md) - 5-minute setup
+- 🤖 **Claude Code**: [CLAUDE_CODE_PROMPT.md](CLAUDE_CODE_PROMPT.md) - AI assistance starter
 - ❓ **Common Questions**: [FAQ.md](FAQ.md) - Frequently asked questions  
 - 🔧 **Issues & Solutions**: [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Problem resolution
 - 📖 **Detailed Setup**: [TEMPLATE_SETUP.md](TEMPLATE_SETUP.md) - Comprehensive guide

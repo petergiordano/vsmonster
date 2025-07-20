@@ -47,7 +47,8 @@ python scripts/validation/run-all-validations.py .
 code .
 
 # Install Claude Code extension if needed
-# Use these AI commands to get started:
+# Use the starter prompt from CLAUDE_CODE_PROMPT.md for optimal AI assistance
+# Or use these AI commands directly:
 @orient                 # See project status
 @next-task             # Get first task
 ```
