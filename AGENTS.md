@@ -9,6 +9,8 @@ This file provides specific guidance for using **OpenAI CODEX-1** as an **Implem
 Your primary source of project context is the dynamic `.ai-context/AI_CONTEXT.md` file. CODEX-1, like other AI agents in this workflow, should refer to `.ai-context/AI_CONTEXT.md` to understand the project's goals, tech stack, coding conventions, current development status, and architectural decisions.
 
   * **Master Context File:** `.ai-context/AI_CONTEXT.md`
+  * **Project-Specific Instructions:** `CODEX.md` (auto-loaded from project root)
+  * **Environment Setup:** Run `python tools/codex_setup.py` before starting implementation
 
 ## 2\. CODEX-1 Identity & Role
 
@@ -373,3 +375,58 @@ Before starting any component implementation, ensure you understand:
 - [ ] Lessons learned section filled out
 
 **FAILURE TO MAINTAIN PROPER LOGGING WILL RESULT IN INCOMPLETE IMPLEMENTATION**
+
+## 10\. Codex Environment Setup
+
+### Pre-Implementation Environment Preparation
+
+Before starting any component implementation, ensure the development environment is properly configured:
+
+#### 1. Run Environment Setup Script
+```bash
+python tools/codex_setup.py
+```
+
+This script will:
+- Verify Python 3.11+ installation
+- Install all required dependencies from requirements.txt
+- Create necessary directory structure
+- Validate configuration files
+- Check for ELEVENLABS_API_KEY in .env
+- Verify FFmpeg installation
+- Setup git environment
+- Create/update CODEX.md with project-specific instructions
+
+#### 2. Environment Variables
+Ensure these are set in your .env file:
+```bash
+ELEVENLABS_API_KEY=your-elevenlabs-api-key
+# Future APIs as needed
+OPENAI_API_KEY=your-openai-key-here
+```
+
+#### 3. Container Requirements
+When setting up Codex environment:
+- Use Python 3.11+ base image
+- Ensure FFmpeg is installed for audio processing
+- Include git for version control operations
+
+#### 4. Key Files to Include
+- `config/config.json` - Central configuration
+- `tests/reference/episode_2_ex_final.md` - Gold standard test
+- `docs/specifications/feat_spec-component-2-voice-gen.md` - Feature spec
+- `archive/codex_task_logs/TASK_LOG_TEMPLATE.md` - Logging template
+
+### Environment Validation
+The setup script will report:
+- ✅ Successes: What's properly configured
+- ⚠️  Warnings: Non-critical issues to address
+- ❌ Errors: Must-fix issues before proceeding
+
+### Post-Setup Checklist
+- [ ] All dependencies installed successfully
+- [ ] ELEVENLABS_API_KEY configured in .env
+- [ ] FFmpeg available for audio processing
+- [ ] Directory structure created
+- [ ] CODEX.md present with project instructions
+- [ ] No errors reported by setup script
