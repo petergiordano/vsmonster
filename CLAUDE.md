@@ -28,6 +28,30 @@ Sequential pipeline where each component delivers independent value:
 - Schema: See `config/notion-database-schema.json`
 - Tasks prefixed: VSM-1, VSM-2, etc.
 
+## The interpreter: always call it by explicit path
+
+This tree runs on **Python 3.11.5 in `venv/`**. Every `python`, `pytest`, `black`,
+`flake8`, and `mypy` written anywhere in this document means `./venv/bin/<name>`.
+
+```bash
+./venv/bin/python src/parser.py tests/reference/episode_007.md   # not: python src/parser.py
+./venv/bin/pytest tests/ -v
+```
+
+**Never type bare `python` or `python3`** — on this Mac they resolve to Anaconda's 3.11 or
+a pyenv shim, not to this project.
+
+Two standing cautions:
+
+- **This environment depends on Anaconda.** `venv/bin/python3` is a symlink to
+  `/Applications/anaconda3/bin/python3`. Delete or move Anaconda and this venv dies. It was
+  left in place on 2026-08-06 because this is a backup tree and all imports still pass
+  (`elevenlabs`, `pydub`, `moviepy`, `cv2`, `PIL`, `dotenv`, `requests`, `markdown`,
+  `mistune`). Rebuild it on uv 3.12 before doing real work here:
+  `uv venv .venv --python 3.12 && uv pip install --python .venv/bin/python -r requirements.txt`.
+- **This is the backup, not the live repo.** The active tree is
+  `~/Documents/GitHub/vsmonster`. Check there before changing anything here.
+
 ## Essential Commands
 
 ### Pipeline Operations
